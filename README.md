@@ -2,10 +2,9 @@
 Pytorch implementation of popular deep reinforcement learning algorithms towards SOA performance.
 
 To be implemented algorithms:
-* (Double/Dueling) Deep Q-Learning (DQN)
-* Deep Deterministic Policy Gradient (DDPG)
 * Proximal Policy Optimization (PPO)
-
+* Deep Deterministic Policy Gradient (DDPG)
+* (Double/Dueling) Deep Q-Learning (DQN)
 
 # Dependency
 * PyTorch v0.4.0
@@ -24,3 +23,4 @@ To be implemented algorithms:
 * [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347)
 * [Emergence of Locomotion Behaviours in Rich Environments](https://arxiv.org/abs/1707.02286)
 * Some hyper-parameters are from [DeepMind Control Suite](https://arxiv.org/abs/1801.00690), [OpenAI Baselines](https://github.com/openai/baselines) and [Ilya Kostrikov](https://github.com/ikostrikov/pytorch-a2c-ppo-acktr)
+>>>>>>> 6ed6f29f7b9137dee8d7b124b1cd24b93dd41cbd
