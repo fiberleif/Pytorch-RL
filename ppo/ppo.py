@@ -27,23 +27,26 @@ in the OpenAI Gym (https://gym.openai.com/). Testing was focused on
 the MuJoCo control tasks.
 """
 
+import os
+import random
+import argparse
+import numpy as np
 import gym
 import torch
-import random
-import numpy as np
-# from gym import wrappers
-# from policy import Policy
-# from value_function import NNValueFunction
-# from utils import Logger, Scaler
+
+
+import sys
+sys.path.append('..')
+import utils.logger as logger
 from datetime import datetime
-import os
-import argparse
+from utils.scaler import Scaler
+from ppo.models import Policy, ValueFunction
 
 
 def parse_arguments():
     """ Parse Arguments from Commandline
-        Return:
-            args: commandline arguments (object)
+    Return:
+        args: commandline arguments (object)
     """
     parser = argparse.ArgumentParser(description=('Train policy on OpenAI Gym environment '
                                                   'using Proximal Policy Optimizer'))
@@ -62,40 +65,83 @@ def parse_arguments():
     parser.add_argument('-m', '--hid1_mult', type=int, default=10,
                         help='Size of first hidden layer for value and policy NNs'
                              '(integer multiplier of observation dimension)')
-    parser.add_argument('-v', '--policy_logvar', type=float, default=-1.0,
+    parser.add_argument('-v', '--init_policy_logvar', type=float, default=-1.0,
                         help='Initial policy log-variance (natural log of variance)')
     parser.add_argument('-s', '--seed', type=int, default=0,
                         help='Random seed for all randomness')
     args = parser.parse_args()
     return args
 
-def init_gym(env_name):
-    """
-    Initialize gym environment
-    Args:
-        env_name: environment name, e.g. "Humanoid-v1" (str)
-    Returns:
-        gym environment (object)
-        number of observation dimensions (int)
-        number of action dimensions (int)
-    """
-    env = gym.make(env_name)
-    obs_dim = env.observation_space.shape[0]
-    act_dim = env.action_space.shape[0]
 
-    return env, obs_dim, act_dim
-
-
-def set_global_seed(seed, env):
+def set_global_seed(seed):
+    """ Set Seeds of All Used Modules (Except Env) """
     np.random.seed(seed)
-    env.seed(seed)
     random.seed(seed)
     torch.manual_seed(seed)
 
 
-def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, hid1_mult, policy_logvar, seed):
+def configure_log_info(env_name, seed):
+    """ Configure Log Information """
+    cwd = os.path.join(os.getcwd(), 'log')
+    now = datetime.utcnow().strftime("%b-%d_%H:%M:%S")  # create unique log file
+    run_name = "{0}-{1}-{2}".format(env_name, seed, now)
+    cwd = os.path.join(cwd, run_name)
+    logger.configure(dir=cwd)
+
+
+def sample(self, policy_mean, policy_logvar, state):
+    # compute mean action
+    mean_action = policy_mean(state)
+    # compute action noise
+    action_noise = torch.exp(policy_logvar / 2.0) * torch.randn(policy_logvar.size(0))
+    action = mean_action + action_noise
+    return action.data.numpy()
+
+
+def run_episode(env, policy, scaler, animate=False):
+    """ Run single episode with option to animate
+    Args:
+        env: ai gym environment (object)
+        policy_mean: policy mean (ppo.models.Policy)
+        scaler:  state scaler, used to scale/offset each observation dimension
+            to a similar range (utils.scaler.Scaler)
+    Returns:
+        observes: shape = (episode len, obs_dim) (np.array)
+        actions: shape = (episode len, act_dim) (np.array)
+        rewards: shape = (episode len,) (np.array)
+        unscaled_obs: useful for training scaler, shape = (episode len, obs_dim) (np.array)
     """
-    Main training loop
+    obs = env.reset()
+    observes, actions, rewards, unscaled_obs = [], [], [], []
+    done = False
+    step = 0.0
+    scale, offset = scaler.get()
+    scale[-1] = 1.0  # don't scale time step feature
+    offset[-1] = 0.0  # don't offset time step feature
+    while not done:
+        obs = obs.astype(np.float32).reshape((1, -1))
+        obs = np.append(obs, [[step]], axis=1)  # add time step feature
+        unscaled_obs.append(obs)
+        obs = (obs - offset) * scale  # center and scale observations
+        observes.append(obs)
+        action = policy.sample(obs).reshape((1, -1)).astype(np.float32)
+        actions.append(action)
+        obs, reward, done, _ = env.step(np.squeeze(action, axis=0))
+        if not isinstance(reward, float):
+            reward = np.asscalar(np.asarray(reward))
+        rewards.append(reward)
+        step += 1e-3  # increment time step feature
+
+    return (np.concatenate(observes), np.concatenate(actions),
+            np.array(rewards, dtype=np.float64), np.concatenate(unscaled_obs))
+
+
+def run_policy(env, policy_mean, policy_logvar, scaler, logger, episodes=5):
+    """ Rollout with Policy and Store Trajectories """
+
+
+def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, hid1_mult, init_policy_logvar, seed):
+    """ Main training loop
     Args:
         env_name: OpenAI Gym environment name, e.g. 'Hopper-v1'
         num_episodes: maximum number of episodes to run
@@ -105,25 +151,34 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, hid1_mult, po
         batch_size: number of episodes per policy training batch
         hid1_mult: hid1 size for policy and value_f (mutliplier of obs dimension)
         policy_logvar: natural log of initial policy variance
-        """
-
-    # create env component
-    env, obs_dim, act_dim = init_gym(env_name)
-    obs_dim += 1  # add 1 to obs dimension for time step feature (see run_episode())
+    """
 
     # set seeds
-    set_global_seed(seed, env)
+    set_global_seed(seed)
+    # configure log
+    configure_log_info(env_name, seed)
 
-    # configure log-information
-    cwd = os.path.join(os.getcwd(), 'log')
-    run_name = "{0}-{1}".format(env_name, ) + str(args.seed)
-    cwd = os.path.join(cwd, run_name)
-    logger.configure(dir=cwd)
-    now = datetime.utcnow().strftime("%b-%d_%H:%M:%S")  # create unique directories
+    # create env
+    env = gym.make(env_name)
+    env.seed(seed) # set env seed
+    obs_dim = env.observation_space.shape[0]
+    obs_dim += 1  # add 1 to obs dimension for time step feature (see run_episode())
+    act_dim = env.action_space.shape[0]
 
+    # create scaler
     scaler = Scaler(obs_dim)
-    val_func = NNValueFunction(obs_dim, hid1_mult)
-    policy = Policy(obs_dim, act_dim, kl_targ, hid1_mult, policy_logvar)
+
+    # create policy log-variance
+    # logvar_speed is used to 'fool' gradient descent into making faster updates
+    # to log-variances. heuristic sets logvar_speed based on action dim.
+    logvar_speed = (100 * act_dim ) // 48
+    log_vars = torch.Tensor(np.ones(act_dim) * init_policy_logvar, requires_grad=True)
+
+    # create policy mean
+    policy = Policy(obs_dim, act_dim, hid1_mult)
+    # create value_function
+    value_function = ValueFunction(obs_dim, hid1_mult)
+
     # run a few episodes of untrained policy to initialize scaler:
     run_policy(env, policy, scaler, logger, episodes=5)
     episode = 0
@@ -139,15 +194,6 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, hid1_mult, po
         log_batch_stats(observes, actions, advantages, disc_sum_rew, logger, episode)
         policy.update(observes, actions, advantages, logger)  # update policy
         val_func.fit(observes, disc_sum_rew, logger)  # update value function
-
-def sample(self, state):
-    # compute mean action
-    mean_action = self.forward(state)
-    # compute action noise
-    action_noise =  torch.exp(self.log_vars / 2.0) * torch.randn(self.act_dim)
-    sample_action = mean_action + action_noise
-    return sample_action
-
 
 
 
