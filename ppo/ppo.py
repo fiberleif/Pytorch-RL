@@ -31,7 +31,7 @@ import os
 import random
 import argparse
 import numpy as np
-import scipy
+import scipy.signal
 import gym
 import torch
 import torch.nn as nn
@@ -43,7 +43,7 @@ import utils.logger as logger
 from datetime import datetime
 from sklearn.utils import shuffle
 from utils.scaler import Scaler
-from ppo.models import Policy, ValueFunction
+from models import Policy, ValueFunction
 
 
 def parse_arguments():
@@ -98,7 +98,8 @@ def configure_log_info(env_name, seed):
     logger.configure(dir=cwd)
 
 
-def sample(self, policy_mean, policy_logvar, state):
+def sample(policy_mean, policy_logvar, state):
+    state = torch.Tensor(state)
     # compute mean action
     mean_action = policy_mean(state)
     # compute action noise
@@ -187,18 +188,19 @@ def add_disc_sum_rew(trajectories, gamma):
         trajectory['disc_sum_rew'] = disc_sum_rew
 
 
-def add_value(trajectories, val_func):
+def add_value(trajectories, value_function):
     """ Adds estimated value to all time steps of all trajectories
     Args:
         trajectories: as returned by run_policy()
-        val_func: object with predict() method, takes observations
+        value_function: object with predict() method, takes observations
             and returns predicted state value
     Returns:
         None (mutates trajectories dictionary to add 'values')
     """
     for trajectory in trajectories:
         observes = trajectory['observes']
-        values = val_func.predict(observes)
+        observes = torch.Tensor(observes)
+        values = value_function(observes).data.numpy()
         trajectory['values'] = values
 
 
@@ -250,19 +252,22 @@ def build_train_set(trajectories):
 
 def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_logvars_optimizer,
             observes, actions, advantages, policy_hyper):
-    old_means_np = policy_mean(observes).data.numpy()
-    old_logvars_np = policy_logvars.data.numpy()
     # placeholder
     observes_tensor = torch.Tensor(observes)
     actions_tensor = torch.Tensor(actions)
     advantages_tensor = torch.Tensor(advantages)
+    old_means_np = policy_mean(observes_tensor).data.numpy()
+    old_logvars_np = policy_logvars.data.numpy()
     old_means_tensor = torch.Tensor(old_means_np)
     old_logvars_tensor = torch.Tensor(old_logvars_np)
     # loss, kl, entropy = 0, 0, 0
     for e in range(policy_hyper["epoch"]):
         # logp
         logp = -0.5 * torch.sum(policy_logvars)
-        logp += -0.5 * torch.sum((actions_tensor - policy_mean(observes_tensor)) ** 2 / torch.exp(policy_logvars), dim=1)
+        print("ss:", logp.shape)
+        print("kk:", policy_logvars.shape)
+        logp2 = -0.5 * torch.sum((actions_tensor - policy_mean(observes_tensor)) ** 2 / torch.exp(policy_logvars), dim=1)
+        print("mm", logp2.shape)
         logp_old = -0.5 * torch.sum(old_logvars_tensor)
         logp_old += -0.5 * torch.sum((actions_tensor - old_means_tensor) ** 2 / torch.exp(old_logvars_tensor), dim=1)
         # kl & entropy
@@ -374,7 +379,8 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
 
     # create policy log-variance
     logvar_speed = (100 * act_dim ) // 48
-    policy_logvars = torch.Tensor(np.ones(1, act_dim) * init_policy_logvar, requires_grad=True)
+    policy_logvars = torch.Tensor(np.ones((1, act_dim)) * init_policy_logvar)
+    policy_logvars.requires_grad = True
     policy_logvars_optimizer = optim.Adam([policy_logvars], lr=logvar_speed * actor_lr)
 
     # create policy mean
@@ -394,7 +400,7 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
     # train & test models
     policy_hyper = {"beta": 1.0, "eta": 50, "kl_targ": kl_targ, "epoch": 20, "lr": actor_lr, "lr_multiplier": 1.0,
                     "logvar_speed": logvar_speed, "clipping_range": None}
-    num_iteration = num_episodes / test_frequency
+    num_iteration = num_episodes // test_frequency
     current_episodes = 0
     current_steps = 0
     for iter in range(num_iteration):

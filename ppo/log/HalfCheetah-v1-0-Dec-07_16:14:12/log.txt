@@ -1,0 +1,3 @@
+Logging to /home/guoqing/Pytorch-RL/ppo/log/HalfCheetah-v1-0-Dec-07_16:14:12
+Policy Params -- h1: 180, h2: 103, h3: 60
+Value Params -- h1: 180, h2: 30, h3: 5
