@@ -31,14 +31,17 @@ import os
 import random
 import argparse
 import numpy as np
+import scipy
 import gym
 import torch
-
+import torch.nn as nn
+import torch.optim as optim
 
 import sys
 sys.path.append('..')
 import utils.logger as logger
 from datetime import datetime
+from sklearn.utils import shuffle
 from utils.scaler import Scaler
 from ppo.models import Policy, ValueFunction
 
@@ -62,6 +65,8 @@ def parse_arguments():
                         help='D_KL target value')
     parser.add_argument('-b', '--batch_size', type=int, default=20,
                         help='Number of episodes per training batch')
+    parser.add_argument('-t', '--test_frequency', type=int, default=10,
+                        help='Number of training batch before test')
     parser.add_argument('-m', '--hid1_mult', type=int, default=10,
                         help='Size of first hidden layer for value and policy NNs'
                              '(integer multiplier of observation dimension)')
@@ -69,6 +74,10 @@ def parse_arguments():
                         help='Initial policy log-variance (natural log of variance)')
     parser.add_argument('-s', '--seed', type=int, default=0,
                         help='Random seed for all randomness')
+    parser.add_argument('--actor_lr', type=float, default=1e-5,
+                        help='Learning rate for actor')
+    parser.add_argument('--critic_lr', type=float, default=1e-5,
+                        help='Learning rate for critic')
     args = parser.parse_args()
     return args
 
@@ -98,11 +107,12 @@ def sample(self, policy_mean, policy_logvar, state):
     return action.data.numpy()
 
 
-def run_episode(env, policy, scaler, animate=False):
+def run_episode(env, policy_mean, policy_logvar, scaler):
     """ Run single episode with option to animate
     Args:
         env: ai gym environment (object)
         policy_mean: policy mean (ppo.models.Policy)
+        policy logvar: policy logvar (torch.tensor)
         scaler:  state scaler, used to scale/offset each observation dimension
             to a similar range (utils.scaler.Scaler)
     Returns:
@@ -124,7 +134,7 @@ def run_episode(env, policy, scaler, animate=False):
         unscaled_obs.append(obs)
         obs = (obs - offset) * scale  # center and scale observations
         observes.append(obs)
-        action = policy.sample(obs).reshape((1, -1)).astype(np.float32)
+        action = sample(policy_mean, policy_logvar, obs).reshape((1, -1)).astype(np.float32)
         actions.append(action)
         obs, reward, done, _ = env.step(np.squeeze(action, axis=0))
         if not isinstance(reward, float):
@@ -138,9 +148,137 @@ def run_episode(env, policy, scaler, animate=False):
 
 def run_policy(env, policy_mean, policy_logvar, scaler, logger, episodes=5):
     """ Rollout with Policy and Store Trajectories """
+    total_steps = 0
+    trajectories = []
+    for e in range(episodes):
+        observes, actions, rewards, unscaled_obs = run_episode(env, policy_mean, policy_logvar, scaler)
+        total_steps += observes.shape[0]
+        trajectory = {'observes': observes,
+                      'actions': actions,
+                      'rewards': rewards,
+                      'unscaled_obs': unscaled_obs}
+        trajectories.append(trajectory)
+    unscaled = np.concatenate([t['unscaled_obs'] for t in trajectories])
+    scaler.update(unscaled)  # update running statistics for scaling observations
+    # logger.log({'_MeanReward': np.mean([t['rewards'].sum() for t in trajectories]),
+    #             'Steps': total_steps})
+    return trajectories, total_steps
 
 
-def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, hid1_mult, init_policy_logvar, seed):
+def discount(x, gamma):
+    """ Calculate discounted forward sum of a sequence at each point """
+    return scipy.signal.lfilter([1.0], [1.0, -gamma], x[::-1])[::-1]
+
+
+def add_disc_sum_rew(trajectories, gamma):
+    """ Adds discounted sum of rewards to all time steps of all trajectories
+    Args:
+        trajectories: as returned by run_policy()
+        gamma: discount
+    Returns:
+        None (mutates trajectories dictionary to add 'disc_sum_rew')
+    """
+    for trajectory in trajectories:
+        if gamma < 0.999:  # don't scale for gamma ~= 1
+            rewards = trajectory['rewards'] * (1 - gamma)
+        else:
+            rewards = trajectory['rewards']
+        disc_sum_rew = discount(rewards, gamma)
+        trajectory['disc_sum_rew'] = disc_sum_rew
+
+
+def add_value(trajectories, val_func):
+    """ Adds estimated value to all time steps of all trajectories
+    Args:
+        trajectories: as returned by run_policy()
+        val_func: object with predict() method, takes observations
+            and returns predicted state value
+    Returns:
+        None (mutates trajectories dictionary to add 'values')
+    """
+    for trajectory in trajectories:
+        observes = trajectory['observes']
+        values = val_func.predict(observes)
+        trajectory['values'] = values
+
+
+def add_gae(trajectories, gamma, lam):
+    """ Add generalized advantage estimator.
+    https://arxiv.org/pdf/1506.02438.pdf
+    Args:
+        trajectories: as returned by run_policy(), must include 'values'
+            key from add_value().
+        gamma: reward discount
+        lam: lambda (see paper).
+            lam=0 : use TD residuals
+            lam=1 : A =  Sum Discounted Rewards - V_hat(s)
+    Returns:
+        None (mutates trajectories dictionary to add 'advantages')
+    """
+    for trajectory in trajectories:
+        if gamma < 0.999:  # don't scale for gamma ~= 1
+            rewards = trajectory['rewards'] * (1 - gamma)
+        else:
+            rewards = trajectory['rewards']
+        values = trajectory['values']
+        # temporal differences
+        tds = rewards - values + np.append(values[1:] * gamma, 0)
+        advantages = discount(tds, gamma * lam)
+        trajectory['advantages'] = advantages
+
+
+def build_train_set(trajectories):
+    """
+    Args:
+        trajectories: trajectories after processing by add_disc_sum_rew(),
+            add_value(), and add_gae()
+    Returns: 4-tuple of NumPy arrays
+        observes: shape = (N, obs_dim)
+        actions: shape = (N, act_dim)
+        advantages: shape = (N,)
+        disc_sum_rew: shape = (N,)
+    """
+    observes = np.concatenate([t['observes'] for t in trajectories])
+    actions = np.concatenate([t['actions'] for t in trajectories])
+    disc_sum_rew = np.concatenate([t['disc_sum_rew'] for t in trajectories])
+    advantages = np.concatenate([t['advantages'] for t in trajectories])
+    # normalize advantages
+    advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-6)
+
+    return observes, actions, advantages, disc_sum_rew
+
+
+def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_logvars_optimizer,
+            observes, actions, advantages):
+    pass
+
+
+def update_value_function(value_function, value_function_optimizer, x_train, y_train, num_batches, batch_size):
+    epochs = 10
+    for e in range(epochs):
+        x_train, y_train = shuffle(x_train, y_train)
+        for j in range(num_batches):
+            start = j * batch_size
+            end = (j + 1) * batch_size
+            x_train_tensor = torch.Tensor(x_train[start:end, :])
+            y_train_tensor = torch.Tensor(y_train[start:end])
+            loss = nn.MSELoss(reduction='mean')
+            loss_output = loss(value_function(x_train_tensor), y_train_tensor)
+            value_function_optimizer.zero_grad()
+            loss_output.backward()
+            value_function_optimizer.step()
+
+    y_hat = value_function(x_train).data.numpy()
+    loss = np.mean(np.square(y_hat - y_train))  # explained variance after update
+    exp_var = 1 - np.var(y_train - y_hat) / np.var(y_train)  # diagnose over-fitting of val func
+
+    # logger.log({'ValFuncLoss': loss,
+    #             'ExplainedVarNew': exp_var,
+    #             'ExplainedVarOld': old_exp_var})
+
+
+def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequency,
+          hid1_mult, init_policy_logvar, seed, actor_lr, critic_lr):
     """ Main training loop
     Args:
         env_name: OpenAI Gym environment name, e.g. 'Hopper-v1'
@@ -169,32 +307,69 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, hid1_mult, in
     scaler = Scaler(obs_dim)
 
     # create policy log-variance
-    # logvar_speed is used to 'fool' gradient descent into making faster updates
-    # to log-variances. heuristic sets logvar_speed based on action dim.
     logvar_speed = (100 * act_dim ) // 48
-    log_vars = torch.Tensor(np.ones(act_dim) * init_policy_logvar, requires_grad=True)
+    policy_logvars = torch.Tensor(np.ones(act_dim) * init_policy_logvar, requires_grad=True)
+    policy_logvars_optimizer = optim.Adam([policy_logvars], lr=logvar_speed * actor_lr)
 
     # create policy mean
-    policy = Policy(obs_dim, act_dim, hid1_mult)
+    policy_mean = Policy(obs_dim, act_dim, hid1_mult)
+    policy_mean_optimizer = optim.Adam(policy_mean.parameters(), lr=actor_lr)
     # create value_function
     value_function = ValueFunction(obs_dim, hid1_mult)
+    value_function_optimizer = optim.Adam(value_function.parameters(), lr=critic_lr)
+
+    # off-policy buffer for value function (store the previous and current data)
+    replay_buffer_x = None
+    replay_buffer_y = None
 
     # run a few episodes of untrained policy to initialize scaler:
-    run_policy(env, policy, scaler, logger, episodes=5)
-    episode = 0
-    while episode < num_episodes:
-        trajectories = run_policy(env, policy, scaler, logger, episodes=batch_size)
-        episode += len(trajectories)
-        add_value(trajectories, val_func)  # add estimated values to episodes
-        add_disc_sum_rew(trajectories, gamma)  # calculated discounted sum of Rs
-        add_gae(trajectories, gamma, lam)  # calculate advantage
-        # concatenate all episodes into single NumPy arrays
-        observes, actions, advantages, disc_sum_rew = build_train_set(trajectories)
-        # add various stats to training log:
-        log_batch_stats(observes, actions, advantages, disc_sum_rew, logger, episode)
-        policy.update(observes, actions, advantages, logger)  # update policy
-        val_func.fit(observes, disc_sum_rew, logger)  # update value function
+    run_policy(env, policy_mean, policy_logvars, scaler, logger, episodes=5)
 
+    # train & test models
+    num_iteration = num_episodes / test_frequency
+    current_episode = 0
+    current_steps = 0
+    for iter in range(num_iteration):
+        # train models
+        for i in range(test_frequency):
+            # rollout
+            trajectories, steps = run_policy(env, policy_mean, policy_logvars, scaler, logger, episodes=batch_size)
+            # process data
+            current_episode += len(trajectories)
+            current_steps += steps
+            add_value(trajectories, value_function)  # add estimated values to episodes
+            add_disc_sum_rew(trajectories, gamma)  # calculated discounted sum of Rs
+            add_gae(trajectories, gamma, lam)  # calculate advantage
+            # concatenate all episodes into single NumPy arrays
+            observes, actions, advantages, disc_sum_rew = build_train_set(trajectories)
+            # update policy
+
+            update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_logvars_optimizer,
+                          observes, actions, advantages)  # update policy
+
+            # update value function
+            num_batches = max(observes.shape[0] // 256, 1)
+            batch_size = observes.shape[0] // num_batches
+            y_hat = value_function(observes).data.numpy()  # check explained variance prior to update
+            old_exp_var = 1 - np.var(disc_sum_rew - y_hat) / np.var(disc_sum_rew)
+            if replay_buffer_x is None:
+                x_train, y_train = observes, disc_sum_rew
+            else:
+                x_train = np.concatenate([observes, replay_buffer_x])
+                y_train = np.concatenate([observes, replay_buffer_y])
+            replay_buffer_x = observes
+            replay_buffer_y = disc_sum_rew
+            update_value_function(value_function, value_function_optimizer, x_train, y_train, num_batches, batch_size)
+
+        # test models
+        num_test_episodes = 10
+        trajectories, _ = run_policy(env, policy_mean, policy_logvars, scaler, logger, episodes=num_test_episodes)
+        returns = [np.sum(t["rewards"]) for t in trajectories]
+        avg_return = sum(returns) / num_test_episodes
+        logger.record_tabular('iteration', iter)
+        logger.record_tabular('episodes', current_episode)
+        logger.record_tabular('steps', current_steps)
+        logger.record_tabular('avg_return', avg_return)
 
 
 def main():
