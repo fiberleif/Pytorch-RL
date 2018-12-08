@@ -65,7 +65,7 @@ def parse_arguments():
                         help='D_KL target value')
     parser.add_argument('-b', '--batch_size', type=int, default=20,
                         help='Number of episodes per training batch')
-    parser.add_argument('-t', '--test_frequency', type=int, default=10,
+    parser.add_argument('-t', '--test_frequency', type=int, default=1,
                         help='Number of training batch before test')
     parser.add_argument('-m', '--hid1_mult', type=int, default=10,
                         help='Size of first hidden layer for value and policy NNs'
@@ -105,7 +105,7 @@ def sample(policy_mean, policy_logvar, state):
     # compute action noise
     action_noise = torch.exp(policy_logvar / 2.0) * torch.randn(policy_logvar.size(0))
     action = mean_action + action_noise
-    return action.data.numpy()
+    return action.detach().numpy()
 
 
 def run_episode(env, policy_mean, policy_logvar, scaler):
@@ -200,7 +200,7 @@ def add_value(trajectories, value_function):
     for trajectory in trajectories:
         observes = trajectory['observes']
         observes = torch.Tensor(observes)
-        values = np.squeeze(value_function(observes).data.numpy())
+        values = np.squeeze(value_function(observes).detach().numpy())
         trajectory['values'] = values
 
 
@@ -255,8 +255,8 @@ def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_log
     observes_tensor = torch.Tensor(observes)
     actions_tensor = torch.Tensor(actions)
     advantages_tensor = torch.Tensor(advantages)
-    old_means_np = policy_mean(observes_tensor).data.numpy()
-    old_logvars_np = policy_logvars.data.numpy()
+    old_means_np = policy_mean(observes_tensor).detach().numpy()
+    old_logvars_np = policy_logvars.detach().numpy()
     old_means_tensor = torch.Tensor(old_means_np)
     old_logvars_tensor = torch.Tensor(old_logvars_np)
     # loss, kl, entropy = 0, 0, 0
@@ -277,18 +277,18 @@ def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_log
                              - policy_logvars.shape[1])
         # entropy = 0.5 * (policy_logvars.shape[1] * torch.Tensor([np.log(2 * np.pi) + 1]) + torch.sum(policy_logvars))
         if policy_hyper["clipping_range"] is not None:
-            logger.info('setting up loss with clipping objective')
+            #logger.info('setting up loss with clipping objective')
             pg_ratio = torch.exp(logp - logp_old)
             clipped_pg_ratio = torch.clamp(pg_ratio, 1 - policy_hyper["clipping_range"][0],
                                            1 + policy_hyper["clipping_range"][1])
             surrogate_loss = torch.min(advantages_tensor * pg_ratio, advantages_tensor * clipped_pg_ratio)
             loss = -torch.sum(surrogate_loss)
         else:
-            logger.info('setting up loss with KL penalty')
+            #logger.info('setting up loss with KL penalty')
             loss1 = -torch.sum(advantages_tensor * torch.exp(logp - logp_old))
-            # loss2 = torch.sum(policy_hyper["beta"] * kl)
+            loss2 = kl * policy_hyper["beta"]
             loss3 = policy_hyper["eta"] * ((torch.max(torch.Tensor([0.0]), kl - 2.0 * policy_hyper["kl_targ"])) ** 2)
-            loss = loss1 + loss3
+            loss = loss1 + loss2 + loss3
         policy_mean_optimizer.zero_grad()
         policy_logvars_optimizer.zero_grad()
         # adjust learning rate
@@ -307,7 +307,7 @@ def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_log
         kl = 0.5 * torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
                     torch.sum((policy_mean(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvars), dim=1)
                              - policy_logvars.shape[1])
-        kl_np = kl.data.numpy()
+        kl_np = kl.detach().numpy()
         if kl_np > policy_hyper["kl_targ"] * 4:  # early stopping if D_KL diverges badly
             break
     if kl_np > policy_hyper["kl_targ"] * 2:  # servo beta to reach D_KL target
@@ -442,10 +442,6 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
         logger.record_tabular('steps', current_steps)
         logger.record_tabular('avg_return', avg_return)
         logger.dump_tabular()
-        logger.info("iteration-{0}".format(iter))
-        logger.info("episodes-{0}".format(current_episodes))
-        logger.info("steps-{0}".format(current_steps))
-        logger.info("avg_return-{0}".format(avg_return))
 
 
 def main():

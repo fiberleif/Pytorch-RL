@@ -1,0 +1,1547 @@
+Logging to /home/guoqing/Pytorch-RL/ppo/log/HalfCheetah-v1-0-Dec-08_12:03:20
+Policy Params -- h1: 180, h2: 103, h3: 60
+Value Params -- h1: 180, h2: 30, h3: 5
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -290     |
+| episodes   | 1036     |
+| iteration  | 0        |
+| steps      | 1036000  |
+-------------------------
+iteration-0
+episodes-1036
+steps-1036000
+avg_return--289.92547379557794
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -380     |
+| episodes   | 2316     |
+| iteration  | 1        |
+| steps      | 2316000  |
+-------------------------
+iteration-1
+episodes-2316
+steps-2316000
+avg_return--380.10888057268625
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -340     |
+| episodes   | 3596     |
+| iteration  | 2        |
+| steps      | 3596000  |
+-------------------------
+iteration-2
+episodes-3596
+steps-3596000
+avg_return--340.3296189450712
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -321     |
+| episodes   | 4876     |
+| iteration  | 3        |
+| steps      | 4876000  |
+-------------------------
+iteration-3
+episodes-4876
+steps-4876000
+avg_return--320.69790911223754
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -358     |
+| episodes   | 6156     |
+| iteration  | 4        |
+| steps      | 6156000  |
+-------------------------
+iteration-4
+episodes-6156
+steps-6156000
+avg_return--357.54670279787126
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -270     |
+| episodes   | 7436     |
+| iteration  | 5        |
+| steps      | 7436000  |
+-------------------------
+iteration-5
+episodes-7436
+steps-7436000
+avg_return--270.02541273653856
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -361     |
+| episodes   | 8716     |
+| iteration  | 6        |
+| steps      | 8716000  |
+-------------------------
+iteration-6
+episodes-8716
+steps-8716000
+avg_return--360.7205362253736
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -359     |
+| episodes   | 9996     |
+| iteration  | 7        |
+| steps      | 9996000  |
+-------------------------
+iteration-7
+episodes-9996
+steps-9996000
+avg_return--358.836201446791
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -343     |
+| episodes   | 11276    |
+| iteration  | 8        |
+| steps      | 11276000 |
+-------------------------
+iteration-8
+episodes-11276
+steps-11276000
+avg_return--342.92055364722904
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -355     |
+| episodes   | 12556    |
+| iteration  | 9        |
+| steps      | 12556000 |
+-------------------------
+iteration-9
+episodes-12556
+steps-12556000
+avg_return--354.94617456587014
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -345     |
+| episodes   | 13836    |
+| iteration  | 10       |
+| steps      | 13836000 |
+-------------------------
+iteration-10
+episodes-13836
+steps-13836000
+avg_return--345.15339497198346
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -349     |
+| episodes   | 15116    |
+| iteration  | 11       |
+| steps      | 15116000 |
+-------------------------
+iteration-11
+episodes-15116
+steps-15116000
+avg_return--349.034660248785
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -353     |
+| episodes   | 16396    |
+| iteration  | 12       |
+| steps      | 16396000 |
+-------------------------
+iteration-12
+episodes-16396
+steps-16396000
+avg_return--353.13001610908117
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -379     |
+| episodes   | 17676    |
+| iteration  | 13       |
+| steps      | 17676000 |
+-------------------------
+iteration-13
+episodes-17676
+steps-17676000
+avg_return--378.88354874648263
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -311     |
+| episodes   | 18956    |
+| iteration  | 14       |
+| steps      | 18956000 |
+-------------------------
+iteration-14
+episodes-18956
+steps-18956000
+avg_return--311.49087409247954
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+-------------------------
+| avg_return | -357     |
+| episodes   | 20236    |
+| iteration  | 15       |
+| steps      | 20236000 |
+-------------------------
+iteration-15
+episodes-20236
+steps-20236000
+avg_return--356.8865081002736
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty

@@ -1,0 +1,17 @@
+Logging to /home/guoqing/Pytorch-RL/ppo/log/HalfCheetah-v1-0-Dec-08_15:04:59
+Policy Params -- h1: 180, h2: 103, h3: 60
+Value Params -- h1: 180, h2: 30, h3: 5
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
+setting up loss with KL penalty
