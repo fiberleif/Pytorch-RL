@@ -263,13 +263,12 @@ def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_log
     # loss, kl, entropy = 0, 0, 0
     for e in range(policy_hyper["epoch"]):
         # logp
-        logp = -0.5 * torch.sum(policy_logvars)
-        print("ss:", logp.shape)
-        print("kk:", policy_logvars.shape)
+        logp1 = -0.5 * torch.sum(policy_logvars)
         logp2 = -0.5 * torch.sum((actions_tensor - policy_mean(observes_tensor)) ** 2 / torch.exp(policy_logvars), dim=1)
-        print("mm", logp2.shape)
-        logp_old = -0.5 * torch.sum(old_logvars_tensor)
-        logp_old += -0.5 * torch.sum((actions_tensor - old_means_tensor) ** 2 / torch.exp(old_logvars_tensor), dim=1)
+        logp = logp1 + logp2
+        logp_old1 = -0.5 * torch.sum(old_logvars_tensor)
+        logp_old2 = -0.5 * torch.sum((actions_tensor - old_means_tensor) ** 2 / torch.exp(old_logvars_tensor), dim=1)
+        logp_old = logp_old1 + logp_old2
         # kl & entropy
         log_det_cov_old = torch.sum(old_logvars_tensor)
         log_det_cov_new = torch.sum(policy_logvars)
