@@ -7,10 +7,16 @@ To be implemented algorithms:
 * (Double/Dueling) Deep Q-Learning (DQN)
 
 # Dependency
+* Python 3.6
+* Numpy 1.15
+* Scipy 1.1.0
+* Mujoco-py 0.5.7
+* Gym 0.9.0
+* sklearn 0.0
 * PyTorch v0.4.0
-* Python 3.6, 3.5
 
-### Run PPO algorithm:
+# Code Usage
+## Run PPO algorithm:
 
 ```
 cd ppo
@@ -24,6 +30,7 @@ cd ppo
 ./ppo.py Ant-v1 -n 100000
 ./ppo.py Humanoid-v1 -n 200000
 ./ppo.py HumanoidStandup-v1 -n 200000 -b 5
+```
 
 # References
 * [Human Level Control through Deep Reinforcement Learning](https://www.nature.com/nature/journal/v518/n7540/full/nature14236.html)
