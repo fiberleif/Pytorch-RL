@@ -200,7 +200,7 @@ def add_value(trajectories, value_function):
     for trajectory in trajectories:
         observes = trajectory['observes']
         observes = torch.Tensor(observes)
-        values = value_function(observes).data.numpy()
+        values = np.squeeze(value_function(observes).data.numpy())
         trajectory['values'] = values
 
 
@@ -246,7 +246,6 @@ def build_train_set(trajectories):
     advantages = np.concatenate([t['advantages'] for t in trajectories])
     # normalize advantages
     advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-6)
-
     return observes, actions, advantages, disc_sum_rew
 
 
@@ -274,21 +273,21 @@ def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_log
         log_det_cov_new = torch.sum(policy_logvars)
         tr_old_new = torch.sum(torch.exp(old_logvars_tensor - policy_logvars))
         kl = 0.5 * torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
-                    torch.sum((policy_mean(observes_tensor) - old_means_tensor)**2 / torch.exp(policy_logvars), axis=1)
+                    torch.sum((policy_mean(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvars), dim=1)
                              - policy_logvars.shape[1])
         # entropy = 0.5 * (policy_logvars.shape[1] * torch.Tensor([np.log(2 * np.pi) + 1]) + torch.sum(policy_logvars))
-        logger.info('setting up loss with clipping objective')
         if policy_hyper["clipping_range"] is not None:
+            logger.info('setting up loss with clipping objective')
             pg_ratio = torch.exp(logp - logp_old)
             clipped_pg_ratio = torch.clamp(pg_ratio, 1 - policy_hyper["clipping_range"][0],
                                            1 + policy_hyper["clipping_range"][1])
-            surrogate_loss = torch.minimum(advantages_tensor * pg_ratio, advantages_tensor * clipped_pg_ratio)
+            surrogate_loss = torch.min(advantages_tensor * pg_ratio, advantages_tensor * clipped_pg_ratio)
             loss = -torch.sum(surrogate_loss)
         else:
             logger.info('setting up loss with KL penalty')
             loss1 = -torch.sum(advantages_tensor * torch.exp(logp - logp_old))
             loss2 = torch.sum(policy_hyper["beta"] * kl)
-            loss3 = policy_hyper["eta"] * (torch.maximum(0.0, kl - 2.0 * policy_hyper["kl_targ"]))**2
+            loss3 = policy_hyper["eta"] * ((torch.max(torch.Tensor([0.0]), kl - 2.0 * policy_hyper["kl_targ"])) ** 2)
             loss = loss1 + loss2 + loss3
         policy_mean_optimizer.zero_grad()
         policy_logvars_optimizer.zero_grad()
@@ -306,7 +305,7 @@ def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_log
         log_det_cov_new = torch.sum(policy_logvars)
         tr_old_new = torch.sum(torch.exp(old_logvars_tensor - policy_logvars))
         kl = 0.5 * torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
-                    torch.sum((policy_mean(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvars), axis=1)
+                    torch.sum((policy_mean(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvars), dim=1)
                              - policy_logvars.shape[1])
         kl_np = kl.data.numpy()
         if kl_np > policy_hyper["kl_targ"] * 4:  # early stopping if D_KL diverges badly
@@ -330,17 +329,17 @@ def update_value_function(value_function, value_function_optimizer, x_train, y_t
             end = (j + 1) * batch_size
             # placeholder
             x_train_tensor = torch.Tensor(x_train[start:end, :])
-            y_train_tensor = torch.Tensor(y_train[start:end])
+            y_train_tensor = torch.Tensor(y_train[start:end]).view(-1, 1)
             # train loss
-            loss = nn.MSELoss(reduction='mean')
+            loss = nn.MSELoss()
             loss_output = loss(value_function(x_train_tensor), y_train_tensor)
             value_function_optimizer.zero_grad()
             loss_output.backward()
             value_function_optimizer.step()
 
-    y_hat = value_function(x_train).data.numpy()
-    loss = np.mean(np.square(y_hat - y_train))  # explained variance after update
-    exp_var = 1 - np.var(y_train - y_hat) / np.var(y_train)  # diagnose over-fitting of val func
+    #y_hat = value_function(x_train).data.numpy()
+    #loss = np.mean(np.square(y_hat - y_train))  # explained variance after update
+    #exp_var = 1 - np.var(y_train - y_hat) / np.var(y_train)  # diagnose over-fitting of val func
 
     # logger.log({'ValFuncLoss': loss,
     #             'ExplainedVarNew': exp_var,
@@ -422,8 +421,8 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
             # update value function
             num_batches = max(observes.shape[0] // 256, 1)
             batch_size = observes.shape[0] // num_batches
-            y_hat = value_function(observes).data.numpy()  # check explained variance prior to update
-            old_exp_var = 1 - np.var(disc_sum_rew - y_hat) / np.var(disc_sum_rew)
+            #y_hat = value_function(torch.Tensor(observes)).data.numpy()  # check explained variance prior to update
+            #old_exp_var = 1 - np.var(disc_sum_rew - y_hat) / np.var(disc_sum_rew)
             if replay_buffer_x is None:
                 x_train, y_train = observes, disc_sum_rew
             else:
