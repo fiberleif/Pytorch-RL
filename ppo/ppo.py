@@ -147,7 +147,7 @@ def run_episode(env, policy_mean, policy_logvar, scaler):
             np.array(rewards, dtype=np.float64), np.concatenate(unscaled_obs))
 
 
-def run_policy(env, policy_mean, policy_logvar, scaler, logger, episodes=5):
+def run_policy(env, policy_mean, policy_logvar, scaler, episodes=5):
     """ Rollout with Policy and Store Trajectories """
     total_steps = 0
     trajectories = []
@@ -286,9 +286,9 @@ def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_log
         else:
             logger.info('setting up loss with KL penalty')
             loss1 = -torch.sum(advantages_tensor * torch.exp(logp - logp_old))
-            loss2 = torch.sum(policy_hyper["beta"] * kl)
+            # loss2 = torch.sum(policy_hyper["beta"] * kl)
             loss3 = policy_hyper["eta"] * ((torch.max(torch.Tensor([0.0]), kl - 2.0 * policy_hyper["kl_targ"])) ** 2)
-            loss = loss1 + loss2 + loss3
+            loss = loss1 + loss3
         policy_mean_optimizer.zero_grad()
         policy_logvars_optimizer.zero_grad()
         # adjust learning rate
@@ -393,7 +393,7 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
     replay_buffer_y = None
 
     # run a few episodes of untrained policy to initialize scaler:
-    run_policy(env, policy_mean, policy_logvars, scaler, logger, episodes=5)
+    run_policy(env, policy_mean, policy_logvars, scaler, episodes=5)
 
     # train & test models
     policy_hyper = {"beta": 1.0, "eta": 50, "kl_targ": kl_targ, "epoch": 20, "lr": actor_lr, "lr_multiplier": 1.0,
@@ -405,7 +405,7 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
         # train models
         for i in range(test_frequency):
             # rollout
-            trajectories, steps = run_policy(env, policy_mean, policy_logvars, scaler, logger, episodes=batch_size)
+            trajectories, steps = run_policy(env, policy_mean, policy_logvars, scaler, episodes=batch_size)
             # process data
             current_episodes += len(trajectories)
             current_steps += steps
@@ -427,14 +427,14 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
                 x_train, y_train = observes, disc_sum_rew
             else:
                 x_train = np.concatenate([observes, replay_buffer_x])
-                y_train = np.concatenate([observes, replay_buffer_y])
+                y_train = np.concatenate([disc_sum_rew, replay_buffer_y])
             replay_buffer_x = observes
             replay_buffer_y = disc_sum_rew
             update_value_function(value_function, value_function_optimizer, x_train, y_train, num_batches, batch_size)
 
         # test models
         num_test_episodes = 10
-        trajectories, _ = run_policy(env, policy_mean, policy_logvars, scaler, logger, episodes=num_test_episodes)
+        trajectories, _ = run_policy(env, policy_mean, policy_logvars, scaler, episodes=num_test_episodes)
         returns = [np.sum(t["rewards"]) for t in trajectories]
         avg_return = sum(returns) / num_test_episodes
         logger.record_tabular('iteration', iter)
