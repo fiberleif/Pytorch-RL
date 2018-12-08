@@ -10,6 +10,20 @@ To be implemented algorithms:
 * PyTorch v0.4.0
 * Python 3.6, 3.5
 
+### Run PPO algorithm:
+
+```
+cd ppo
+./ppo.py Reacher-v1 -n 60000 -b 50
+./ppo.py InvertedPendulum-v1
+./ppo.py InvertedDoublePendulum-v1 -n 12000
+./ppo.py Swimmer-v1 -n 2500 -b 5
+./ppo.py Hopper-v1 -n 30000
+./ppo.py HalfCheetah-v1 -n 3000 -b 5
+./ppo.py Walker2d-v1 -n 25000
+./ppo.py Ant-v1 -n 100000
+./ppo.py Humanoid-v1 -n 200000
+./ppo.py HumanoidStandup-v1 -n 200000 -b 5
 
 # References
 * [Human Level Control through Deep Reinforcement Learning](https://www.nature.com/nature/journal/v518/n7540/full/nature14236.html)
