@@ -1,12 +1,14 @@
 # Pytorch-RL
 Pytorch implementation of popular deep reinforcement learning algorithms towards SOA performance.
 
-To be implemented algorithms:
+Implemented algorithms:
 * Proximal Policy Optimization (PPO)
+
+To be implemented algorithms:
 * Deep Deterministic Policy Gradient (DDPG)
 * (Double/Dueling) Deep Q-Learning (DQN)
 
-# Dependency
+## Dependency Installation
 * Python 3.6
 * Numpy 1.15
 * Scipy 1.1.0
@@ -15,9 +17,8 @@ To be implemented algorithms:
 * sklearn 0.0
 * PyTorch v0.4.0
 
-# Code Usage
-## Run PPO algorithm:
-
+## Code Usage
+### How to run PPO algorithm
 ```
 cd ppo
 ./ppo.py Reacher-v1 -n 60000 -b 50
@@ -32,7 +33,7 @@ cd ppo
 ./ppo.py HumanoidStandup-v1 -n 200000 -b 5
 ```
 
-# References
+## References
 * [Human Level Control through Deep Reinforcement Learning](https://www.nature.com/nature/journal/v518/n7540/full/nature14236.html)
 * [Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/abs/1509.06461)
 * [Dueling Network Architectures for Deep Reinforcement Learning](https://arxiv.org/abs/1511.06581)
