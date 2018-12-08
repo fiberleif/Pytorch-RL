@@ -420,7 +420,7 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
 
             # update value function
             num_batches = max(observes.shape[0] // 256, 1)
-            batch_size = observes.shape[0] // num_batches
+            vf_batch_size = observes.shape[0] // num_batches
             #y_hat = value_function(torch.Tensor(observes)).data.numpy()  # check explained variance prior to update
             #old_exp_var = 1 - np.var(disc_sum_rew - y_hat) / np.var(disc_sum_rew)
             if replay_buffer_x is None:
@@ -430,7 +430,7 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
                 y_train = np.concatenate([disc_sum_rew, replay_buffer_y])
             replay_buffer_x = observes
             replay_buffer_y = disc_sum_rew
-            update_value_function(value_function, value_function_optimizer, x_train, y_train, num_batches, batch_size)
+            update_value_function(value_function, value_function_optimizer, x_train, y_train, num_batches, vf_batch_size)
 
         # test models
         num_test_episodes = 10
