@@ -41,9 +41,9 @@ import sys
 sys.path.append('..')
 import utils.logger as logger
 from datetime import datetime
-from sklearn.utils import shuffle
 from utils.scaler import Scaler
-from models import Policy, ValueFunction
+from policy import Policy
+from value_function import ValueFunction
 
 
 def parse_arguments():
@@ -98,17 +98,7 @@ def configure_log_info(env_name, seed):
     logger.configure(dir=cwd)
 
 
-def sample(policy_mean, policy_logvar, state):
-    state = torch.Tensor(state)
-    # compute mean action
-    mean_action = policy_mean(state)
-    # compute action noise
-    action_noise = torch.exp(policy_logvar / 2.0) * torch.randn(policy_logvar.size(0))
-    action = mean_action + action_noise
-    return action.detach().numpy()
-
-
-def run_episode(env, policy_mean, policy_logvar, scaler):
+def run_episode(env, policy, scaler):
     """ Run single episode with option to animate
     Args:
         env: ai gym environment (object)
@@ -135,7 +125,7 @@ def run_episode(env, policy_mean, policy_logvar, scaler):
         unscaled_obs.append(obs)
         obs = (obs - offset) * scale  # center and scale observations
         observes.append(obs)
-        action = sample(policy_mean, policy_logvar, obs).reshape((1, -1)).astype(np.float32)
+        action = policy.sample(obs).reshape((1, -1)).astype(np.float32)
         actions.append(action)
         obs, reward, done, _ = env.step(np.squeeze(action, axis=0))
         if not isinstance(reward, float):
@@ -147,12 +137,12 @@ def run_episode(env, policy_mean, policy_logvar, scaler):
             np.array(rewards, dtype=np.float64), np.concatenate(unscaled_obs))
 
 
-def run_policy(env, policy_mean, policy_logvar, scaler, episodes=5):
+def run_policy(env, policy, scaler, episodes=5):
     """ Rollout with Policy and Store Trajectories """
     total_steps = 0
     trajectories = []
     for e in range(episodes):
-        observes, actions, rewards, unscaled_obs = run_episode(env, policy_mean, policy_logvar, scaler)
+        observes, actions, rewards, unscaled_obs = run_episode(env, policy, scaler)
         total_steps += observes.shape[0]
         trajectory = {'observes': observes,
                       'actions': actions,
@@ -249,103 +239,6 @@ def build_train_set(trajectories):
     return observes, actions, advantages, disc_sum_rew
 
 
-def update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_logvars_optimizer,
-            observes, actions, advantages, policy_hyper):
-    # placeholder
-    observes_tensor = torch.Tensor(observes)
-    actions_tensor = torch.Tensor(actions)
-    advantages_tensor = torch.Tensor(advantages)
-    old_means_np = policy_mean(observes_tensor).detach().numpy()
-    old_logvars_np = policy_logvars.detach().numpy()
-    old_means_tensor = torch.Tensor(old_means_np)
-    old_logvars_tensor = torch.Tensor(old_logvars_np)
-    # loss, kl, entropy = 0, 0, 0
-    for e in range(policy_hyper["epoch"]):
-        # logp
-        logp1 = -0.5 * torch.sum(policy_logvars)
-        logp2 = -0.5 * torch.sum((actions_tensor - policy_mean(observes_tensor)) ** 2 / torch.exp(policy_logvars), dim=1)
-        logp = logp1 + logp2
-        logp_old1 = -0.5 * torch.sum(old_logvars_tensor)
-        logp_old2 = -0.5 * torch.sum((actions_tensor - old_means_tensor) ** 2 / torch.exp(old_logvars_tensor), dim=1)
-        logp_old = logp_old1 + logp_old2
-        # kl & entropy
-        log_det_cov_old = torch.sum(old_logvars_tensor)
-        log_det_cov_new = torch.sum(policy_logvars)
-        tr_old_new = torch.sum(torch.exp(old_logvars_tensor - policy_logvars))
-        kl = 0.5 * torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
-                    torch.sum((policy_mean(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvars), dim=1)
-                             - policy_logvars.shape[1])
-        # entropy = 0.5 * (policy_logvars.shape[1] * torch.Tensor([np.log(2 * np.pi) + 1]) + torch.sum(policy_logvars))
-        if policy_hyper["clipping_range"] is not None:
-            #logger.info('setting up loss with clipping objective')
-            pg_ratio = torch.exp(logp - logp_old)
-            clipped_pg_ratio = torch.clamp(pg_ratio, 1 - policy_hyper["clipping_range"][0],
-                                           1 + policy_hyper["clipping_range"][1])
-            surrogate_loss = torch.min(advantages_tensor * pg_ratio, advantages_tensor * clipped_pg_ratio)
-            loss = -torch.sum(surrogate_loss)
-        else:
-            #logger.info('setting up loss with KL penalty')
-            loss1 = -torch.sum(advantages_tensor * torch.exp(logp - logp_old))
-            loss2 = kl * policy_hyper["beta"]
-            loss3 = policy_hyper["eta"] * ((torch.max(torch.Tensor([0.0]), kl - 2.0 * policy_hyper["kl_targ"])) ** 2)
-            loss = loss1 + loss2 + loss3
-        policy_mean_optimizer.zero_grad()
-        policy_logvars_optimizer.zero_grad()
-        # adjust learning rate
-        lr = policy_hyper["lr"] * policy_hyper["lr_multiplier"]
-        for param_group in policy_mean_optimizer.param_groups:
-            param_group['lr'] = lr
-        for param_group in policy_logvars_optimizer.param_groups:
-            param_group['lr'] = lr * policy_hyper["logvar_speed"]
-        loss.backward()
-        policy_mean_optimizer.step()
-        policy_logvars_optimizer.step()
-        # compute new kl
-        log_det_cov_old = torch.sum(old_logvars_tensor)
-        log_det_cov_new = torch.sum(policy_logvars)
-        tr_old_new = torch.sum(torch.exp(old_logvars_tensor - policy_logvars))
-        kl = 0.5 * torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
-                    torch.sum((policy_mean(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvars), dim=1)
-                             - policy_logvars.shape[1])
-        kl_np = kl.detach().numpy()
-        if kl_np > policy_hyper["kl_targ"] * 4:  # early stopping if D_KL diverges badly
-            break
-    if kl_np > policy_hyper["kl_targ"] * 2:  # servo beta to reach D_KL target
-        policy_hyper["beta"] = np.minimum(35, 1.5 * policy_hyper["beta"])  # max clip beta
-        if policy_hyper["beta"] > 30 and policy_hyper["lr_multiplier"] > 0.1:
-            policy_hyper["lr_multiplier"] /= 1.5
-    elif kl_np < policy_hyper["kl_targ"] / 2:
-        policy_hyper["beta"] = np.maximum(1 / 35, policy_hyper["beta"] / 1.5)  # min clip beta
-        if policy_hyper["beta"] < (1 / 30) and policy_hyper["lr_multiplier"] < 10:
-            policy_hyper["lr_multiplier"] *= 1.5
-
-
-def update_value_function(value_function, value_function_optimizer, x_train, y_train, num_batches, batch_size):
-    epochs = 10
-    for e in range(epochs):
-        x_train, y_train = shuffle(x_train, y_train)
-        for j in range(num_batches):
-            start = j * batch_size
-            end = (j + 1) * batch_size
-            # placeholder
-            x_train_tensor = torch.Tensor(x_train[start:end, :])
-            y_train_tensor = torch.Tensor(y_train[start:end]).view(-1, 1)
-            # train loss
-            loss = nn.MSELoss()
-            loss_output = loss(value_function(x_train_tensor), y_train_tensor)
-            value_function_optimizer.zero_grad()
-            loss_output.backward()
-            value_function_optimizer.step()
-
-    #y_hat = value_function(x_train).data.numpy()
-    #loss = np.mean(np.square(y_hat - y_train))  # explained variance after update
-    #exp_var = 1 - np.var(y_train - y_hat) / np.var(y_train)  # diagnose over-fitting of val func
-
-    # logger.log({'ValFuncLoss': loss,
-    #             'ExplainedVarNew': exp_var,
-    #             'ExplainedVarOld': old_exp_var})
-
-
 def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequency,
           hid1_mult, init_policy_logvar, seed, actor_lr, critic_lr):
     """ Main training loop
@@ -375,29 +268,16 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
     # create scaler
     scaler = Scaler(obs_dim)
 
-    # create policy log-variance
-    logvar_speed = (100 * act_dim ) // 48
-    policy_logvars = torch.Tensor(np.ones((1, act_dim)) * init_policy_logvar)
-    policy_logvars.requires_grad = True
-    policy_logvars_optimizer = optim.Adam([policy_logvars], lr=logvar_speed * actor_lr)
+    # create policy
+    policy = Policy(obs_dim, act_dim, kl_targ, hid1_mult, init_policy_logvar)
 
-    # create policy mean
-    policy_mean = Policy(obs_dim, act_dim, hid1_mult)
-    policy_mean_optimizer = optim.Adam(policy_mean.parameters(), lr=actor_lr)
     # create value_function
     value_function = ValueFunction(obs_dim, hid1_mult)
-    value_function_optimizer = optim.Adam(value_function.parameters(), lr=critic_lr)
-
-    # off-policy buffer for value function (store the previous and current data)
-    replay_buffer_x = None
-    replay_buffer_y = None
 
     # run a few episodes of untrained policy to initialize scaler:
-    run_policy(env, policy_mean, policy_logvars, scaler, episodes=5)
+    run_policy(env, policy, scaler, episodes=5)
 
     # train & test models
-    policy_hyper = {"beta": 1.0, "eta": 50, "kl_targ": kl_targ, "epoch": 20, "lr": actor_lr, "lr_multiplier": 1.0,
-                    "logvar_speed": logvar_speed, "clipping_range": None}
     num_iteration = num_episodes // test_frequency
     current_episodes = 0
     current_steps = 0
@@ -405,7 +285,7 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
         # train models
         for i in range(test_frequency):
             # rollout
-            trajectories, steps = run_policy(env, policy_mean, policy_logvars, scaler, episodes=batch_size)
+            trajectories, steps = run_policy(env, policy, scaler, episodes=batch_size)
             # process data
             current_episodes += len(trajectories)
             current_steps += steps
@@ -415,26 +295,13 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
             # concatenate all episodes into single NumPy arrays
             observes, actions, advantages, disc_sum_rew = build_train_set(trajectories)
             # update policy
-            update_policy(policy_mean, policy_logvars, policy_mean_optimizer, policy_logvars_optimizer,
-                          observes, actions, advantages, policy_hyper)  # update policy
-
+            policy.update(observes, actions, advantages)  # update policy
             # update value function
-            num_batches = max(observes.shape[0] // 256, 1)
-            vf_batch_size = observes.shape[0] // num_batches
-            #y_hat = value_function(torch.Tensor(observes)).data.numpy()  # check explained variance prior to update
-            #old_exp_var = 1 - np.var(disc_sum_rew - y_hat) / np.var(disc_sum_rew)
-            if replay_buffer_x is None:
-                x_train, y_train = observes, disc_sum_rew
-            else:
-                x_train = np.concatenate([observes, replay_buffer_x])
-                y_train = np.concatenate([disc_sum_rew, replay_buffer_y])
-            replay_buffer_x = observes
-            replay_buffer_y = disc_sum_rew
-            update_value_function(value_function, value_function_optimizer, x_train, y_train, num_batches, vf_batch_size)
+            value_function.update(observes, disc_sum_rew)  # update value function
 
         # test models
         num_test_episodes = 10
-        trajectories, _ = run_policy(env, policy_mean, policy_logvars, scaler, episodes=num_test_episodes)
+        trajectories, _ = run_policy(env, policy, scaler, episodes=num_test_episodes)
         returns = [np.sum(t["rewards"]) for t in trajectories]
         avg_return = sum(returns) / num_test_episodes
         logger.record_tabular('iteration', iter)
