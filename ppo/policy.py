@@ -104,7 +104,7 @@ class Policy(nn.Module):
             tr_old_new = torch.sum(torch.exp(old_logvar_tensor - policy_logvar))
             kl = 0.5 * torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
                 torch.sum((self.forward(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvar), dim=1)
-                - policy_logvar.shape[1])
+                - policy_logvar.shape[0])
             if self.clipping_range is not None:
                 # logger.info('setting up loss with clipping objective')
                 pg_ratio = torch.exp(logp - logp_old)
@@ -116,7 +116,7 @@ class Policy(nn.Module):
                 # logger.info('setting up loss with KL penalty')
                 loss1 = -torch.sum(advantages_tensor * torch.exp(logp - logp_old))
                 loss2 = kl * self.beta
-                loss3 = self.beta * ((torch.max(torch.Tensor([0.0]), kl - 2.0 * self.kl_targ)) ** 2)
+                loss3 = ((torch.max(torch.Tensor([0.0]), kl - 2.0 * self.kl_targ)) ** 2) * self.beta
                 loss = loss1 + loss2 + loss3
             self.policy_mean_optimizer.zero_grad()
             self.policy_logvars_optimizer.zero_grad()
@@ -138,7 +138,7 @@ class Policy(nn.Module):
             tr_old_new = torch.sum(torch.exp(old_logvar_tensor - policy_logvar))
             kl = 0.5 * torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
                 torch.sum((self.forward(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvar), dim=1)
-                                 - policy_logvar.shape[1])
+                                 - policy_logvar.shape[0])
             kl_np = kl.detach().numpy()
 
             # break
