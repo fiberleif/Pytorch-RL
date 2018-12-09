@@ -74,10 +74,6 @@ def parse_arguments():
                         help='Initial policy log-variance (natural log of variance)')
     parser.add_argument('-s', '--seed', type=int, default=0,
                         help='Random seed for all randomness')
-    parser.add_argument('--actor_lr', type=float, default=1e-6,
-                        help='Learning rate for actor')
-    parser.add_argument('--critic_lr', type=float, default=1e-6,
-                        help='Learning rate for critic')
     args = parser.parse_args()
     return args
 
@@ -240,7 +236,7 @@ def build_train_set(trajectories):
 
 
 def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequency,
-          hid1_mult, init_policy_logvar, seed, actor_lr, critic_lr):
+          hid1_mult, init_policy_logvar, seed):
     """ Main training loop
     Args:
         env_name: OpenAI Gym environment name, e.g. 'Hopper-v1'
