@@ -235,6 +235,27 @@ def build_train_set(trajectories):
     return observes, actions, advantages, disc_sum_rew
 
 
+def log_batch_stats(observes, actions, advantages, disc_sum_rew):
+    """ Log various batch statistics """
+    logger.log({'mean_obs': np.mean(observes),
+                'min_obs': np.min(observes),
+                'max_obs': np.max(observes),
+                'std_obs': np.mean(np.var(observes, axis=0)),
+                'mean_act': np.mean(actions),
+                'min_act': np.min(actions),
+                'max_act': np.max(actions),
+                'std_act': np.mean(np.var(actions, axis=0)),
+                'mean_adv': np.mean(advantages),
+                'min_adv': np.min(advantages),
+                'max_adv': np.max(advantages),
+                'std_adv': np.var(advantages),
+                'mean_discrew': np.mean(disc_sum_rew),
+                'min_discrew': np.min(disc_sum_rew),
+                'max_discrew': np.max(disc_sum_rew),
+                'std_discrew': np.var(disc_sum_rew),
+                })
+
+
 def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequency,
           hid1_mult, init_policy_logvar, seed):
     """ Main training loop
@@ -290,6 +311,8 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
             add_gae(trajectories, gamma, lam)  # calculate advantage
             # concatenate all episodes into single NumPy arrays
             observes, actions, advantages, disc_sum_rew = build_train_set(trajectories)
+            # add various stats to training log:
+            log_batch_stats(observes, actions, advantages, disc_sum_rew)
             # update policy
             policy.update(observes, actions, advantages)  # update policy
             # update value function

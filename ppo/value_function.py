@@ -58,6 +58,9 @@ class ValueFunction(nn.Module):
     def update(self, x, y):
         num_batches = max(x.shape[0] // 256, 1)
         batch_size = x.shape[0] // num_batches
+        y_hat = self(torch.Tensor(x))
+        y_np = y_hat.detach().numpy()
+        old_exp_var = 1 - np.var(y - y_np) / np.var(y)
         if self.replay_buffer_x is None:
             x_train, y_train = x, y
         else:
@@ -66,7 +69,7 @@ class ValueFunction(nn.Module):
         self.replay_buffer_x = x
         self.replay_buffer_y = y
         for e in range(self.epochs):
-            x_train, y_train = shuffle(x, y)
+            x_train, y_train = shuffle(x_train, y_train)
             for j in range(num_batches):
                 start = j * batch_size
                 end = (j + 1) * batch_size
@@ -79,5 +82,13 @@ class ValueFunction(nn.Module):
                 self.value_function_optimizer.zero_grad()
                 loss_output.backward()
                 self.value_function_optimizer.step()
-
+        y_hat = self(torch.Tensor(x))
+        loss = nn.MSELoss()
+        loss_output = loss(y_hat, torch.Tensor(y).view(-1, 1))
+        y_np = y_hat.detach().numpy()
+        loss_np = loss_output.detach().numpy()
+        exp_var = 1 - np.var(y - y_np) / np.var(y)
+        print("vfloss:", loss_np)
+        print("oldvar:", old_exp_var)
+        print("newvar:", exp_var)
 
