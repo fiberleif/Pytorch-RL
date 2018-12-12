@@ -83,7 +83,7 @@ class Policy(nn.Module):
         # placeholder
         observes_tensor = torch.Tensor(observes)
         actions_tensor = torch.Tensor(actions)
-        advantages_tensor = torch.Tensor(advantages)
+        advantages_tensor = torch.Tensor(advantages).view(-1, 1)
         old_means_np = self.forward(observes_tensor).detach().numpy()
         old_logvar_tensor = torch.sum(self.log_vars, dim=0) + self.init_policy_logvar
         old_logvar_np = old_logvar_tensor.detach().numpy()
@@ -97,7 +97,7 @@ class Policy(nn.Module):
                                      dim=1)
             logp = logp1 + logp2
             logp_old1 = -0.5 * torch.sum(old_logvar_tensor)
-            logp_old2 = -0.5 * torch.sum((actions_tensor - old_means_tensor) ** 2 / torch.exp(old_logvar_tensor),dim=1)
+            logp_old2 = -0.5 * torch.sum((actions_tensor - old_means_tensor) ** 2 / torch.exp(old_logvar_tensor), dim=1)
             logp_old = logp_old1 + logp_old2
             # kl & entropy
             log_det_cov_old = torch.sum(old_logvar_tensor)
