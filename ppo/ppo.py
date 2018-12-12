@@ -65,7 +65,7 @@ def parse_arguments():
                         help='D_KL target value')
     parser.add_argument('-b', '--batch_size', type=int, default=20,
                         help='Number of episodes per training batch')
-    parser.add_argument('-t', '--test_frequency', type=int, default=1,
+    parser.add_argument('-t', '--test_frequency', type=int, default=10,
                         help='Number of training batch before test')
     parser.add_argument('-m', '--hid1_mult', type=int, default=10,
                         help='Size of first hidden layer for value and policy NNs'
@@ -312,7 +312,7 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
             # concatenate all episodes into single NumPy arrays
             observes, actions, advantages, disc_sum_rew = build_train_set(trajectories)
             # add various stats to training log:
-            log_batch_stats(observes, actions, advantages, disc_sum_rew)
+            #log_batch_stats(observes, actions, advantages, disc_sum_rew)
             # update policy
             policy.update(observes, actions, advantages)  # update policy
             # update value function

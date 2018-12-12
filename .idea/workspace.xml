@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d6cbcaaf-dab0-4747-b5b3-362cfe2c5bb9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/ppo/policy.py" beforeDir="false" afterPath="$PROJECT_DIR$/ppo/policy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ppo/ppo.py" beforeDir="false" afterPath="$PROJECT_DIR$/ppo/ppo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ppo/value_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/ppo/value_function.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,23 +34,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1384" />
+          <entry key="py" value="1393" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1384" />
+          <entry key="Python" value="1393" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ppo/ppo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+            <state relative-caret-position="559">
+              <caret line="67" column="70" selection-start-line="67" selection-start-column="70" selection-end-line="67" selection-end-column="70" />
               <folding>
                 <element signature="e#861#870#0" expanded="true" />
               </folding>
@@ -60,24 +61,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ppo/value_function.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-699">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="729">
+              <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
-                <marker date="1544619634834" expanded="true" signature="2146:2302" ph="..." />
+                <marker date="1544620282556" expanded="true" signature="2146:2302" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ppo/policy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="175" column="32" lean-forward="true" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
+            <state relative-caret-position="1564">
+              <caret line="161" column="9" selection-start-line="161" selection-start-column="9" selection-end-line="161" selection-end-column="9" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
-                <marker date="1544619319934" expanded="true" signature="4785:6150" ph="..." />
+                <marker date="1544620260064" expanded="true" signature="4785:6150" ph="..." />
               </folding>
             </state>
           </provider>
@@ -107,13 +108,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ppo/models.py" />
-        <option value="$PROJECT_DIR$/ppo/ppo.py" />
         <option value="$PROJECT_DIR$/ppo/policy.py" />
         <option value="$PROJECT_DIR$/ppo/value_function.py" />
+        <option value="$PROJECT_DIR$/ppo/ppo.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="72" />
     <option name="y" value="229" />
     <option name="width" value="1696" />
@@ -196,34 +197,34 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ppo/models.py" />
-    <entry file="file://$PROJECT_DIR$/ppo/ppo.py">
+    <entry file="file://$PROJECT_DIR$/ppo/policy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+        <state relative-caret-position="1564">
+          <caret line="161" column="9" selection-start-line="161" selection-start-column="9" selection-end-line="161" selection-end-column="9" />
           <folding>
-            <element signature="e#861#870#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="true" />
+            <marker date="1544620260064" expanded="true" signature="4785:6150" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ppo/value_function.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-699">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="729">
+          <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-            <marker date="1544619634834" expanded="true" signature="2146:2302" ph="..." />
+            <marker date="1544620282556" expanded="true" signature="2146:2302" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ppo/policy.py">
+    <entry file="file://$PROJECT_DIR$/ppo/ppo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="175" column="32" lean-forward="true" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
+        <state relative-caret-position="559">
+          <caret line="67" column="70" selection-start-line="67" selection-start-column="70" selection-end-line="67" selection-end-column="70" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
-            <marker date="1544619319934" expanded="true" signature="4785:6150" ph="..." />
+            <element signature="e#861#870#0" expanded="true" />
           </folding>
         </state>
       </provider>

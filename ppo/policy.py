@@ -156,10 +156,10 @@ class Policy(nn.Module):
             # break
             if kl_np > self.kl_targ * 4:  # early stopping if D_KL diverges badly
                 break
-        print("epoch-{0}-finished".format(e))
-        print("PolicyLoss:", loss_np)
-        print("KL:", kl_np)
-        print("entropy:", entropy_np)
+        #print("epoch-{0}-finished".format(e))
+        #print("PolicyLoss:", loss_np)
+        #print("KL:", kl_np)
+        #print("entropy:", entropy_np)
 
         # TODO: too many "magic numbers" in next 8 lines of code, need to clean up
         if kl_np > self.kl_targ * 2:  # servo beta to reach D_KL target
