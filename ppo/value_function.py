@@ -8,6 +8,7 @@ sys.path.append('..')
 import utils.logger as logger
 from sklearn.utils import shuffle
 
+
 class ValueFunction(nn.Module):
     """ NN-based approximation of value function """
     def __init__(self, obs_dim, hid1_mult):
@@ -55,12 +56,16 @@ class ValueFunction(nn.Module):
     def _set_optimizer(self):
         self.value_function_optimizer = optim.Adam(self.parameters(), lr=self.lr)
 
+    def _exp_var(self, x, y):
+        y_hat = self(torch.Tensor(x))
+        y_np = y_hat.detach().numpy()
+        exp_var = 1 - np.var(y - y_np) / np.var(y)
+        return exp_var
+
     def update(self, x, y):
         num_batches = max(x.shape[0] // 256, 1)
         batch_size = x.shape[0] // num_batches
-        y_hat = self(torch.Tensor(x))
-        y_np = y_hat.detach().numpy()
-        old_exp_var = 1 - np.var(y - y_np) / np.var(y)
+        old_exp_var = self._exp_var(x, y) # test
         if self.replay_buffer_x is None:
             x_train, y_train = x, y
         else:
@@ -78,17 +83,14 @@ class ValueFunction(nn.Module):
                 y_train_tensor = torch.Tensor(y_train[start:end]).view(-1, 1)
                 # train loss
                 loss = nn.MSELoss()
-                loss_output = loss(self.forward(x_train_tensor), y_train_tensor)
+                loss_output = loss(self(x_train_tensor), y_train_tensor)
                 self.value_function_optimizer.zero_grad()
                 loss_output.backward()
                 self.value_function_optimizer.step()
-        y_hat = self(torch.Tensor(x))
         loss = nn.MSELoss()
-        loss_output = loss(y_hat, torch.Tensor(y).view(-1, 1))
-        y_np = y_hat.detach().numpy()
-        loss_np = loss_output.detach().numpy()
-        exp_var = 1 - np.var(y - y_np) / np.var(y)
+        loss_np = loss(self(torch.Tensor(x)), torch.Tensor(y).view(-1, 1)).detach().numpy()
+        new_exp_var = self._exp_var(x, y)
         print("vfloss:", loss_np)
-        print("oldvar:", old_exp_var)
-        print("newvar:", exp_var)
+        print("oldexpvar:", old_exp_var)
+        print("newexpvar:", new_exp_var)
 
