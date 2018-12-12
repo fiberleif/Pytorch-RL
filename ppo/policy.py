@@ -51,7 +51,7 @@ class Policy(nn.Module):
         # to log-variances. heuristic sets logvar_speed based on network size.
         logvar_speed = (10 * self.hid3_size) // 48
         self.log_vars = torch.Tensor(np.zeros((logvar_speed, self.act_dim)))
-        #self.log_vars.requires_grad = True
+        self.log_vars.requires_grad = True
 
         # set optimizer
         self._set_optimizer()
@@ -83,7 +83,7 @@ class Policy(nn.Module):
         # placeholder
         observes_tensor = torch.Tensor(observes)
         actions_tensor = torch.Tensor(actions)
-        advantages_tensor = torch.Tensor(advantages).view(-1, 1)
+        advantages_tensor = torch.Tensor(advantages)
         old_means_np = self.forward(observes_tensor).detach().numpy()
         old_logvar_tensor = torch.sum(self.log_vars, dim=0) + self.init_policy_logvar
         old_logvar_np = old_logvar_tensor.detach().numpy()
@@ -103,7 +103,7 @@ class Policy(nn.Module):
             log_det_cov_old = torch.sum(old_logvar_tensor)
             log_det_cov_new = torch.sum(policy_logvar)
             tr_old_new = torch.sum(torch.exp(old_logvar_tensor - policy_logvar))
-            kl = torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
+            kl = torch.mean(log_det_cov_new - log_det_cov_old + tr_old_new +
                 torch.sum((self.forward(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvar), dim=1)
                 - policy_logvar.shape[0]) * 0.5
             entropy = (torch.sum(policy_logvar) + self.act_dim * (np.log(2 * np.pi) + 1)) * 0.5
@@ -113,11 +113,11 @@ class Policy(nn.Module):
                 clipped_pg_ratio = torch.clamp(pg_ratio, 1 - self.clipping_range[0],
                                                1 + self.clipping_range[1])
                 surrogate_loss = torch.min(advantages_tensor * pg_ratio, advantages_tensor * clipped_pg_ratio)
-                loss = -torch.sum(surrogate_loss)
+                loss = -torch.mean(surrogate_loss)
             else:
                  # logger.info('setting up loss with KL penalty')
-                loss1 = -torch.sum(advantages_tensor * torch.exp(logp - logp_old))
-                loss2 = kl * self.beta
+                loss1 = -torch.mean(advantages_tensor * torch.exp(logp - logp_old))
+                loss2 = torch.mean(kl * self.beta)
                 loss3 = ((torch.max(torch.Tensor([0.0]), kl - 2.0 * self.kl_targ)) ** 2) * self.eta
                 loss = loss1 + loss2 + loss3
             self.policy_mean_optimizer.zero_grad()
@@ -139,7 +139,7 @@ class Policy(nn.Module):
             log_det_cov_old = torch.sum(old_logvar_tensor)
             log_det_cov_new = torch.sum(policy_logvar)
             tr_old_new = torch.sum(torch.exp(old_logvar_tensor - policy_logvar))
-            kl = torch.sum(log_det_cov_new - log_det_cov_old + tr_old_new +
+            kl = torch.mean(log_det_cov_new - log_det_cov_old + tr_old_new +
                 torch.sum((self.forward(observes_tensor) - old_means_tensor) ** 2 / torch.exp(policy_logvar), dim=1)
                                  - policy_logvar.shape[0]) * 0.5
             entropy = (torch.sum(policy_logvar) + self.act_dim * (np.log(2 * np.pi) + 1)) * 0.5
@@ -161,22 +161,23 @@ class Policy(nn.Module):
                 clipped_pg_ratio = torch.clamp(pg_ratio, 1 - self.clipping_range[0],
                                                1 + self.clipping_range[1])
                 surrogate_loss = torch.min(advantages_tensor * pg_ratio, advantages_tensor * clipped_pg_ratio)
-                loss = -torch.sum(surrogate_loss)
+                loss = -torch.mean(surrogate_loss)
             else:
                  # logger.info('setting up loss with KL penalty')
-                loss1 = -torch.sum(advantages_tensor * torch.exp(logp - logp_old))
-                loss2 = kl * self.beta
+                loss1 = -torch.mean(advantages_tensor * torch.exp(logp - logp_old))
+                loss2 = torch.mean(kl * self.beta)
                 loss3 = ((torch.max(torch.Tensor([0.0]), kl - 2.0 * self.kl_targ)) ** 2) * self.eta
                 loss = loss1 + loss2 + loss3
             loss_np = loss.detach().numpy()
 
             # break
             if kl_np > self.kl_targ * 4:  # early stopping if D_KL diverges badly
-                print("epoch-{0}-break".format(e))
-                print("PolicyLoss:", loss_np)
-                print("KL:", kl_np)
-                print("entropy:", entropy_np)
                 break
+        print("epoch-{0}-break".format(e))
+        print("PolicyLoss:", loss_np)
+        print("KL:", kl_np)
+        print("entropy:", entropy_np)
+
         # TODO: too many "magic numbers" in next 8 lines of code, need to clean up
         if kl_np > self.kl_targ * 2:  # servo beta to reach D_KL target
             self.beta = np.minimum(35, 1.5 * self.beta)  # max clip beta
