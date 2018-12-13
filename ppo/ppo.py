@@ -122,6 +122,7 @@ def run_episode(env, policy, scaler):
         obs = (obs - offset) * scale  # center and scale observations
         observes.append(obs)
         action = policy.sample(obs).reshape((1, -1)).astype(np.float32)
+        action = np.clip(action, -1.0, 1,0)
         actions.append(action)
         obs, reward, done, _ = env.step(np.squeeze(action, axis=0))
         if not isinstance(reward, float):
