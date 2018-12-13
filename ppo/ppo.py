@@ -65,7 +65,7 @@ def parse_arguments():
                         help='D_KL target value')
     parser.add_argument('-b', '--batch_size', type=int, default=20,
                         help='Number of episodes per training batch')
-    parser.add_argument('-t', '--test_frequency', type=int, default=10,
+    parser.add_argument('-t', '--num_train', type=int, default=10,
                         help='Number of training batch before test')
     parser.add_argument('-m', '--hid1_mult', type=int, default=10,
                         help='Size of first hidden layer for value and policy NNs'
@@ -257,7 +257,7 @@ def log_batch_stats(observes, actions, advantages, disc_sum_rew):
                 })
 
 
-def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequency,
+def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, num_train,
           hid1_mult, init_policy_logvar, seed):
     """ Main training loop
     Args:
@@ -296,12 +296,12 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
     run_policy(env, policy, scaler, episodes=5)
 
     # train & test models
-    num_iteration = num_episodes // test_frequency
+    num_iteration = num_episodes // num_train
     current_episodes = 0
     current_steps = 0
     for iter in range(num_iteration):
         # train models
-        for i in range(test_frequency):
+        for i in range(num_train):
             # rollout
             trajectories, steps = run_policy(env, policy, scaler, episodes=batch_size)
             # process data
