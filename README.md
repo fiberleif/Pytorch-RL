@@ -8,7 +8,7 @@ To be implemented algorithms:
 * Deep Deterministic Policy Gradient (DDPG)
 * (Double/Dueling) Deep Q-Learning (DQN)
 
-## Dependency Installation
+## Dependency
 * Python 3.6
 * Numpy 1.15
 * Scipy 1.1.0
@@ -18,19 +18,19 @@ To be implemented algorithms:
 * PyTorch v0.4.0
 
 ## Code Usage
-### How to run PPO algorithm
+### Run PPO algorithm in MuJoCo Suite
 ```
 cd ppo
-python ppo.py --env_name Reacher-v1 -n 60000 -b 50
-python ppo.py --env_name InvertedPendulum-v1
-python ppo.py --env_name InvertedDoublePendulum-v1 -n 12000
-python ppo.py --env_name Swimmer-v1 -n 2500 -b 5
-python ppo.py --env_name Hopper-v1 -n 30000
-python ppo.py --env_name HalfCheetah-v1 -n 3000 -b 5
-python ppo.py --env_name Walker2d-v1 -n 25000
-python ppo.py --env_name Ant-v1 -n 100000
-python ppo.py --env_name Humanoid-v1 -n 200000
-python ppo.py --env_name HumanoidStandup-v1 -n 200000 -b 5
+python ppo_train.py --env_name Reacher-v1 -n 60000 -b 50
+python ppo_train.py --env_name InvertedPendulum-v1
+python ppo_train.py --env_name InvertedDoublePendulum-v1 -n 12000
+python ppo_train.py --env_name Swimmer-v1 -n 2500 -b 5
+python ppo_train.py --env_name Hopper-v1 -n 30000
+python ppo_train.py --env_name HalfCheetah-v1 -n 3000 -b 5
+python ppo_train.py --env_name Walker2d-v1 -n 25000
+python ppo_train.py --env_name Ant-v1 -n 100000
+python ppo_train.py --env_name Humanoid-v1 -n 200000
+python ppo_train.py --env_name HumanoidStandup-v1 -n 200000 -b 5
 ```
 
 ## References
