@@ -59,9 +59,9 @@ class Policy(nn.Module):
     def forward(self, state):
         viewed_state = state.view(-1, self.obs_dim)
         # 3 hidden layers with tanh activations
-        x = F.tanh(self.fc1(viewed_state))
-        x = F.tanh(self.fc2(x))
-        x = F.tanh(self.fc3(x))
+        x = torch.tanh(self.fc1(viewed_state))
+        x = torch.tanh(self.fc2(x))
+        x = torch.tanh(self.fc3(x))
         x = self.fc4(x)
         return x
 

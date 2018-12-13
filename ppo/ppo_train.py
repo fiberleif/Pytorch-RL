@@ -22,9 +22,8 @@ https://arxiv.org/pdf/1506.02438.pdf
 And, also these Github repo which was very helpful to me during this implementation:
 https://github.com/pat-coady/trpo/
 
-This implementation learns policies for continuous environments
-in the OpenAI Gym (https://gym.openai.com/). Testing was focused on
-the MuJoCo control tasks.
+This implementation learns policies for continuous environments in the OpenAI Gym (https://gym.openai.com/).
+Testing was focused on the MuJoCo control Suite.
 """
 
 import os
@@ -65,7 +64,7 @@ def parse_arguments():
                         help='D_KL target value')
     parser.add_argument('-b', '--batch_size', type=int, default=20,
                         help='Number of episodes per training batch')
-    parser.add_argument('-t', '--num_train', type=int, default=10,
+    parser.add_argument('-t', '--eval_freq', type=int, default=10,
                         help='Number of training batch before test')
     parser.add_argument('-m', '--hid1_mult', type=int, default=10,
                         help='Size of first hidden layer for value and policy NNs'
@@ -257,7 +256,7 @@ def log_batch_stats(observes, actions, advantages, disc_sum_rew):
                 })
 
 
-def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, num_train,
+def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, eval_freq,
           hid1_mult, init_policy_logvar, seed):
     """ Main training loop
     Args:
@@ -296,12 +295,12 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, num_train,
     run_policy(env, policy, scaler, episodes=5)
 
     # train & test models
-    num_iteration = num_episodes // num_train
+    num_iteration = num_episodes // eval_freq
     current_episodes = 0
     current_steps = 0
     for iter in range(num_iteration):
         # train models
-        for i in range(num_train):
+        for i in range(eval_freq):
             # rollout
             trajectories, steps = run_policy(env, policy, scaler, episodes=batch_size)
             # process data
