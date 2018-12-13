@@ -321,8 +321,7 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, test_frequenc
         # test models
         num_test_episodes = 10
         trajectories, _ = run_policy(env, policy, scaler, episodes=num_test_episodes)
-        returns = [np.sum(t["rewards"]) for t in trajectories]
-        avg_return = sum(returns) / num_test_episodes
+        avg_return = np.mean([np.sum(t["rewards"]) for t in trajectories])
         logger.record_tabular('iteration', iter)
         logger.record_tabular('episodes', current_episodes)
         logger.record_tabular('steps', current_steps)
