@@ -5,7 +5,7 @@ Implemented algorithms:
 * Proximal Policy Optimization (PPO)
 
 To be implemented algorithms:
-* Deep Deterministic Policy Gradient (DDPG)
+* Deep Deterministic Policy Gradient (DDPG) (working on)
 * (Double/Dueling) Deep Q-Learning (DQN)
 
 ## Dependency
