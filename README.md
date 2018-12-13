@@ -44,5 +44,5 @@ python ppo_train.py --env_name HumanoidStandup-v1 -n 200000 -b 5
 * [Trust Region Policy Optimization](https://arxiv.org/abs/1502.05477)
 * [Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347)
 * [Emergence of Locomotion Behaviours in Rich Environments](https://arxiv.org/abs/1707.02286)
-* Github Repository with a lot helpful implementations: [pat-coady](https://github.com/pat-coady/trpo), [OpenAI Baselines](https://github.com/openai/baselines) and [Ilya Kostrikov](https://github.com/ikostrikov/pytorch-a2c-ppo-acktr)
+* Github Repository with a lot helpful implementations: [Pat-coady](https://github.com/pat-coady/trpo), [OpenAI Baselines](https://github.com/openai/baselines) and [Ilya Kostrikov](https://github.com/ikostrikov/pytorch-a2c-ppo-acktr)
 
