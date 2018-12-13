@@ -64,7 +64,7 @@ def parse_arguments():
                         help='D_KL target value')
     parser.add_argument('-b', '--batch_size', type=int, default=20,
                         help='Number of episodes per training batch')
-    parser.add_argument('-t', '--eval_freq', type=int, default=10,
+    parser.add_argument('-f', '--eval_freq', type=int, default=10,
                         help='Number of training batch before test')
     parser.add_argument('-m', '--hid1_mult', type=int, default=10,
                         help='Size of first hidden layer for value and policy NNs'
