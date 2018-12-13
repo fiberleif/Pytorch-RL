@@ -53,7 +53,7 @@ def parse_arguments():
     """
     parser = argparse.ArgumentParser(description=('Train policy on OpenAI Gym environment '
                                                   'using Proximal Policy Optimizer'))
-    parser.add_argument('--env_name', type=str, default="HalfCheetah-v1",
+    parser.add_argument('-e', '--env_name', type=str, default="HalfCheetah-v1",
                         help='OpenAI Gym environment name')
     parser.add_argument('-n', '--num_episodes', type=int, default=1000,
                         help='Number of episodes to run')
