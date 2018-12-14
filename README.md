@@ -21,18 +21,29 @@ To be implemented algorithms:
 ### Run PPO algorithm in MuJoCo Suite
 ```
 cd ppo
-python ppo_train.py --env_name Reacher-v1 -n 60000 -b 50
-python ppo_train.py --env_name InvertedPendulum-v1
-python ppo_train.py --env_name InvertedDoublePendulum-v1 -n 12000
-python ppo_train.py --env_name Swimmer-v1 -n 2500 -b 5
-python ppo_train.py --env_name Hopper-v1 -n 30000
-python ppo_train.py --env_name HalfCheetah-v1 -n 3000 -b 5
-python ppo_train.py --env_name Walker2d-v1 -n 25000
-python ppo_train.py --env_name Ant-v1 -n 100000
-python ppo_train.py --env_name Humanoid-v1 -n 200000
-python ppo_train.py --env_name HumanoidStandup-v1 -n 200000 -b 5
+python ppo_train.py --e Reacher-v1 -n 60000 -b 50
+python ppo_train.py --e InvertedPendulum-v1
+python ppo_train.py --e InvertedDoublePendulum-v1 -n 12000
+python ppo_train.py --e Swimmer-v1 -n 2500 -b 5
+python ppo_train.py --e Hopper-v1 -n 30000
+python ppo_train.py --e HalfCheetah-v1 -n 3000 -b 5
+python ppo_train.py --e Walker2d-v1 -n 25000
+python ppo_train.py --e Ant-v1 -n 100000
+python ppo_train.py --e Humanoid-v1 -n 200000
+python ppo_train.py --e HumanoidStandup-v1 -n 200000 -b 5
 ```
-
+### Run DDPG algorithm in MuJoCo Suite
+```
+cd ddpg
+python ddpg_train.py --e Reacher-v1 --start_timesteps 1000
+python ddpg_train.py --e InvertedPendulum-v1 --start_timesteps 1000
+python ddpg_train.py --e InvertedDoublePendulum-v1 --start_timesteps 1000
+python ddpg_train.py --e Swimmer-v1 --start_timesteps 1000
+python ddpg_train.py --e Hopper-v1 --start_timesteps 1000
+python ddpg_train.py --e HalfCheetah-v1 --start_timesteps 10000
+python ddpg_train.py --e Walker2d-v1 --start_timesteps 1000
+python ddpg_train.py --e Ant-v1 --start_timesteps 10000
+```
 ## References
 * [Human Level Control through Deep Reinforcement Learning](https://www.nature.com/nature/journal/v518/n7540/full/nature14236.html)
 * [Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/abs/1509.06461)
