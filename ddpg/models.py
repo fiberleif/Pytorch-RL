@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import torch.functional as F
+import torch.nn.functional as F
 import torch.optim as optim
 import numpy as np
 
@@ -76,6 +76,7 @@ class DDPG(object):
         self.tau = tau
 
     def select_action(self, observations, add_noise):
+        observations = torch.Tensor(observations)
         if add_noise:
             action = self.actor(observations).detach().numpy().flatten()
         else:
@@ -83,6 +84,11 @@ class DDPG(object):
             action = (self.actor(observations).detach().numpy().flatten() + noise).clip(-self.actor.action_range,
                                                                                         self.actor.action_range)
         return action
+
+    def align_target(self):
+        # align target networks with themselves
+        self.target_actor.load_state_dict(self.actor.state_dict())
+        self.target_critic.load_state_dict(self.critic.state_dict())
 
     def _compute_target_q(self):
         # compute target Q
@@ -92,7 +98,7 @@ class DDPG(object):
     def _update_critic(self):
         # build critic loss
         mse_loss = nn.MSELoss()
-        critic_loss = mse_loss(self.critic(self.obsveration, self.action), self.target_Q)
+        critic_loss = mse_loss(self.critic(self.observation, self.action), self.target_Q)
 
         # update critic
         self.critic.optimizer.zero_grad()
@@ -101,8 +107,8 @@ class DDPG(object):
 
     def _update_actor(self):
         # build actor loss
-        action = self.actor(self.obsveration)
-        actor_loss = -self.critic(self.obsveration, action).mean()
+        action = self.actor(self.observation)
+        actor_loss = -self.critic(self.observation, action).mean()
 
         # update actor
         self.actor.optimizer.zero_grad()
@@ -111,7 +117,7 @@ class DDPG(object):
 
     def update(self, observation, action, reward, next_obs, done):
         # placeholder
-        self.obsveration = torch.Tensor(observation)
+        self.observation = torch.Tensor(observation)
         self.action = torch.Tensor(action)
         self.reward = torch.Tensor(reward)
         self.next_obs = torch.Tensor(next_obs)
