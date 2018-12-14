@@ -3,9 +3,9 @@ Pytorch implementation of popular deep reinforcement learning algorithms towards
 
 Implemented algorithms:
 * Proximal Policy Optimization (PPO)
+* Deep Deterministic Policy Gradient (DDPG) 
 
 To be implemented algorithms:
-* Deep Deterministic Policy Gradient (DDPG) (working on)
 * (Double/Dueling) Deep Q-Learning (DQN)
 
 ## Dependency
