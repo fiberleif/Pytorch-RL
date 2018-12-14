@@ -20,7 +20,7 @@ class ReplayBuffer(object):
         else:
             self.storage.append(data)
 
-    def sample(self, batch_size):
+    def sample(self, batch_size=64):
         # sample tuples of (observation, action, reward, next_observation, done)
         ind = np.random.randint(0, len(self.storage), size=batch_size)
         x, y, u, r, d = [], [], [], [], []

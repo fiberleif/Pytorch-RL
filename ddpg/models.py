@@ -7,7 +7,7 @@ import numpy as np
 
 class Actor(nn.Module):
     """ NN-based approximation of deterministic policy (actor) """
-    def __init__(self, obs_dim, act_dim, action_range, actor_lr):
+    def __init__(self, obs_dim, act_dim, action_range, actor_lr=1e-4):
         super(Actor, self).__init__()
         # hyperparameter
         self.obs_dim = obs_dim
@@ -38,12 +38,12 @@ class Actor(nn.Module):
 
 class Critic(nn.Module):
     """ NN-based approximation of Q function (critic) """
-    def __init__(self, obs_dim, act_dim, critic_lr):
+    def __init__(self, obs_dim, act_dim, weight_decay=1e-2):
         super(Critic, self).__init__()
         # hyperparameter
         self.obs_dim = obs_dim
         self.act_dim = act_dim
-        self.crtic_lr = critic_lr
+        self.weight_decay = weight_decay
 
         # NN components
         self.fc1 = nn.Linear(self.obs_dim, 400)
@@ -62,7 +62,7 @@ class Critic(nn.Module):
         return x
 
     def _set_optimizer(self):
-        self.optimizer = optim.Adam(self.parameters(), lr=self.crtic_lr)
+        self.optimizer = optim.Adam(self.parameters(), weight_decay=self.weight_decay)
 
 
 class DDPG(object):

@@ -72,7 +72,7 @@ def parse_arguments():
     parser.add_argument('-v', '--init_policy_logvar', type=float, default=-1.0,
                         help='Initial policy log-variance (natural log of variance)')
     parser.add_argument('-s', '--seed', type=int, default=0,
-                        help='Random seed for all randomness')
+                        help='Random seed for all modules with randomness')
     args = parser.parse_args()
     return args
 
@@ -266,8 +266,10 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, eval_freq,
         lam: lambda from Generalized Advantage Estimate
         kl_targ: D_KL target for policy update [D_KL(pi_old || pi_new)
         batch_size: number of episodes per policy training batch
+        eval_freq: number of training batch before test
         hid1_mult: hid1 size for policy and value_f (mutliplier of obs dimension)
-        policy_logvar: natural log of initial policy variance
+        init_policy_logvar: natural log of initial policy variance
+        seed: random seed for all modules with randomness
     """
 
     # set seeds
