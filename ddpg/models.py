@@ -66,7 +66,7 @@ class Critic(nn.Module):
 
 
 class DDPG(object):
-    def __init__(self, actor, critic, target_actor, target_critic, noise_std, gamma, tau):
+    def __init__(self, actor, critic, target_actor, target_critic, noise_std, gamma, tau, device):
         self.actor = actor
         self.critic = critic
         self.target_actor = target_actor
@@ -74,14 +74,15 @@ class DDPG(object):
         self.noise_std = noise_std
         self.gamma = gamma
         self.tau = tau
+        self.device = device
 
     def select_action(self, observations, add_noise):
-        observations = torch.Tensor(observations)
+        observations = torch.Tensor(observations).to(self.device)
         if add_noise:
-            action = self.actor(observations).detach().numpy().flatten()
+            action = self.actor(observations).cpu().data.numpy().flatten()
         else:
             noise = np.random.normal(0, self.noise_std, size=self.actor.act_dim)
-            action = (self.actor(observations).detach().numpy().flatten() + noise).clip(-self.actor.action_range,
+            action = (self.actor(observations).cpu().data.numpy().flatten() + noise).clip(-self.actor.action_range,
                                                                                         self.actor.action_range)
         return action
 
@@ -117,11 +118,11 @@ class DDPG(object):
 
     def update(self, observation, action, reward, next_obs, done):
         # placeholder
-        self.observation = torch.Tensor(observation)
-        self.action = torch.Tensor(action)
-        self.reward = torch.Tensor(reward)
-        self.next_obs = torch.Tensor(next_obs)
-        self.done = torch.Tensor(done)
+        self.observation = torch.Tensor(observation).to(self.device)
+        self.action = torch.Tensor(action).to(self.device)
+        self.reward = torch.Tensor(reward).to(self.device)
+        self.next_obs = torch.Tensor(next_obs).to(self.device)
+        self.done = torch.Tensor(done).to(self.device)
 
         # build graph and update models
         self._compute_target_q()

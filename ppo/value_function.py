@@ -7,7 +7,8 @@ import sys
 sys.path.append('..')
 import utils.logger as logger
 from sklearn.utils import shuffle
-
+# set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class ValueFunction(nn.Module):
     """ NN-based approximation of value function """
@@ -57,8 +58,8 @@ class ValueFunction(nn.Module):
         self.value_function_optimizer = optim.Adam(self.parameters(), lr=self.lr)
 
     def _exp_var(self, x, y):
-        y_hat = self(torch.Tensor(x))
-        y_np = y_hat.detach().numpy()
+        y_hat = self(torch.Tensor(x).to(device))
+        y_np = y_hat.cpu().data.numpy()
         exp_var = 1 - np.var(y - y_np) / np.var(y)
         return exp_var
 
@@ -79,8 +80,8 @@ class ValueFunction(nn.Module):
                 start = j * batch_size
                 end = (j + 1) * batch_size
                 # placeholder
-                x_train_tensor = torch.Tensor(x_train[start:end, :])
-                y_train_tensor = torch.Tensor(y_train[start:end]).view(-1, 1)
+                x_train_tensor = torch.Tensor(x_train[start:end, :]).to(device)
+                y_train_tensor = torch.Tensor(y_train[start:end]).view(-1, 1).to(device)
                 # train loss
                 loss = nn.MSELoss()
                 loss_output = loss(self(x_train_tensor), y_train_tensor)
@@ -88,7 +89,7 @@ class ValueFunction(nn.Module):
                 loss_output.backward()
                 self.value_function_optimizer.step()
         loss = nn.MSELoss()
-        loss_np = loss(self(torch.Tensor(x)), torch.Tensor(y).view(-1, 1)).detach().numpy()
+        loss_np = loss(self(torch.Tensor(x).to(device)), torch.Tensor(y).view(-1, 1)).cpu().data.numpy()
         new_exp_var = self._exp_var(x, y)
         #print("vfloss:", loss_np)
         #print("oldexpvar:", old_exp_var)

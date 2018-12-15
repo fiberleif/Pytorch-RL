@@ -83,23 +83,17 @@ def configure_log_info(env_name, seed):
     logger.configure(dir=cwd)
 
 
-def run_episode(env, agent, scaler, replay_buffer, mode):
+def run_episode(env, agent, replay_buffer, mode):
     """ Run single episode with option to animate """
     assert (mode in ["train", "test", "random"])
     obs = env.reset()
-    unscaled_obs = []
     done = False
     obs_step = 0.0
     episode_return = 0.0
     episode_length = 0
-    scale, offset = scaler.get()
-    scale[-1] = 1.0  # don't scale time step feature
-    offset[-1] = 0.0  # don't offset time step feature
     while not done:
         obs = obs.astype(np.float32).flatten()
         obs = np.append(obs, obs_step)  # add time step feature
-        unscaled_obs.append(obs)
-        obs = (obs - offset) * scale  # center and scale observations
         current_obs = obs
         if mode == "train":
             action = agent.select_action(obs, True).flatten().astype(np.float32)
@@ -117,23 +111,18 @@ def run_episode(env, agent, scaler, replay_buffer, mode):
         done_bool = float(done)
         next_obs = obs.astype(np.float32).flatten()
         next_obs = np.append(next_obs, obs_step) 
-        next_obs = (next_obs - offset) * scale
         if mode != "test":
             replay_buffer.add(current_obs, action, next_obs, reward, done_bool)
-    return episode_return, episode_length, np.array(unscaled_obs)
+    return episode_return, episode_length
 
 
-def run_policy(env, agent, scaler, replay_buffer, mode="train", episodes=5):
+def run_policy(env, agent, replay_buffer, mode="train", episodes=5):
     """ Rollout with agent and store trajectories """
     total_steps = 0
     returns = []
-    unscaleds = []
     for e in range(episodes):
-        episode_return, episode_length, unscaled_obs = run_episode(env, agent, scaler, replay_buffer, mode)
+        episode_return, episode_length = run_episode(env, agent, replay_buffer, mode)
         total_steps += episode_length
-        unscaleds.append(unscaled_obs)
-    unscaled = np.concatenate(unscaleds)
-    scaler.update(unscaled)  # update running statistics for scaling observations
     return returns, total_steps
 
 
@@ -149,6 +138,9 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
         eval_freq: number of training batch before test
         seed: random seed for all modules with randomness
     """
+    # set device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     # set seeds
     set_global_seed(seed)
     # configure log
@@ -161,25 +153,22 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
     obs_dim += 1  # add 1 to obs dimension for time step feature (see run_episode())
     act_dim = env.action_space.shape[0]
 
-    # create scaler
-    scaler = Scaler(obs_dim)
-
     # create actor and target actor
-    actor = Actor(obs_dim, act_dim, float(env.action_space.high[0]))
-    target_actor = Actor(obs_dim, act_dim, float(env.action_space.high[0]))
+    actor = Actor(obs_dim, act_dim, float(env.action_space.high[0])).to(device)
+    target_actor = Actor(obs_dim, act_dim, float(env.action_space.high[0])).to(device)
 
     # create critic and target critic
-    critic = Critic(obs_dim, act_dim)
-    target_critic = Critic(obs_dim, act_dim)
+    critic = Critic(obs_dim, act_dim).to(device)
+    target_critic = Critic(obs_dim, act_dim).to(device)
 
     # create DDPG agent (hollowed object)
-    agent = DDPG(actor, critic, target_actor, target_critic, noise_std, gamma, tau)
+    agent = DDPG(actor, critic, target_actor, target_critic, noise_std, gamma, tau, device)
     agent.align_target()
 
     # create replay_buffer
     replay_buffer = ReplayBuffer()
     # run a few episodes of untrained policy to initialize scaler and fill in replay buffer
-    run_policy(env, agent, scaler, replay_buffer, mode="random", episodes=start_episodes)
+    run_policy(env, agent, replay_buffer, mode="random", episodes=start_episodes)
     
     num_iteration = num_episodes // eval_freq
     current_episodes = 0
@@ -188,7 +177,7 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
         # train models
         for i in range(eval_freq):
             # sample transitions
-            _, total_steps = run_policy(env, agent, scaler, replay_buffer, mode="train", episodes=batch_size)
+            _, total_steps = run_policy(env, agent, replay_buffer, mode="train", episodes=batch_size)
             current_episodes += batch_size
             current_steps += total_steps
             # train
@@ -198,7 +187,7 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
                 agent.update(observation, action, reward, next_obs, done)
         # test models
         num_test_episodes = 10
-        returns, _ = run_policy(env, agent, scaler, replay_buffer, mode="test", episodes=num_test_episodes)
+        returns, _ = run_policy(env, agent, replay_buffer, mode="test", episodes=num_test_episodes)
         avg_return = np.mean(returns)
         logger.record_tabular('iteration', iter)
         logger.record_tabular('episodes', current_episodes)

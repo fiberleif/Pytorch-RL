@@ -271,6 +271,8 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, eval_freq,
         init_policy_logvar: natural log of initial policy variance
         seed: random seed for all modules with randomness
     """
+    # set device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # set seeds
     set_global_seed(seed)
@@ -288,10 +290,10 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, eval_freq,
     scaler = Scaler(obs_dim)
 
     # create policy
-    policy = Policy(obs_dim, act_dim, kl_targ, hid1_mult, init_policy_logvar)
+    policy = Policy(obs_dim, act_dim, kl_targ, hid1_mult, init_policy_logvar).to(device)
 
     # create value_function
-    value_function = ValueFunction(obs_dim, hid1_mult)
+    value_function = ValueFunction(obs_dim, hid1_mult).to(device)
 
     # run a few episodes of untrained policy to initialize scaler:
     run_policy(env, policy, scaler, episodes=5)

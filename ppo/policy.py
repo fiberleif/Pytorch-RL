@@ -6,6 +6,8 @@ import numpy as np
 import sys
 sys.path.append('..')
 import utils.logger as logger
+# set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class Policy(nn.Module):
@@ -50,7 +52,7 @@ class Policy(nn.Module):
         # logvar_speed is used to 'fool' gradient descent into making faster updates
         # to log-variances. heuristic sets logvar_speed based on network size.
         logvar_speed = (10 * self.hid3_size) // 48
-        self.log_vars = torch.Tensor(np.zeros((logvar_speed, self.act_dim)))
+        self.log_vars = torch.Tensor(np.zeros((logvar_speed, self.act_dim))).to(device)
         self.log_vars.requires_grad = True
 
         # set optimizer
@@ -70,20 +72,20 @@ class Policy(nn.Module):
         self.policy_logvars_optimizer = optim.Adam([self.log_vars], lr= self.lr)
 
     def sample(self, state):
-        state = torch.Tensor(state)
+        state = torch.Tensor(state).to(device)
         # compute mean action
         mean_action = self(state)
         # compute action noise
         policy_logvar = torch.sum(self.log_vars, dim=0) + self.init_policy_logvar
         action_noise = torch.exp(policy_logvar / 2.0) * torch.randn(policy_logvar.size(0))
         action = mean_action + action_noise
-        return action.detach().numpy()
+        return action.cpu().data.numpy()
 
     def _placeholders(self, observes, actions, advantages):
         # placeholders
-        self.observes_tensor = torch.Tensor(observes)
-        self.actions_tensor = torch.Tensor(actions)
-        self.advantages_tensor = torch.Tensor(advantages)
+        self.observes_tensor = torch.Tensor(observes).to(device)
+        self.actions_tensor = torch.Tensor(actions).to(device)
+        self.advantages_tensor = torch.Tensor(advantages).to(device)
         self.old_means_tensor = self(self.observes_tensor).detach()
         self.old_logvar_tensor = (torch.sum(self.log_vars, dim=0) + self.init_policy_logvar).detach()
 
@@ -118,7 +120,7 @@ class Policy(nn.Module):
             # logger.info('setting up loss with KL penalty')
             loss1 = -torch.mean(self.advantages_tensor * torch.exp(self.logp - self.logp_old))
             loss2 = torch.mean(self.kl * self.beta)
-            loss3 = ((torch.max(torch.Tensor([0.0]), self.kl - 2.0 * self.kl_targ)) ** 2) * self.eta
+            loss3 = ((torch.max(torch.Tensor([0.0]).to(device), self.kl - 2.0 * self.kl_targ)) ** 2) * self.eta
             self.loss = loss1 + loss2 + loss3
 
         self.policy_mean_optimizer.zero_grad()
@@ -147,12 +149,12 @@ class Policy(nn.Module):
             self.policy_logvar = torch.sum(self.log_vars, dim=0) + self.init_policy_logvar
             # compute new kl
             self._kl_entropy()
-            kl_np = self.kl.detach().numpy()
-            entropy_np = self.entropy.detach().numpy()
+            kl_np = self.kl.cpu().data.numpy()
+            entropy_np = self.entropy.cpu().data.numpy()
             # compute new loss
             self._logprob()
             self._loss_train()
-            loss_np = self.loss.detach().numpy()
+            loss_np = self.loss.cpu().data.numpy()
             # break
             if kl_np > self.kl_targ * 4:  # early stopping if D_KL diverges badly
                 break
