@@ -163,7 +163,7 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
     target_critic = Critic(obs_dim, act_dim).to(device)
 
     # create DDPG agent (hollowed object)
-    agent = DDPG(actor, critic, target_actor, target_critic, noise_std, gamma, tau, device)
+    agent = DDPG(actor, critic, target_actor, target_critic, noise_std, gamma, tau)
     agent.align_target()
 
     # create replay_buffer
