@@ -57,7 +57,7 @@ def parse_arguments():
                         help='Target network update rate')
     parser.add_argument('-o', '--noise_std', type=float, default=0.1,
                         help='Std of Gaussian exploration noise')
-    parser.add_argument('-b', '--batch_size', type=int, default=10,
+    parser.add_argument('-b', '--batch_size', type=int, default=1,
                         help='Number of episodes per training batch')
     parser.add_argument('-f', '--eval_freq', type=int, default=10,
                         help='Number of training batch before test')
@@ -123,6 +123,7 @@ def run_policy(env, agent, replay_buffer, mode="train", episodes=5):
     for e in range(episodes):
         episode_return, episode_length = run_episode(env, agent, replay_buffer, mode)
         total_steps += episode_length
+        returns.append(episode_return)
     return returns, total_steps
 
 
@@ -177,9 +178,10 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
         # train models
         for i in range(eval_freq):
             # sample transitions
-            _, total_steps = run_policy(env, agent, replay_buffer, mode="train", episodes=batch_size)
+            train_returns, total_steps = run_policy(env, agent, replay_buffer, mode="train", episodes=batch_size)
             current_episodes += batch_size
             current_steps += total_steps
+            logger.info('average train return:{0}'.format(np.mean(train_returns)))
             # train
             num_epoch = total_steps // batch_size
             for e in range(num_epoch):
@@ -189,10 +191,12 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
         num_test_episodes = 10
         returns, _ = run_policy(env, agent, replay_buffer, mode="test", episodes=num_test_episodes)
         avg_return = np.mean(returns)
+        std_return = np.std(returns)
         logger.record_tabular('iteration', iter)
         logger.record_tabular('episodes', current_episodes)
         logger.record_tabular('steps', current_steps)
         logger.record_tabular('avg_return', avg_return)
+        logger.record_tabular('std_return', std_return)
         logger.dump_tabular()
 
 

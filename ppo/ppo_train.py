@@ -44,6 +44,8 @@ from utils.scaler import Scaler
 from policy import Policy
 from value_function import ValueFunction
 
+# set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def parse_arguments():
     """ Parse Arguments from Commandline
@@ -185,8 +187,8 @@ def add_value(trajectories, value_function):
     """
     for trajectory in trajectories:
         observes = trajectory['observes']
-        observes = torch.Tensor(observes)
-        values = np.squeeze(value_function(observes).detach().numpy())
+        observes = torch.Tensor(observes).to(device)
+        values = np.squeeze(value_function(observes).cpu().data.numpy())
         trajectory['values'] = values
 
 
@@ -271,9 +273,6 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, eval_freq,
         init_policy_logvar: natural log of initial policy variance
         seed: random seed for all modules with randomness
     """
-    # set device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     # set seeds
     set_global_seed(seed)
     # configure log

@@ -77,7 +77,7 @@ class Policy(nn.Module):
         mean_action = self(state)
         # compute action noise
         policy_logvar = torch.sum(self.log_vars, dim=0) + self.init_policy_logvar
-        action_noise = torch.exp(policy_logvar / 2.0) * torch.randn(policy_logvar.size(0))
+        action_noise = torch.exp(policy_logvar / 2.0) * torch.randn(policy_logvar.size(0)).to(device)
         action = mean_action + action_noise
         return action.cpu().data.numpy()
 

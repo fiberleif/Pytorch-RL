@@ -89,7 +89,7 @@ class ValueFunction(nn.Module):
                 loss_output.backward()
                 self.value_function_optimizer.step()
         loss = nn.MSELoss()
-        loss_np = loss(self(torch.Tensor(x).to(device)), torch.Tensor(y).view(-1, 1)).cpu().data.numpy()
+        loss_np = loss(self(torch.Tensor(x).to(device)), torch.Tensor(y).to(device).view(-1, 1)).cpu().data.numpy()
         new_exp_var = self._exp_var(x, y)
         #print("vfloss:", loss_np)
         #print("oldexpvar:", old_exp_var)
