@@ -37,6 +37,9 @@ from utils.scaler import Scaler
 from models import Actor, Critic, DDPG
 from replay_buffer import ReplayBuffer
 
+# set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 def parse_arguments():
     """ Parse Arguments from Commandline
@@ -139,9 +142,6 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
         eval_freq: number of training batch before test
         seed: random seed for all modules with randomness
     """
-    # set device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     # set seeds
     set_global_seed(seed)
     # configure log
@@ -181,7 +181,7 @@ def train(env_name, start_episodes, num_episodes, gamma, tau, noise_std, batch_s
             train_returns, total_steps = run_policy(env, agent, replay_buffer, mode="train", episodes=batch_size)
             current_episodes += batch_size
             current_steps += total_steps
-            logger.info('average train return:{0}'.format(np.mean(train_returns)))
+            logger.info('[train] average return:{0}, std return: {1}'.format(np.mean(train_returns), np.std(train_returns)))
             # train
             num_epoch = total_steps // batch_size
             for e in range(num_epoch):

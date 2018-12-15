@@ -6,6 +6,7 @@ import numpy as np
 import sys
 sys.path.append('..')
 import utils.logger as logger
+
 # set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

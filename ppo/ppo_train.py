@@ -314,6 +314,8 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, eval_freq,
             add_gae(trajectories, gamma, lam)  # calculate advantage
             # concatenate all episodes into single NumPy arrays
             observes, actions, advantages, disc_sum_rew = build_train_set(trajectories)
+            train_returns = [np.sum(t["rewards"]) for t in trajectories]
+            logger.info('[train] average return:{0}, std return: {1}'.format(np.mean(train_returns), np.std(train_returns)))
             # add various stats to training log:
             #log_batch_stats(observes, actions, advantages, disc_sum_rew)
             # update policy
@@ -325,10 +327,12 @@ def train(env_name, num_episodes, gamma, lam, kl_targ, batch_size, eval_freq,
         num_test_episodes = 10
         trajectories, _ = run_policy(env, policy, scaler, episodes=num_test_episodes)
         avg_return = np.mean([np.sum(t["rewards"]) for t in trajectories])
+        std_return = np.std([np.sum(t["rewards"]) for t in trajectories])
         logger.record_tabular('iteration', iter)
         logger.record_tabular('episodes', current_episodes)
         logger.record_tabular('steps', current_steps)
         logger.record_tabular('avg_return', avg_return)
+        logger.record_tabular('std_return', std_return)
         logger.dump_tabular()
 
 

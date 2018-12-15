@@ -4,6 +4,9 @@ import torch.nn.functional as F
 import torch.optim as optim
 import numpy as np
 
+# set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 class Actor(nn.Module):
     """ NN-based approximation of deterministic policy (actor) """
@@ -66,7 +69,7 @@ class Critic(nn.Module):
 
 
 class DDPG(object):
-    def __init__(self, actor, critic, target_actor, target_critic, noise_std, gamma, tau, device):
+    def __init__(self, actor, critic, target_actor, target_critic, noise_std, gamma, tau):
         self.actor = actor
         self.critic = critic
         self.target_actor = target_actor
@@ -74,10 +77,9 @@ class DDPG(object):
         self.noise_std = noise_std
         self.gamma = gamma
         self.tau = tau
-        self.device = device
 
     def select_action(self, observations, add_noise):
-        observations = torch.Tensor(observations).to(self.device)
+        observations = torch.Tensor(observations).to(device)
         if add_noise:
             action = self.actor(observations).cpu().data.numpy().flatten()
         else:
@@ -118,11 +120,11 @@ class DDPG(object):
 
     def update(self, observation, action, reward, next_obs, done):
         # placeholder
-        self.observation = torch.Tensor(observation).to(self.device)
-        self.action = torch.Tensor(action).to(self.device)
-        self.reward = torch.Tensor(reward).to(self.device)
-        self.next_obs = torch.Tensor(next_obs).to(self.device)
-        self.done = torch.Tensor(done).to(self.device)
+        self.observation = torch.Tensor(observation).to(device)
+        self.action = torch.Tensor(action).to(device)
+        self.reward = torch.Tensor(reward).to(device)
+        self.next_obs = torch.Tensor(next_obs).to(device)
+        self.done = torch.Tensor(done).to(device)
 
         # build graph and update models
         self._compute_target_q()
