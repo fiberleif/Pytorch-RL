@@ -54,7 +54,7 @@ def parse_arguments():
                         help='How many episodes purely random policy is run for')
     parser.add_argument('-n', '--num_episodes', type=int, default=1000,
                         help='Number of episodes to run')
-    parser.add_argument('-g', '--gamma', type=float, default=0.995,
+    parser.add_argument('-g', '--gamma', type=float, default=0.99,
                         help='Discount factor')
     parser.add_argument('-t', '--tau', type=float, default=0.005,
                         help='Target network update rate')

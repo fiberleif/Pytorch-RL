@@ -1,0 +1,1703 @@
+Logging to /home/guoqing/Pytorch-RL/ppo/log/HalfCheetah-v1-0-Dec-16_04:50:05
+Policy Params -- h1: 180, h2: 103, h3: 60
+Value Params -- h1: 180, h2: 30, h3: 5
+[train] average return:-245.05528407827305, std return: 59.80536092267458
+[train] average return:-232.19027933861804, std return: 41.45528677414735
+[train] average return:-189.9056708695113, std return: 48.90485902752517
+[train] average return:-226.32961319243344, std return: 73.02543026474152
+[train] average return:-157.17469630663513, std return: 36.62518354411652
+[train] average return:-157.92918986733554, std return: 40.938057379990596
+[train] average return:-189.9476091773877, std return: 34.54202883703679
+[train] average return:-136.23682418135962, std return: 43.50680788475194
+[train] average return:-91.86938563797669, std return: 56.306285103667
+[train] average return:-52.34553477890779, std return: 55.414009981475125
+-------------------------
+| avg_return | -95.7    |
+| episodes   | 50       |
+| iteration  | 0        |
+| std_return | 45.6     |
+| steps      | 50000    |
+-------------------------
+[train] average return:-123.04774634698495, std return: 62.5998701996782
+[train] average return:-83.55027457253924, std return: 30.43689477016558
+[train] average return:-109.66903581586799, std return: 39.667449909741414
+[train] average return:-42.08098296588898, std return: 62.07557579303094
+[train] average return:-19.094884366211, std return: 58.17953534612702
+[train] average return:-63.01993008076515, std return: 32.628257168378234
+[train] average return:-70.19020868099457, std return: 33.4631700460019
+[train] average return:-51.161119268923464, std return: 20.325227060382783
+[train] average return:-16.046728612974825, std return: 40.95852988692134
+[train] average return:16.578155518836688, std return: 41.77563423297568
+-------------------------
+| avg_return | -4.87    |
+| episodes   | 100      |
+| iteration  | 1        |
+| std_return | 44.1     |
+| steps      | 100000   |
+-------------------------
+[train] average return:-39.16492758029707, std return: 44.480482721322176
+[train] average return:-23.89559532821444, std return: 30.13088409620167
+[train] average return:21.919758373598835, std return: 29.82796555377399
+[train] average return:70.22672705646197, std return: 45.0418202613254
+[train] average return:-22.64742459537333, std return: 36.906315468264516
+[train] average return:69.39543753412818, std return: 44.789742804289084
+[train] average return:0.08320348986882635, std return: 18.113601462600656
+[train] average return:-2.7407449530491186, std return: 37.016283651799895
+[train] average return:55.125965939065544, std return: 55.607314197167845
+[train] average return:70.99782550347304, std return: 29.66145656395501
+-------------------------
+| avg_return | 88.9     |
+| episodes   | 150      |
+| iteration  | 2        |
+| std_return | 36       |
+| steps      | 150000   |
+-------------------------
+[train] average return:25.367213181955744, std return: 43.29423870994599
+[train] average return:58.682092646710316, std return: 38.52966162161735
+[train] average return:87.02228233411341, std return: 75.74187080510163
+[train] average return:116.68514308905606, std return: 38.551939080671985
+[train] average return:86.87169020864252, std return: 43.06822047860591
+[train] average return:70.2630306833718, std return: 23.945615040287
+[train] average return:115.14916457625638, std return: 49.45328811879476
+[train] average return:126.41254007639415, std return: 19.90768736169962
+[train] average return:135.78234905223565, std return: 11.844122205423437
+[train] average return:117.07745695151246, std return: 76.72652488467737
+-------------------------
+| avg_return | 146      |
+| episodes   | 200      |
+| iteration  | 3        |
+| std_return | 55.3     |
+| steps      | 200000   |
+-------------------------
+[train] average return:114.36161868467634, std return: 65.14489183070249
+[train] average return:160.47092584705757, std return: 86.5901463494095
+[train] average return:119.45061908921294, std return: 33.66534589452437
+[train] average return:165.22349780762332, std return: 65.31814587504176
+[train] average return:186.16156639413416, std return: 50.594467909219354
+[train] average return:162.15101223531892, std return: 38.81518804376225
+[train] average return:154.3462132201101, std return: 62.4196511139675
+[train] average return:189.3685796731674, std return: 49.00643466412138
+[train] average return:243.4584591471159, std return: 94.67695050388866
+[train] average return:230.27117082566596, std return: 56.170213281158716
+-------------------------
+| avg_return | 159      |
+| episodes   | 250      |
+| iteration  | 4        |
+| std_return | 124      |
+| steps      | 250000   |
+-------------------------
+[train] average return:137.1057293231906, std return: 218.38235174757787
+[train] average return:140.29638491959287, std return: 90.00971076906876
+[train] average return:193.0160400455753, std return: 62.363087839016735
+[train] average return:249.17956822246848, std return: 44.86030553154657
+[train] average return:96.6924796131186, std return: 192.96855954895395
+[train] average return:186.62151738610547, std return: 55.53046663842764
+[train] average return:126.2603786034573, std return: 210.23454422782922
+[train] average return:234.5185284621653, std return: 97.97829172640793
+[train] average return:263.5495152545758, std return: 47.79244598134648
+[train] average return:281.5052145284617, std return: 53.80744105369911
+-------------------------
+| avg_return | 238      |
+| episodes   | 300      |
+| iteration  | 5        |
+| std_return | 53.5     |
+| steps      | 300000   |
+-------------------------
+[train] average return:261.46070284831404, std return: 82.46282633981451
+[train] average return:265.4696823977057, std return: 73.07877048050274
+[train] average return:286.65615868106954, std return: 42.0843938877668
+[train] average return:264.52709508454853, std return: 44.04090937095608
+[train] average return:289.22485091298506, std return: 52.19481201317465
+[train] average return:249.25785285212078, std return: 26.707546240517296
+[train] average return:283.28429439071607, std return: 70.35163265828051
+[train] average return:286.88415767174894, std return: 43.12815586975322
+[train] average return:299.6163421627319, std return: 15.053951328538002
+[train] average return:281.93458449652064, std return: 36.02001420282031
+-------------------------
+| avg_return | 338      |
+| episodes   | 350      |
+| iteration  | 6        |
+| std_return | 59.5     |
+| steps      | 350000   |
+-------------------------
+[train] average return:343.9740412388197, std return: 77.47477346753023
+[train] average return:205.0773405355464, std return: 182.9528082020462
+[train] average return:311.7846027208337, std return: 60.985021852957715
+[train] average return:290.4001122951769, std return: 55.300203603661366
+[train] average return:329.13292510408485, std return: 47.53857590072207
+[train] average return:411.4672847140122, std return: 82.00812859647152
+[train] average return:345.96107908693705, std return: 52.70462380151232
+[train] average return:353.7576363902361, std return: 89.1374764873879
+[train] average return:356.8631993588252, std return: 68.71274711436463
+[train] average return:379.89742317757714, std return: 89.00605293686375
+-------------------------
+| avg_return | 324      |
+| episodes   | 400      |
+| iteration  | 7        |
+| std_return | 127      |
+| steps      | 400000   |
+-------------------------
+[train] average return:361.19608318620686, std return: 100.74777413748079
+[train] average return:297.6771686359802, std return: 282.1803870163663
+[train] average return:356.65843644145014, std return: 19.70314277800403
+[train] average return:380.0151290712245, std return: 57.23946581200502
+[train] average return:395.4047907759905, std return: 61.911677555458155
+[train] average return:391.52308853225566, std return: 66.37287474656605
+[train] average return:404.53723494749465, std return: 98.85448453891503
+[train] average return:406.28118970888465, std return: 82.03411374903335
+[train] average return:366.86662323992323, std return: 166.90561155816698
+[train] average return:392.96240772181335, std return: 67.66498134270186
+-------------------------
+| avg_return | 496      |
+| episodes   | 450      |
+| iteration  | 8        |
+| std_return | 102      |
+| steps      | 450000   |
+-------------------------
+[train] average return:492.21166758646643, std return: 99.3212220376984
+[train] average return:429.62929211290776, std return: 80.92335731679285
+[train] average return:431.8019105642335, std return: 8.757573800854392
+[train] average return:529.8423714802623, std return: 73.02706300107896
+[train] average return:427.4046511938817, std return: 35.5644210023604
+[train] average return:506.671735556144, std return: 78.833721324524
+[train] average return:476.85839702006444, std return: 50.96543805943047
+[train] average return:480.1723484996337, std return: 115.83398338327933
+[train] average return:464.2171845164644, std return: 85.9186674392297
+[train] average return:494.7525268923508, std return: 54.38065925285985
+-------------------------
+| avg_return | 437      |
+| episodes   | 500      |
+| iteration  | 9        |
+| std_return | 205      |
+| steps      | 500000   |
+-------------------------
+[train] average return:388.14651979176824, std return: 95.55858587127827
+[train] average return:552.3451859634789, std return: 53.01335013806147
+[train] average return:444.36832102524585, std return: 62.960133534572705
+[train] average return:497.00432144693707, std return: 110.71561179881951
+[train] average return:498.51139958317, std return: 78.32636662802085
+[train] average return:520.7536557876257, std return: 59.5427767208232
+[train] average return:529.4678910263917, std return: 39.51161904619456
+[train] average return:528.3501645911635, std return: 91.25559124510654
+[train] average return:324.0396688710218, std return: 377.29760566928326
+[train] average return:480.2603232650719, std return: 71.86221762374939
+-------------------------
+| avg_return | 538      |
+| episodes   | 550      |
+| iteration  | 10       |
+| std_return | 52.4     |
+| steps      | 550000   |
+-------------------------
+[train] average return:510.517059296198, std return: 66.92833526324877
+[train] average return:598.9641817813945, std return: 44.78546078151956
+[train] average return:543.1850636546021, std return: 99.4004628379041
+[train] average return:587.5646804028302, std return: 63.34984386933965
+[train] average return:590.9761784069462, std return: 80.471683492259
+[train] average return:605.5599371326841, std return: 84.72476261529941
+[train] average return:601.7595195621309, std return: 89.86771399131436
+[train] average return:677.3879573080018, std return: 72.08250898168671
+[train] average return:636.7876271083454, std return: 66.14953441440606
+[train] average return:579.1635904008671, std return: 72.64338464397936
+-------------------------
+| avg_return | 630      |
+| episodes   | 600      |
+| iteration  | 11       |
+| std_return | 62.4     |
+| steps      | 600000   |
+-------------------------
+[train] average return:460.0303231264919, std return: 377.0531540231286
+[train] average return:680.0746795881323, std return: 63.878279604648675
+[train] average return:736.9011055537417, std return: 38.793056915772894
+[train] average return:775.1874016573125, std return: 81.15216730274726
+[train] average return:653.3578759795104, std return: 137.04908583171527
+[train] average return:693.3915314816109, std return: 52.420792042083846
+[train] average return:470.9746726061541, std return: 223.30746118521625
+[train] average return:517.8012227929485, std return: 358.58580993820505
+[train] average return:640.2622860720458, std return: 77.97529418265408
+[train] average return:716.3989987381759, std return: 63.514465957618896
+-------------------------
+| avg_return | 666      |
+| episodes   | 650      |
+| iteration  | 12       |
+| std_return | 99.4     |
+| steps      | 650000   |
+-------------------------
+[train] average return:655.721240079347, std return: 102.35650986624962
+[train] average return:783.8086221824857, std return: 54.32282762660756
+[train] average return:737.966956007154, std return: 69.84852753144278
+[train] average return:730.0740578004439, std return: 54.13986974691847
+[train] average return:522.9892055158224, std return: 424.1489235301515
+[train] average return:763.1743566397979, std return: 71.73864718871961
+[train] average return:781.7188484359967, std return: 44.60066265813149
+[train] average return:722.6985652712458, std return: 100.94248880284968
+[train] average return:785.3226172156135, std return: 139.9660872939946
+[train] average return:818.5293539283083, std return: 78.71296333211451
+-------------------------
+| avg_return | 708      |
+| episodes   | 700      |
+| iteration  | 13       |
+| std_return | 333      |
+| steps      | 700000   |
+-------------------------
+[train] average return:911.5451439628075, std return: 43.802258411885916
+[train] average return:851.7837850760345, std return: 98.67846698558726
+[train] average return:747.5070895860329, std return: 32.518893650251876
+[train] average return:846.7213311870103, std return: 73.66172934333433
+[train] average return:937.6721074372932, std return: 95.38668106770221
+[train] average return:860.9380207424887, std return: 104.18931713005887
+[train] average return:874.562712453437, std return: 92.48677304652306
+[train] average return:850.2220245263998, std return: 80.87907334327797
+[train] average return:971.8073765195426, std return: 98.51544839157239
+[train] average return:956.0266154571633, std return: 101.62558608985908
+-------------------------
+| avg_return | 939      |
+| episodes   | 750      |
+| iteration  | 14       |
+| std_return | 76.2     |
+| steps      | 750000   |
+-------------------------
+[train] average return:995.733341007505, std return: 53.489790744306966
+[train] average return:980.4384666441059, std return: 68.3458370942088
+[train] average return:965.8651566598306, std return: 101.26732954809752
+[train] average return:951.3938545598555, std return: 86.56742466341586
+[train] average return:1014.6911966100555, std return: 86.41695016429094
+[train] average return:1090.655603405775, std return: 123.65587358685194
+[train] average return:1074.2133778017603, std return: 15.446315969855773
+[train] average return:975.0490132193847, std return: 79.00841895776196
+[train] average return:1057.208864082478, std return: 71.27331473865021
+[train] average return:1082.9371153267984, std return: 50.486762363782965
+-------------------------
+| avg_return | 1.17e+03 |
+| episodes   | 800      |
+| iteration  | 15       |
+| std_return | 101      |
+| steps      | 800000   |
+-------------------------
+[train] average return:1123.7869450028138, std return: 77.14186524714422
+[train] average return:1187.709611737632, std return: 92.3552152455388
+[train] average return:1186.3912374009242, std return: 36.18093898921584
+[train] average return:1150.7482176447545, std return: 84.90753391732544
+[train] average return:1230.7798236382525, std return: 30.71532258583119
+[train] average return:1163.0609936358933, std return: 79.786458646946
+[train] average return:1234.9521256350326, std return: 54.327184042426865
+[train] average return:1232.1537657300348, std return: 79.15282790947485
+[train] average return:1274.151829155055, std return: 92.84800890552405
+[train] average return:1236.3845965203923, std return: 107.25764562156125
+-------------------------
+| avg_return | 1.31e+03 |
+| episodes   | 850      |
+| iteration  | 16       |
+| std_return | 129      |
+| steps      | 850000   |
+-------------------------
+[train] average return:1208.004351058455, std return: 376.62569689230276
+[train] average return:1338.0285778592533, std return: 88.97332362229969
+[train] average return:1284.998904088118, std return: 122.04700473277181
+[train] average return:1317.4139742373584, std return: 88.69883952539384
+[train] average return:1438.4904064374164, std return: 84.69693914107617
+[train] average return:1434.0874309788105, std return: 79.501474276695
+[train] average return:1439.752675123788, std return: 37.5654755644993
+[train] average return:1477.721378538855, std return: 68.34271898238894
+[train] average return:1480.4391806071621, std return: 60.74901225003735
+[train] average return:1514.7513446553833, std return: 21.821251501217
+-------------------------
+| avg_return | 1.36e+03 |
+| episodes   | 900      |
+| iteration  | 17       |
+| std_return | 365      |
+| steps      | 900000   |
+-------------------------
+[train] average return:1481.840833472538, std return: 84.49242580000488
+[train] average return:1544.7310600158894, std return: 110.74472994376018
+[train] average return:1573.1488429729552, std return: 65.58584476097609
+[train] average return:1400.2891906231846, std return: 502.47100255489806
+[train] average return:1591.4574869189123, std return: 104.6663559674101
+[train] average return:1684.6247699942032, std return: 105.78373803136223
+[train] average return:1647.653615310949, std return: 114.92194185293721
+[train] average return:1653.167996414144, std return: 41.89780934829339
+[train] average return:1661.7940153373777, std return: 87.64290408038981
+[train] average return:1687.1359189498319, std return: 97.77638406413995
+-------------------------
+| avg_return | 1.73e+03 |
+| episodes   | 950      |
+| iteration  | 18       |
+| std_return | 135      |
+| steps      | 950000   |
+-------------------------
+[train] average return:1783.5196037652618, std return: 53.302976915075035
+[train] average return:1672.937121200707, std return: 87.92659494881636
+[train] average return:1730.7726027078565, std return: 86.76716915517775
+[train] average return:1707.3027444177956, std return: 58.643178908262
+[train] average return:1789.489630532203, std return: 51.522590461056744
+[train] average return:1795.8044488188502, std return: 58.24822347403672
+[train] average return:1785.2440211622993, std return: 8.52424610139907
+[train] average return:1862.9079885098217, std return: 87.6931787608373
+[train] average return:1884.1972224890274, std return: 28.8005248456478
+[train] average return:1958.771148390649, std return: 83.87897637518178
+-------------------------
+| avg_return | 1.89e+03 |
+| episodes   | 1000     |
+| iteration  | 19       |
+| std_return | 90.2     |
+| steps      | 1000000  |
+-------------------------
+[train] average return:1891.0531845164617, std return: 112.99595706871382
+[train] average return:1960.6602867829793, std return: 62.620370256759216
+[train] average return:1933.2228751419248, std return: 103.8463378439248
+[train] average return:1934.0129090254172, std return: 23.546389358455894
+[train] average return:1996.5903307926812, std return: 85.41685077125318
+[train] average return:1990.9340680206064, std return: 43.37947101640723
+[train] average return:2042.58778015352, std return: 49.120835560917364
+[train] average return:2013.2465006810683, std return: 80.92919111181892
+[train] average return:2081.917904145577, std return: 144.65752396719074
+[train] average return:2064.770512673029, std return: 78.05719902806973
+-------------------------
+| avg_return | 2.07e+03 |
+| episodes   | 1050     |
+| iteration  | 20       |
+| std_return | 91.1     |
+| steps      | 1050000  |
+-------------------------
+[train] average return:2060.9189810418075, std return: 95.35652054149897
+[train] average return:2089.097745063714, std return: 54.591956856097056
+[train] average return:2135.500374370379, std return: 88.12537378384157
+[train] average return:2129.1267984135, std return: 69.81006308959232
+[train] average return:2152.447979576319, std return: 79.77543970606516
+[train] average return:2184.6142050199223, std return: 94.74050311198312
+[train] average return:2144.8745645548247, std return: 22.555109002576685
+[train] average return:2142.8017346587567, std return: 126.04889547115232
+[train] average return:2201.175974394325, std return: 86.55509030845234
+[train] average return:2233.1038748720293, std return: 66.66875478939296
+-------------------------
+| avg_return | 2.19e+03 |
+| episodes   | 1100     |
+| iteration  | 21       |
+| std_return | 67.1     |
+| steps      | 1100000  |
+-------------------------
+[train] average return:2177.072767595826, std return: 84.08587202140062
+[train] average return:2256.3876295550444, std return: 58.1098802931026
+[train] average return:2264.7515020752685, std return: 120.25179497639087
+[train] average return:2220.4468532499254, std return: 57.25563614724775
+[train] average return:2277.1564286784223, std return: 36.80015169596896
+[train] average return:2217.8849131430497, std return: 37.40630117043789
+[train] average return:2334.3002274772684, std return: 85.10989788328803
+[train] average return:2223.256496508836, std return: 118.26599113387005
+[train] average return:2328.923919046406, std return: 112.13981662940168
+[train] average return:2284.040988050737, std return: 96.82367501488267
+-------------------------
+| avg_return | 2.38e+03 |
+| episodes   | 1150     |
+| iteration  | 22       |
+| std_return | 116      |
+| steps      | 1150000  |
+-------------------------
+[train] average return:1929.483295460995, std return: 905.1827870263775
+[train] average return:2378.1879424473, std return: 91.80360934771979
+[train] average return:2341.9417981685074, std return: 97.79890060499591
+[train] average return:2402.3487355914012, std return: 51.39643601655734
+[train] average return:2367.932556797618, std return: 59.667520507011304
+[train] average return:2044.5224250719966, std return: 515.386507145877
+[train] average return:2333.2244712292168, std return: 74.37645233227451
+[train] average return:2398.676251964721, std return: 121.39215285085871
+[train] average return:2310.1356153303136, std return: 176.68113933624713
+[train] average return:2431.0381078530686, std return: 30.307572184331182
+-------------------------
+| avg_return | 2.41e+03 |
+| episodes   | 1200     |
+| iteration  | 23       |
+| std_return | 78.1     |
+| steps      | 1200000  |
+-------------------------
+[train] average return:2386.4546276712435, std return: 53.3108983992395
+[train] average return:2454.784521844552, std return: 95.01850774869547
+[train] average return:2413.23485898886, std return: 37.844991109355846
+[train] average return:2465.472978511246, std return: 123.18148102727166
+[train] average return:2392.364415597396, std return: 107.44125537385818
+[train] average return:2084.9294727158967, std return: 657.1746301067272
+[train] average return:2465.087018721518, std return: 41.9358841924095
+[train] average return:2465.507256034648, std return: 113.31965290953026
+[train] average return:2490.3968915303044, std return: 41.603132224615635
+[train] average return:2426.6662342833306, std return: 84.82484042053652
+-------------------------
+| avg_return | 2.47e+03 |
+| episodes   | 1250     |
+| iteration  | 24       |
+| std_return | 119      |
+| steps      | 1250000  |
+-------------------------
+[train] average return:2459.955229317364, std return: 65.83743089923388
+[train] average return:2491.698577475579, std return: 29.709385470426085
+[train] average return:2520.4507231442885, std return: 91.25150427457757
+[train] average return:2566.4229651757037, std return: 81.92238304755718
+[train] average return:2467.8252033483154, std return: 52.47105794776211
+[train] average return:2594.0282053930064, std return: 82.9549703598914
+[train] average return:2645.896196699182, std return: 33.648952987311446
+[train] average return:2646.683235741571, std return: 42.34670402467459
+[train] average return:2589.541324598427, std return: 45.15760226461475
+[train] average return:2661.172247596222, std return: 105.78977731847527
+-------------------------
+| avg_return | 2.62e+03 |
+| episodes   | 1300     |
+| iteration  | 25       |
+| std_return | 103      |
+| steps      | 1300000  |
+-------------------------
+[train] average return:2600.46717767055, std return: 58.94501348899953
+[train] average return:2606.9981278590253, std return: 110.49837441474112
+[train] average return:2671.788692459196, std return: 62.79497469967304
+[train] average return:2666.7566443927153, std return: 79.10961444813975
+[train] average return:2703.919731018347, std return: 91.7816325065629
+[train] average return:2670.584692460709, std return: 100.87009657647316
+[train] average return:2713.2732885873215, std return: 76.2411122436223
+[train] average return:2689.945804328945, std return: 72.86190973980267
+[train] average return:2678.3734643547295, std return: 65.22959178653171
+[train] average return:2765.3694471723675, std return: 100.54019123163782
+-------------------------
+| avg_return | 2.79e+03 |
+| episodes   | 1350     |
+| iteration  | 26       |
+| std_return | 64       |
+| steps      | 1350000  |
+-------------------------
+[train] average return:2703.864243076544, std return: 117.63969282329855
+[train] average return:2825.3257220451364, std return: 61.92274180106405
+[train] average return:2851.2647867983833, std return: 122.2177658249469
+[train] average return:2746.944391530126, std return: 100.6896709931538
+[train] average return:2782.4076423697225, std return: 55.17153838869454
+[train] average return:2839.936957122153, std return: 69.91844780503838
+[train] average return:2831.992737024684, std return: 91.93282522575686
+[train] average return:2862.89653362458, std return: 43.488625183430464
+[train] average return:2913.8724566599094, std return: 88.02469033158181
+[train] average return:2863.734532606167, std return: 69.41857452841856
+-------------------------
+| avg_return | 2.92e+03 |
+| episodes   | 1400     |
+| iteration  | 27       |
+| std_return | 87.1     |
+| steps      | 1400000  |
+-------------------------
+[train] average return:2897.026581222149, std return: 67.11322346755775
+[train] average return:2841.7663828980194, std return: 104.69889381048824
+[train] average return:2933.3633649608264, std return: 61.271574187488625
+[train] average return:2950.2683743806033, std return: 100.33641972990742
+[train] average return:2973.8224484466036, std return: 44.88221968644395
+[train] average return:2945.105883336685, std return: 31.839205094420272
+[train] average return:2925.3652129511233, std return: 86.7628995153593
+[train] average return:3024.8529771667504, std return: 62.855992123518405
+[train] average return:3016.796169453393, std return: 70.7491001744923
+[train] average return:2959.5944160945287, std return: 61.00484933049996
+-------------------------
+| avg_return | 3.05e+03 |
+| episodes   | 1450     |
+| iteration  | 28       |
+| std_return | 59.8     |
+| steps      | 1450000  |
+-------------------------
+[train] average return:3061.262288898364, std return: 105.10525641552071
+[train] average return:2967.723836683691, std return: 42.5157210894275
+[train] average return:2990.7854607607214, std return: 42.192985122492814
+[train] average return:3077.560081333955, std return: 85.27317112448101
+[train] average return:3011.247005060932, std return: 146.47433148999568
+[train] average return:3065.125600871059, std return: 77.85943548814969
+[train] average return:3007.80710483913, std return: 30.17897588997359
+[train] average return:3058.8828198443157, std return: 41.24722502018986
+[train] average return:2995.748246632263, std return: 60.368059653209485
+[train] average return:3021.596125544851, std return: 39.027173143573506
+-------------------------
+| avg_return | 3.1e+03  |
+| episodes   | 1500     |
+| iteration  | 29       |
+| std_return | 64.3     |
+| steps      | 1500000  |
+-------------------------
+[train] average return:3085.4276771768577, std return: 47.4499940195672
+[train] average return:3102.0974019849646, std return: 57.896921635588924
+[train] average return:3109.1764978448164, std return: 45.45402317774185
+[train] average return:3114.9306163097826, std return: 60.655307277737435
+[train] average return:3100.6335956266653, std return: 86.84635403196137
+[train] average return:3160.28487895177, std return: 27.376217227922226
+[train] average return:2911.115027445907, std return: 382.27240248187746
+[train] average return:3203.631783702077, std return: 73.91533902621475
+[train] average return:3195.8973446863206, std return: 44.187738675567694
+[train] average return:3111.731692534152, std return: 68.87083488949284
+-------------------------
+| avg_return | 3.16e+03 |
+| episodes   | 1550     |
+| iteration  | 30       |
+| std_return | 37.2     |
+| steps      | 1550000  |
+-------------------------
+[train] average return:3136.596421389558, std return: 41.83427588167052
+[train] average return:3097.2939362794973, std return: 126.89663810208535
+[train] average return:3170.046101825958, std return: 32.33610426194538
+[train] average return:3191.467061493481, std return: 25.54433583393261
+[train] average return:3230.0820499009264, std return: 72.02022277387671
+[train] average return:3212.1934605714814, std return: 29.42968137670311
+[train] average return:3228.3709113434325, std return: 53.887420918030955
+[train] average return:3198.0732602544335, std return: 104.17189137694491
+[train] average return:3180.1951730308133, std return: 53.42362134115307
+[train] average return:3093.079097885845, std return: 384.94801193089415
+-------------------------
+| avg_return | 3.26e+03 |
+| episodes   | 1600     |
+| iteration  | 31       |
+| std_return | 60.4     |
+| steps      | 1600000  |
+-------------------------
+[train] average return:3217.6584901112547, std return: 50.984571589284705
+[train] average return:3248.5910118616057, std return: 66.09617541816573
+[train] average return:3267.148574830041, std return: 80.11276380060079
+[train] average return:3307.95202408161, std return: 71.0102928504235
+[train] average return:3326.318970295327, std return: 58.97639436630191
+[train] average return:3256.8429334452876, std return: 73.95442804935286
+[train] average return:3268.099992685461, std return: 70.81087572761676
+[train] average return:3250.408615262791, std return: 36.44859996828008
+[train] average return:3306.7941766173185, std return: 34.51951126173202
+[train] average return:3342.130148839385, std return: 44.9459760059023
+-------------------------
+| avg_return | 3.32e+03 |
+| episodes   | 1650     |
+| iteration  | 32       |
+| std_return | 51.7     |
+| steps      | 1650000  |
+-------------------------
+[train] average return:3287.0318330962814, std return: 56.65536513829864
+[train] average return:3323.737571418409, std return: 38.16937414474191
+[train] average return:3327.6740654090127, std return: 83.04678690321599
+[train] average return:3316.416945179061, std return: 123.00117807210289
+[train] average return:3277.9679399174065, std return: 65.23843227517804
+[train] average return:3383.651321005833, std return: 83.42973476430265
+[train] average return:3318.951934059437, std return: 54.19996505388114
+[train] average return:3387.1526332771414, std return: 59.45662366437376
+[train] average return:3323.141885142211, std return: 83.31122294591161
+[train] average return:3414.9006877188694, std return: 43.0407443869099
+-------------------------
+| avg_return | 3.39e+03 |
+| episodes   | 1700     |
+| iteration  | 33       |
+| std_return | 70.4     |
+| steps      | 1700000  |
+-------------------------
+[train] average return:3382.827391601949, std return: 27.68571069875332
+[train] average return:3314.809534678871, std return: 69.95066333758278
+[train] average return:3381.2664734856735, std return: 37.43743084162505
+[train] average return:3388.632501894658, std return: 46.76494044365923
+[train] average return:3352.2197184680017, std return: 66.12396684579262
+[train] average return:3406.863945976035, std return: 74.00187168173075
+[train] average return:3391.1218504453195, std return: 40.50831984157055
+[train] average return:3416.779112827332, std return: 74.97189770429894
+[train] average return:3466.0504780808587, std return: 82.83452461367874
+[train] average return:3406.5168836346975, std return: 59.33683929376461
+-------------------------
+| avg_return | 3.45e+03 |
+| episodes   | 1750     |
+| iteration  | 34       |
+| std_return | 59.6     |
+| steps      | 1750000  |
+-------------------------
+[train] average return:3438.258462957527, std return: 69.92084599613754
+[train] average return:3402.3196892572914, std return: 98.20863565698536
+[train] average return:3437.4386603294834, std return: 40.85789665906631
+[train] average return:3414.661211435915, std return: 64.49103081893216
+[train] average return:3437.97440436132, std return: 49.34199943041168
+[train] average return:3444.620561570213, std return: 73.89258937871207
+[train] average return:3460.08882873363, std return: 51.480271907649275
+[train] average return:3510.1972316972046, std return: 64.34521985270582
+[train] average return:3536.7526110219796, std return: 53.77089860780143
+[train] average return:3450.653311297352, std return: 79.22879122816038
+-------------------------
+| avg_return | 3.51e+03 |
+| episodes   | 1800     |
+| iteration  | 35       |
+| std_return | 42.4     |
+| steps      | 1800000  |
+-------------------------
+[train] average return:3537.0800836557587, std return: 50.26793524240997
+[train] average return:3510.092570259128, std return: 72.3401343205815
+[train] average return:3523.4921223271435, std return: 48.11513482852785
+[train] average return:3535.793961879056, std return: 78.40655146588928
+[train] average return:3570.845646674816, std return: 29.777468505080346
+[train] average return:3546.0686047915137, std return: 76.02991674036204
+[train] average return:3546.515786035417, std return: 64.17326053248195
+[train] average return:3525.3092385176, std return: 63.77434819977154
+[train] average return:3604.511867861422, std return: 49.734934147016766
+[train] average return:3527.79419800365, std return: 72.90824513571403
+-------------------------
+| avg_return | 3.51e+03 |
+| episodes   | 1850     |
+| iteration  | 36       |
+| std_return | 44.5     |
+| steps      | 1850000  |
+-------------------------
+[train] average return:3561.805245893111, std return: 60.66593828682326
+[train] average return:3602.5550896118266, std return: 76.58616291780284
+[train] average return:3589.011479224742, std return: 33.14477888324885
+[train] average return:3548.832208649202, std return: 88.28232365449169
+[train] average return:3592.507645580836, std return: 94.95535886292748
+[train] average return:3689.756037832124, std return: 35.920596103071425
+[train] average return:3594.7840468368113, std return: 56.014867192549474
+[train] average return:3595.3477236992703, std return: 73.35600065553528
+[train] average return:3639.066287214141, std return: 58.341510311283
+[train] average return:3603.2867849898294, std return: 43.49653160481819
+-------------------------
+| avg_return | 3.64e+03 |
+| episodes   | 1900     |
+| iteration  | 37       |
+| std_return | 36       |
+| steps      | 1900000  |
+-------------------------
+[train] average return:3656.853039369652, std return: 55.40543925534153
+[train] average return:3631.725838961554, std return: 139.0065543568773
+[train] average return:3676.0290050521166, std return: 46.85116898872647
+[train] average return:3653.8914676887885, std return: 47.040651685752266
+[train] average return:3648.0116049358667, std return: 28.647719933232406
+[train] average return:3642.474885043461, std return: 28.58885305088418
+[train] average return:3648.732420491535, std return: 57.404201228279334
+[train] average return:3624.9728446299764, std return: 66.5921092591013
+[train] average return:3676.002160446636, std return: 49.557440361589485
+[train] average return:3677.9802104907967, std return: 83.84246232788904
+-------------------------
+| avg_return | 3.68e+03 |
+| episodes   | 1950     |
+| iteration  | 38       |
+| std_return | 21.8     |
+| steps      | 1950000  |
+-------------------------
+[train] average return:3726.0581751152044, std return: 88.82335570541746
+[train] average return:3712.80227378704, std return: 60.89132230484973
+[train] average return:3631.064319539273, std return: 52.289412394754294
+[train] average return:3666.25816068559, std return: 46.327986893856234
+[train] average return:3684.7683523376427, std return: 23.651419637358078
+[train] average return:3735.4531234019705, std return: 30.191012948470735
+[train] average return:3760.168047985171, std return: 75.70870625081602
+[train] average return:3767.832129431195, std return: 51.92484576319582
+[train] average return:3736.632910583393, std return: 49.95722618700605
+[train] average return:3713.368319006615, std return: 54.72515368706181
+-------------------------
+| avg_return | 3.72e+03 |
+| episodes   | 2000     |
+| iteration  | 39       |
+| std_return | 68.8     |
+| steps      | 2000000  |
+-------------------------
+[train] average return:3744.7592288521846, std return: 28.773135954014553
+[train] average return:3800.8535964781504, std return: 84.7546911305319
+[train] average return:3681.3978737678276, std return: 56.272003126637664
+[train] average return:3727.431408828117, std return: 65.32329452031513
+[train] average return:3732.0183815252676, std return: 51.24120645920102
+[train] average return:3733.9854614517544, std return: 69.03467065275187
+[train] average return:3739.177829090468, std return: 90.58233589172899
+[train] average return:3714.194328779858, std return: 68.6173378852286
+[train] average return:3703.3072710373817, std return: 33.422041515179245
+[train] average return:3736.3582577184, std return: 79.30895433161862
+-------------------------
+| avg_return | 3.75e+03 |
+| episodes   | 2050     |
+| iteration  | 40       |
+| std_return | 64.6     |
+| steps      | 2050000  |
+-------------------------
+[train] average return:3720.3495144466992, std return: 88.77832503863492
+[train] average return:3749.101755507317, std return: 31.154296283815885
+[train] average return:3735.8557845219884, std return: 83.31906781371882
+[train] average return:3758.9727840861583, std return: 28.69529142309055
+[train] average return:3819.0954456675418, std return: 71.08843873043554
+[train] average return:3739.644363237133, std return: 72.01223739296947
+[train] average return:3739.8405342228884, std return: 75.08167971763754
+[train] average return:3673.9124775166674, std return: 33.511940068583336
+[train] average return:3765.693916052473, std return: 57.50485475555129
+[train] average return:3808.1776628893576, std return: 41.53520387124969
+-------------------------
+| avg_return | 3.78e+03 |
+| episodes   | 2100     |
+| iteration  | 41       |
+| std_return | 83.3     |
+| steps      | 2100000  |
+-------------------------
+[train] average return:3832.8713757798687, std return: 59.42854473533794
+[train] average return:3799.230706731396, std return: 31.684902258805472
+[train] average return:3796.8169196012523, std return: 23.857209937936947
+[train] average return:3793.998413866551, std return: 60.32928597004439
+[train] average return:3800.15546472668, std return: 57.63169955696527
+[train] average return:3875.311821913712, std return: 58.0865105468478
+[train] average return:3792.4561427141903, std return: 140.6265499240093
+[train] average return:3800.5033768204107, std return: 78.39200002992318
+[train] average return:3786.8919731546544, std return: 91.33844721202763
+[train] average return:3857.7289145926215, std return: 96.52182033497711
+-------------------------
+| avg_return | 3.84e+03 |
+| episodes   | 2150     |
+| iteration  | 42       |
+| std_return | 84.8     |
+| steps      | 2150000  |
+-------------------------
+[train] average return:3777.8034752834187, std return: 70.30411997012368
+[train] average return:3908.437421030493, std return: 45.19837284789817
+[train] average return:3875.043123557762, std return: 35.97555696316016
+[train] average return:3804.995695861414, std return: 48.54018272776853
+[train] average return:3840.4122770899603, std return: 82.029441426368
+[train] average return:3920.0784739084534, std return: 43.845379508220844
+[train] average return:3869.317711860355, std return: 45.2557908197098
+[train] average return:3854.634482742384, std return: 31.55743063710519
+[train] average return:3868.149830654055, std return: 93.12656871232093
+[train] average return:3850.389924308066, std return: 68.03100258785763
+-------------------------
+| avg_return | 3.87e+03 |
+| episodes   | 2200     |
+| iteration  | 43       |
+| std_return | 40.4     |
+| steps      | 2200000  |
+-------------------------
+[train] average return:3862.2056580337385, std return: 65.04687541816902
+[train] average return:3847.1047512735977, std return: 104.92970658432893
+[train] average return:3854.447726562864, std return: 34.33673623170218
+[train] average return:3918.314926548256, std return: 101.50595091552458
+[train] average return:3881.981818748785, std return: 30.066302389982884
+[train] average return:3894.297410512564, std return: 106.24384500875625
+[train] average return:3923.9624681851783, std return: 33.91394064897414
+[train] average return:3891.7456095903094, std return: 67.32083776799924
+[train] average return:3887.6131758820134, std return: 41.323297102691654
+[train] average return:3887.9608384318335, std return: 91.39511670394218
+-------------------------
+| avg_return | 3.9e+03  |
+| episodes   | 2250     |
+| iteration  | 44       |
+| std_return | 47.3     |
+| steps      | 2250000  |
+-------------------------
+[train] average return:3976.836320035646, std return: 40.78869554877002
+[train] average return:3893.087131863799, std return: 83.3715554272667
+[train] average return:3904.6331565383202, std return: 126.51073685925704
+[train] average return:3974.976253090371, std return: 54.08636435347967
+[train] average return:3932.9401486573006, std return: 43.905212685816174
+[train] average return:3969.801567043726, std return: 59.34876836407709
+[train] average return:3969.9942144644847, std return: 44.224976927562835
+[train] average return:3997.1311724551733, std return: 75.70717992285235
+[train] average return:4000.5561384397115, std return: 36.16596186761418
+[train] average return:3950.5541161525007, std return: 43.63155793671583
+-------------------------
+| avg_return | 3.97e+03 |
+| episodes   | 2300     |
+| iteration  | 45       |
+| std_return | 71.6     |
+| steps      | 2300000  |
+-------------------------
+[train] average return:3950.972404103334, std return: 140.0530332052393
+[train] average return:3966.907137497784, std return: 102.90005508546918
+[train] average return:3978.33452256872, std return: 75.01077639199573
+[train] average return:3978.177481384025, std return: 103.02627360341184
+[train] average return:4006.320913250318, std return: 32.99417140229443
+[train] average return:3979.3334140219945, std return: 53.464485837913244
+[train] average return:4026.920413123737, std return: 36.83473775996874
+[train] average return:4010.371506359268, std return: 87.15643185313478
+[train] average return:4021.983996802216, std return: 52.59898412231218
+[train] average return:4050.4119192595635, std return: 67.32292078958974
+-------------------------
+| avg_return | 4.02e+03 |
+| episodes   | 2350     |
+| iteration  | 46       |
+| std_return | 71.3     |
+| steps      | 2350000  |
+-------------------------
+[train] average return:3985.123571517213, std return: 35.91482967602759
+[train] average return:4052.16485718104, std return: 34.92059860740866
+[train] average return:4042.7533098454214, std return: 69.87147234579656
+[train] average return:4097.977854035502, std return: 60.848169705916476
+[train] average return:4035.549024200197, std return: 81.50165057580087
+[train] average return:4058.578393454184, std return: 58.38013308973271
+[train] average return:4120.601455060065, std return: 78.60734935975964
+[train] average return:4101.517786336693, std return: 22.393391420949218
+[train] average return:3287.357032024271, std return: 1738.0769414925635
+[train] average return:4076.6203052542273, std return: 57.86598200889917
+-------------------------
+| avg_return | 4.06e+03 |
+| episodes   | 2400     |
+| iteration  | 47       |
+| std_return | 38.7     |
+| steps      | 2400000  |
+-------------------------
+[train] average return:4051.750568348769, std return: 105.48811216694286
+[train] average return:4064.1587427998593, std return: 85.4234829903789
+[train] average return:4084.424129843628, std return: 56.000177306281365
+[train] average return:4116.534583110164, std return: 40.09070728481153
+[train] average return:4087.1339939134377, std return: 60.93003430767526
+[train] average return:4108.248641921964, std return: 63.23729096438696
+[train] average return:4082.284721470873, std return: 57.669570765368626
+[train] average return:4119.9799077341995, std return: 69.62602132855451
+[train] average return:4090.3363020639054, std return: 58.6867355418226
+[train] average return:4022.778003400506, std return: 69.11912810752888
+-------------------------
+| avg_return | 4.12e+03 |
+| episodes   | 2450     |
+| iteration  | 48       |
+| std_return | 63.9     |
+| steps      | 2450000  |
+-------------------------
+[train] average return:4070.288457179505, std return: 43.11913121664872
+[train] average return:4071.8265548844256, std return: 81.14303386512397
+[train] average return:4105.285487861204, std return: 74.023804716736
+[train] average return:4125.912400133108, std return: 42.21067197660376
+[train] average return:4175.760484981567, std return: 34.976891492834554
+[train] average return:4136.619352157626, std return: 85.91427365151598
+[train] average return:3891.655472089095, std return: 364.2259433858071
+[train] average return:4121.472055140118, std return: 50.303444542306565
+[train] average return:4108.409344343857, std return: 64.615198058591
+[train] average return:4189.641648395295, std return: 51.52202670056392
+-------------------------
+| avg_return | 4.15e+03 |
+| episodes   | 2500     |
+| iteration  | 49       |
+| std_return | 67.4     |
+| steps      | 2500000  |
+-------------------------
+[train] average return:4149.682799664962, std return: 71.53177987570407
+[train] average return:4138.963853418385, std return: 48.857425489980045
+[train] average return:4184.901999528231, std return: 38.35484750612463
+[train] average return:4127.378041272085, std return: 42.5957574538275
+[train] average return:4158.72195841744, std return: 93.17675817979607
+[train] average return:4180.502100803892, std return: 75.95001981522473
+[train] average return:4160.380081017778, std return: 91.62691723613011
+[train] average return:4188.600820672556, std return: 21.25555465462869
+[train] average return:4226.048798300585, std return: 79.28004068730827
+[train] average return:4225.187220333918, std return: 44.28837531902455
+-------------------------
+| avg_return | 4.23e+03 |
+| episodes   | 2550     |
+| iteration  | 50       |
+| std_return | 44.9     |
+| steps      | 2550000  |
+-------------------------
+[train] average return:4172.843189641778, std return: 76.50561636149313
+[train] average return:4199.733095386522, std return: 85.45981971144967
+[train] average return:4215.338962382912, std return: 69.26949010203981
+[train] average return:4182.858735913689, std return: 35.57317983892646
+[train] average return:4196.736911925501, std return: 62.0256864779447
+[train] average return:4189.466805575449, std return: 23.48318464315184
+[train] average return:4212.510587877542, std return: 38.565164668711894
+[train] average return:4265.080309366606, std return: 96.95752378654663
+[train] average return:4224.836468957129, std return: 76.9408987003439
+[train] average return:4205.1741061483535, std return: 36.66151585685915
+-------------------------
+| avg_return | 4.21e+03 |
+| episodes   | 2600     |
+| iteration  | 51       |
+| std_return | 65.1     |
+| steps      | 2600000  |
+-------------------------
+[train] average return:4253.9569389749095, std return: 45.22439960423748
+[train] average return:4199.592540239998, std return: 76.00913315827054
+[train] average return:4314.56362189699, std return: 48.81863924436628
+[train] average return:4241.888931685289, std return: 92.05329995625607
+[train] average return:4261.716620034415, std return: 30.047187855211167
+[train] average return:4236.565650110781, std return: 35.927404530439226
+[train] average return:4196.395666750557, std return: 27.98058974943314
+[train] average return:4253.222853080093, std return: 64.2737065201361
+[train] average return:3892.575808483907, std return: 629.9374044011754
+[train] average return:3612.610921501461, std return: 1373.0283718766002
+-------------------------
+| avg_return | 4.28e+03 |
+| episodes   | 2650     |
+| iteration  | 52       |
+| std_return | 78.5     |
+| steps      | 2650000  |
+-------------------------
+[train] average return:4241.999269481189, std return: 58.93300600974178
+[train] average return:4241.720729293438, std return: 105.51069434429749
+[train] average return:4241.575539339296, std return: 51.12738204620308
+[train] average return:4269.796400950367, std return: 49.586400440989486
+[train] average return:4272.159892828928, std return: 75.95109394956899
+[train] average return:4242.507701539609, std return: 42.777805411710766
+[train] average return:4286.282259482707, std return: 71.42968559694907
+[train] average return:4291.367128218019, std return: 87.98863431288538
+[train] average return:4235.623119254202, std return: 84.5284789616113
+[train] average return:4323.100224047303, std return: 83.82073744127158
+-------------------------
+| avg_return | 4.34e+03 |
+| episodes   | 2700     |
+| iteration  | 53       |
+| std_return | 80.9     |
+| steps      | 2700000  |
+-------------------------
+[train] average return:4261.427587058222, std return: 38.13720660991414
+[train] average return:4341.972820211205, std return: 42.14672581650833
+[train] average return:4261.820069781845, std return: 94.50730915385483
+[train] average return:4302.347995149027, std return: 65.71548026520153
+[train] average return:4155.773459476538, std return: 296.42457659817455
+[train] average return:4326.087894380706, std return: 72.79302884129226
+[train] average return:4275.566299530848, std return: 82.523458301181
+[train] average return:3627.368987687981, std return: 1427.9282446174234
+[train] average return:4349.361670122421, std return: 62.52609712341133
+[train] average return:4286.169148516828, std return: 54.946903574250776
+-------------------------
+| avg_return | 4.33e+03 |
+| episodes   | 2750     |
+| iteration  | 54       |
+| std_return | 41       |
+| steps      | 2750000  |
+-------------------------
+[train] average return:3424.3808915524196, std return: 1742.538844179542
+[train] average return:4323.128927531976, std return: 22.250380693561073
+[train] average return:4319.201749532212, std return: 33.607657334161175
+[train] average return:4330.403975106361, std return: 52.96622444643525
+[train] average return:4307.971290551676, std return: 90.89988682003323
+[train] average return:4288.0706081071585, std return: 106.92189132561796
+[train] average return:4335.916669713054, std return: 34.46259994295828
+[train] average return:4255.071783226415, std return: 59.3204740191744
+[train] average return:4335.59127507105, std return: 56.20358005702927
+[train] average return:4333.865806312136, std return: 77.62500076495301
+-------------------------
+| avg_return | 4.37e+03 |
+| episodes   | 2800     |
+| iteration  | 55       |
+| std_return | 65.6     |
+| steps      | 2800000  |
+-------------------------
+[train] average return:4305.266143579085, std return: 99.8653078610443
+[train] average return:4277.508311200318, std return: 203.89952125318868
+[train] average return:4355.0233769793995, std return: 69.50053333143907
+[train] average return:4335.061536299005, std return: 66.53899876017746
+[train] average return:4367.007039898843, std return: 45.795734819026826
+[train] average return:4329.763784653583, std return: 56.52340981709127
+[train] average return:4357.583604734607, std return: 43.30551852403239
+[train] average return:4376.077799142444, std return: 58.8535856959672
+[train] average return:4405.746372550833, std return: 4.414231358048584
+[train] average return:4372.957011664156, std return: 63.39784549200693
+-------------------------
+| avg_return | 4.34e+03 |
+| episodes   | 2850     |
+| iteration  | 56       |
+| std_return | 46.5     |
+| steps      | 2850000  |
+-------------------------
+[train] average return:4450.624663154395, std return: 38.999234377337764
+[train] average return:3417.706539325296, std return: 1825.9517309718174
+[train] average return:4356.779616311331, std return: 101.43410918146772
+[train] average return:4359.878890534765, std return: 44.720633418088354
+[train] average return:4326.5390385076535, std return: 148.13605929811075
+[train] average return:4341.275776766075, std return: 80.2634199933601
+[train] average return:4385.578117841202, std return: 39.811676412725745
+[train] average return:4414.347874580785, std return: 66.27744560323036
+[train] average return:4401.594104115035, std return: 71.01597664781467
+[train] average return:4457.429786668049, std return: 64.72157811925274
+-------------------------
+| avg_return | 4.04e+03 |
+| episodes   | 2900     |
+| iteration  | 57       |
+| std_return | 1.06e+03 |
+| steps      | 2900000  |
+-------------------------
+[train] average return:4382.045487385767, std return: 36.09185797848011
+[train] average return:4411.851208330379, std return: 22.939890295428825
+[train] average return:4440.885746201093, std return: 27.03828463345547
+[train] average return:4386.8858070826445, std return: 63.09513781087231
+[train] average return:3995.390755136678, std return: 953.0661141731773
+[train] average return:4439.801009741377, std return: 96.36954493059444
+[train] average return:4428.540061838706, std return: 40.643059966499834
+[train] average return:4423.7303091153, std return: 69.51268344713402
+[train] average return:4413.633142011399, std return: 20.449437386706194
+[train] average return:4454.952355540296, std return: 56.18666352477307
+-------------------------
+| avg_return | 4.46e+03 |
+| episodes   | 2950     |
+| iteration  | 58       |
+| std_return | 69.4     |
+| steps      | 2950000  |
+-------------------------
+[train] average return:4112.161412655472, std return: 641.3463321294397
+[train] average return:4397.969630348263, std return: 130.3599164484887
+[train] average return:4383.701653666263, std return: 56.85534990983658
+[train] average return:3811.414736461561, std return: 1306.1208104646712
+[train] average return:4442.922885713063, std return: 41.77472641621557
+[train] average return:4425.772238928047, std return: 64.70948390767579
+[train] average return:4053.4483772675912, std return: 846.7696176857404
+[train] average return:4419.512724290415, std return: 72.5814610369166
+[train] average return:4426.749902655071, std return: 67.72281867876268
+[train] average return:4431.491067956291, std return: 55.99524259879654
+-------------------------
+| avg_return | 4.42e+03 |
+| episodes   | 3000     |
+| iteration  | 59       |
+| std_return | 68.1     |
+| steps      | 3000000  |
+-------------------------
+[train] average return:4426.62381227008, std return: 137.85799660990403
+[train] average return:4407.005863198383, std return: 49.038239895145715
+[train] average return:4406.253729952738, std return: 78.63361659930496
+[train] average return:4431.977430369397, std return: 58.43401493834046
+[train] average return:4438.840452738352, std return: 47.320374696940064
+[train] average return:4476.081514769479, std return: 60.09410722275217
+[train] average return:4477.80228941161, std return: 36.73655445952697
+[train] average return:4454.497128677014, std return: 81.20100022476561
+[train] average return:3683.3611819508696, std return: 1585.5712104350755
+[train] average return:4449.096380830111, std return: 103.79488662810193
+-------------------------
+| avg_return | 4.46e+03 |
+| episodes   | 3050     |
+| iteration  | 60       |
+| std_return | 55.4     |
+| steps      | 3050000  |
+-------------------------
+[train] average return:4476.176978901658, std return: 70.83653527567752
+[train] average return:4504.246605794893, std return: 95.60097172373557
+[train] average return:4481.613434577118, std return: 32.17940028170359
+[train] average return:4522.725566514622, std return: 81.82674616703105
+[train] average return:4509.968141527527, std return: 57.5302018127897
+[train] average return:4459.403792695912, std return: 113.90383822080797
+[train] average return:4517.009542696112, std return: 60.466295947765346
+[train] average return:4511.630794908827, std return: 27.736828376128752
+[train] average return:4521.628829128944, std return: 63.20236278213165
+[train] average return:4479.680887881108, std return: 119.23942996209644
+-------------------------
+| avg_return | 4.54e+03 |
+| episodes   | 3100     |
+| iteration  | 61       |
+| std_return | 54.4     |
+| steps      | 3100000  |
+-------------------------
+[train] average return:4496.827243754591, std return: 36.82863480010321
+[train] average return:4478.725352727789, std return: 73.75044638033579
+[train] average return:4542.861720160487, std return: 59.918092939826295
+[train] average return:4541.068198303796, std return: 55.82770853849624
+[train] average return:4541.219828117752, std return: 18.588238271507393
+[train] average return:4499.86726476371, std return: 28.924427589083226
+[train] average return:4469.775493160118, std return: 40.24826781638013
+[train] average return:4509.4962052806195, std return: 87.76520420683299
+[train] average return:4486.571152191788, std return: 102.92476834735261
+[train] average return:4508.639953858264, std return: 24.448251509099002
+-------------------------
+| avg_return | 4.57e+03 |
+| episodes   | 3150     |
+| iteration  | 62       |
+| std_return | 56.2     |
+| steps      | 3150000  |
+-------------------------
+[train] average return:4554.37107268418, std return: 62.30177430923209
+[train] average return:4436.188711576561, std return: 221.9205751017093
+[train] average return:4484.230503728788, std return: 58.20450102046738
+[train] average return:4204.756515631037, std return: 815.1422032679311
+[train] average return:4526.134746905849, std return: 30.069591285555084
+[train] average return:4580.894750779395, std return: 39.83084975336779
+[train] average return:4587.723656509374, std return: 74.79836869493707
+[train] average return:4433.5713141067445, std return: 150.49758432095408
+[train] average return:4483.593295569894, std return: 88.28309555773217
+[train] average return:4554.891865239451, std return: 51.40498815615196
+-------------------------
+| avg_return | 4.54e+03 |
+| episodes   | 3200     |
+| iteration  | 63       |
+| std_return | 84.4     |
+| steps      | 3200000  |
+-------------------------
+[train] average return:4587.327359805978, std return: 49.34901401215389
+[train] average return:4521.574674797555, std return: 35.063514024735746
+[train] average return:4593.26918577073, std return: 46.049816758991
+[train] average return:4647.818536206011, std return: 45.81904592392902
+[train] average return:4655.058342431969, std return: 63.761450462564476
+[train] average return:4581.564254266672, std return: 74.14447890652616
+[train] average return:4577.11208331166, std return: 64.60349927971384
+[train] average return:4539.034046469401, std return: 54.83488373508893
+[train] average return:4575.639409734341, std return: 104.7960975823073
+[train] average return:4574.535875556932, std return: 75.1793418293841
+-------------------------
+| avg_return | 4.63e+03 |
+| episodes   | 3250     |
+| iteration  | 64       |
+| std_return | 39       |
+| steps      | 3250000  |
+-------------------------
+[train] average return:4617.684112468567, std return: 41.10139524348791
+[train] average return:4596.301725205182, std return: 41.65179059080347
+[train] average return:4621.261753191924, std return: 71.77577024294055
+[train] average return:4604.005649063552, std return: 55.83242630762542
+[train] average return:4602.596494006414, std return: 57.3838638367374
+[train] average return:4585.899819215898, std return: 94.42576865165093
+[train] average return:4576.678544770124, std return: 57.07487747709018
+[train] average return:4635.1367600235335, std return: 56.389472707002874
+[train] average return:4603.127128382401, std return: 76.48135814969535
+[train] average return:4583.36529209399, std return: 38.45894456806373
+-------------------------
+| avg_return | 4.63e+03 |
+| episodes   | 3300     |
+| iteration  | 65       |
+| std_return | 87.1     |
+| steps      | 3300000  |
+-------------------------
+[train] average return:4583.388005405362, std return: 48.55322936268486
+[train] average return:4614.472077374358, std return: 50.799459212213065
+[train] average return:4690.907962976896, std return: 43.322988194618446
+[train] average return:4616.818554341846, std return: 64.11931745297132
+[train] average return:4612.108382111524, std return: 49.96828808421396
+[train] average return:4082.4693594164514, std return: 1068.1853739022179
+[train] average return:4611.848358479007, std return: 127.25039163732554
+[train] average return:4004.933867676265, std return: 1223.9654114698
+[train] average return:4615.642340574118, std return: 41.89966213057439
+[train] average return:4622.074908199703, std return: 84.63777347609947
+-------------------------
+| avg_return | 4.67e+03 |
+| episodes   | 3350     |
+| iteration  | 66       |
+| std_return | 50.2     |
+| steps      | 3350000  |
+-------------------------
+[train] average return:4665.904252952228, std return: 38.64555698223891
+[train] average return:4650.9525681150135, std return: 33.393909203846924
+[train] average return:4633.038837000595, std return: 62.10598317855054
+[train] average return:4660.687389507261, std return: 30.80971486138474
+[train] average return:4652.385560761389, std return: 19.164969614531287
+[train] average return:4617.5209197095655, std return: 66.28057343943331
+[train] average return:4635.220980268294, std return: 72.40090249651738
+[train] average return:4617.611046829869, std return: 44.5513275954718
+[train] average return:4668.190594224238, std return: 94.7863725487235
+[train] average return:4621.836432008818, std return: 83.39977356925066
+-------------------------
+| avg_return | 4.65e+03 |
+| episodes   | 3400     |
+| iteration  | 67       |
+| std_return | 71       |
+| steps      | 3400000  |
+-------------------------
+[train] average return:4665.616426528172, std return: 39.161736063944524
+[train] average return:4674.154441368625, std return: 73.59124801869555
+[train] average return:4650.6865679654975, std return: 53.30865061969358
+[train] average return:4693.8819382975, std return: 76.14178098409108
+[train] average return:4665.6577878369435, std return: 18.478669122910404
+[train] average return:4702.592017076996, std return: 78.08352160834247
+[train] average return:4682.6104950379795, std return: 84.73796253799239
+[train] average return:4669.699229576804, std return: 66.46395563210083
+[train] average return:4747.392674003455, std return: 57.43258039841915
+[train] average return:4724.695993785715, std return: 81.46876818413892
+-------------------------
+| avg_return | 4.67e+03 |
+| episodes   | 3450     |
+| iteration  | 68       |
+| std_return | 73.7     |
+| steps      | 3450000  |
+-------------------------
+[train] average return:4460.360272686114, std return: 501.37521861734473
+[train] average return:4686.619520827868, std return: 42.86916062147139
+[train] average return:4779.6639405364795, std return: 41.24710552736934
+[train] average return:4742.820911239427, std return: 75.33171474430057
+[train] average return:4507.2267939151825, std return: 399.71734461638135
+[train] average return:4681.076575165012, std return: 70.36931657932563
+[train] average return:4672.02762250036, std return: 40.604341765855125
+[train] average return:4726.065030408298, std return: 47.62651093187227
+[train] average return:4691.439951166356, std return: 47.100894289143774
+[train] average return:4680.807572754316, std return: 52.42001665776766
+-------------------------
+| avg_return | 4.7e+03  |
+| episodes   | 3500     |
+| iteration  | 69       |
+| std_return | 85.3     |
+| steps      | 3500000  |
+-------------------------
+[train] average return:4717.733547890671, std return: 80.278997107628
+[train] average return:4712.261459236455, std return: 41.271893286005536
+[train] average return:3734.9558757298546, std return: 1995.146735589023
+[train] average return:4711.653195703577, std return: 47.75802538125888
+[train] average return:4702.937883912103, std return: 45.10333900367049
+[train] average return:4716.686167281119, std return: 68.16549188557741
+[train] average return:4714.950261544785, std return: 100.0295757764717
+[train] average return:4719.867681551879, std return: 34.09123320952697
+[train] average return:4726.085609950108, std return: 17.40299693494277
+[train] average return:4732.77609302781, std return: 64.50601379862289
+-------------------------
+| avg_return | 4.58e+03 |
+| episodes   | 3550     |
+| iteration  | 70       |
+| std_return | 472      |
+| steps      | 3550000  |
+-------------------------
+[train] average return:4735.461363889857, std return: 21.261122009713684
+[train] average return:4745.864493666611, std return: 68.37015325356461
+[train] average return:4670.3574610728365, std return: 115.38705677608017
+[train] average return:4744.61604765663, std return: 30.249930507645423
+[train] average return:4750.543112991681, std return: 44.97779512844448
+[train] average return:4777.87095853063, std return: 48.73396827552078
+[train] average return:4742.34220293876, std return: 92.43092073407199
+[train] average return:4758.12625925977, std return: 39.607453419384576
+[train] average return:4723.50750720754, std return: 76.41947802426242
+[train] average return:4757.840957440449, std return: 24.49975343755907
+-------------------------
+| avg_return | 4.28e+03 |
+| episodes   | 3600     |
+| iteration  | 71       |
+| std_return | 1.52e+03 |
+| steps      | 3600000  |
+-------------------------
+[train] average return:4752.710751404739, std return: 62.86019046578975
+[train] average return:4761.480949730119, std return: 91.87609224556144
+[train] average return:4723.048417787849, std return: 77.49925366340456
+[train] average return:4771.771750692256, std return: 52.42068793823397
+[train] average return:4767.911419245914, std return: 54.75123788406773
+[train] average return:4779.959406166761, std return: 41.80057832622833
+[train] average return:4754.067609794608, std return: 107.0154137465767
+[train] average return:4825.190071815853, std return: 51.355337822671544
+[train] average return:4749.4981663101735, std return: 51.36060949323829
+[train] average return:4742.491492306329, std return: 77.89755419958054
+-------------------------
+| avg_return | 4.81e+03 |
+| episodes   | 3650     |
+| iteration  | 72       |
+| std_return | 70.7     |
+| steps      | 3650000  |
+-------------------------
+[train] average return:4815.494926567345, std return: 64.47075897383482
+[train] average return:4840.662022028124, std return: 46.65669034975916
+[train] average return:4811.329857617162, std return: 77.21616994694458
+[train] average return:4814.63257528428, std return: 44.94377957256601
+[train] average return:4810.697459614816, std return: 89.5782449393486
+[train] average return:3769.973512602222, std return: 2028.8789914483527
+[train] average return:4817.388867109786, std return: 28.365486298337792
+[train] average return:4779.024123517691, std return: 40.46063772188052
+[train] average return:4806.346536090416, std return: 80.52546205813904
+[train] average return:4774.056422891423, std return: 33.61667845629791
+-------------------------
+| avg_return | 4.85e+03 |
+| episodes   | 3700     |
+| iteration  | 73       |
+| std_return | 53.7     |
+| steps      | 3700000  |
+-------------------------
+[train] average return:4813.551649507765, std return: 65.63435286605046
+[train] average return:4849.198242370765, std return: 42.40649497480361
+[train] average return:4871.027043980188, std return: 35.36443684458077
+[train] average return:4803.787890296408, std return: 93.2872170985747
+[train] average return:4823.180246750365, std return: 46.871259423131036
+[train] average return:4854.6294549824615, std return: 45.70165081261658
+[train] average return:4891.748113804908, std return: 60.25334556934422
+[train] average return:4872.495482688226, std return: 25.497566721041732
+[train] average return:4878.339424547933, std return: 71.06086758394287
+[train] average return:4864.894696029947, std return: 45.61365128400582
+-------------------------
+| avg_return | 4.89e+03 |
+| episodes   | 3750     |
+| iteration  | 74       |
+| std_return | 78.4     |
+| steps      | 3750000  |
+-------------------------
+[train] average return:4900.722295881167, std return: 76.03661107163447
+[train] average return:4891.003970608684, std return: 23.705559645491565
+[train] average return:4819.73828523818, std return: 64.88495885587591
+[train] average return:4895.935142285069, std return: 60.32106911267386
+[train] average return:4877.41292458213, std return: 45.876392230860425
+[train] average return:4878.7022999236815, std return: 67.93316313250884
+[train] average return:4835.990737136664, std return: 60.460445678407446
+[train] average return:4852.591109810104, std return: 33.34393558820233
+[train] average return:4836.551801113702, std return: 87.48125592626262
+[train] average return:4881.478208831842, std return: 59.742495933856986
+-------------------------
+| avg_return | 4.9e+03  |
+| episodes   | 3800     |
+| iteration  | 75       |
+| std_return | 54.8     |
+| steps      | 3800000  |
+-------------------------
+[train] average return:4872.957365567598, std return: 38.085799927966406
+[train] average return:4861.11122405442, std return: 81.12151828941232
+[train] average return:3859.2343507949527, std return: 2078.2078976091398
+[train] average return:4907.3531435973, std return: 78.23518115580734
+[train] average return:3877.081965769235, std return: 2083.9399892042634
+[train] average return:4855.747637667966, std return: 41.679056608392216
+[train] average return:4868.662412021292, std return: 46.76110830701524
+[train] average return:4856.83134920282, std return: 32.913585635222674
+[train] average return:4890.871980749356, std return: 29.185262368286647
+[train] average return:4865.793916500302, std return: 59.445791322513664
+-------------------------
+| avg_return | 4.9e+03  |
+| episodes   | 3850     |
+| iteration  | 76       |
+| std_return | 54.4     |
+| steps      | 3850000  |
+-------------------------
+[train] average return:4728.503694377933, std return: 259.1291564923937
+[train] average return:4895.566054603491, std return: 77.01291814508225
+[train] average return:4914.2158260514325, std return: 43.24719257499061
+[train] average return:4855.852368513672, std return: 46.787541997779904
+[train] average return:4646.032173428503, std return: 482.0844538476931
+[train] average return:4592.395193000049, std return: 546.4181416011069
+[train] average return:4938.627216393945, std return: 62.80169392824839
+[train] average return:4856.65871021872, std return: 46.36767768332322
+[train] average return:4839.42226872481, std return: 39.80844122539339
+[train] average return:4858.03167158616, std return: 76.48264296427895
+-------------------------
+| avg_return | 4.88e+03 |
+| episodes   | 3900     |
+| iteration  | 77       |
+| std_return | 39.1     |
+| steps      | 3900000  |
+-------------------------
+[train] average return:4883.397026614526, std return: 64.07902901907109
+[train] average return:4841.339534960344, std return: 88.99457052032254
+[train] average return:4858.61484049273, std return: 48.81568296020504
+[train] average return:4919.860301993115, std return: 49.18929967019899
+[train] average return:4877.591372284185, std return: 77.17938293709601
+[train] average return:4857.730718247694, std return: 34.20832617662505
+[train] average return:4913.651741561645, std return: 59.11436229156194
+[train] average return:4883.557850174686, std return: 53.46375938453464
+[train] average return:4865.125913263053, std return: 45.847459052446084
+[train] average return:4933.636420263377, std return: 31.760146395407354
+-------------------------
+| avg_return | 4.88e+03 |
+| episodes   | 3950     |
+| iteration  | 78       |
+| std_return | 53.7     |
+| steps      | 3950000  |
+-------------------------
+[train] average return:4865.979496684711, std return: 76.54306341346606
+[train] average return:4883.562111802823, std return: 47.365209110236215
+[train] average return:4934.173184628827, std return: 80.14056814933195
+[train] average return:4921.564948130441, std return: 43.4788688080031
+[train] average return:4888.855048571765, std return: 54.66646698737925
+[train] average return:4893.351743882425, std return: 71.93442356663728
+[train] average return:4902.3928903870665, std return: 81.14642970252221
+[train] average return:4952.149733179083, std return: 43.758635718440026
+[train] average return:4918.923649286261, std return: 40.25769615483586
+[train] average return:4924.895257369082, std return: 91.66156846265703
+-------------------------
+| avg_return | 4.93e+03 |
+| episodes   | 4000     |
+| iteration  | 79       |
+| std_return | 56.2     |
+| steps      | 4000000  |
+-------------------------
+[train] average return:4969.744276510053, std return: 20.586150543001743
+[train] average return:4920.583238904396, std return: 56.325398561205205
+[train] average return:4960.134361891541, std return: 60.50760856153232
+[train] average return:4896.419915307319, std return: 70.53307518113682
+[train] average return:4905.250663328841, std return: 45.46160202549396
+[train] average return:4919.022626115887, std return: 52.00878131709705
+[train] average return:4929.576924869086, std return: 35.7513192334151
+[train] average return:4928.9953013440945, std return: 31.77661920846272
+[train] average return:4948.953777267519, std return: 78.90823701992701
+[train] average return:3875.9932142011394, std return: 2088.3738403220427
+-------------------------
+| avg_return | 4.96e+03 |
+| episodes   | 4050     |
+| iteration  | 80       |
+| std_return | 77.5     |
+| steps      | 4050000  |
+-------------------------
+[train] average return:4968.51409001972, std return: 59.473498987069426
+[train] average return:4937.84274284225, std return: 93.67488252121582
+[train] average return:4967.779677232237, std return: 91.4473493318192
+[train] average return:4921.317824158106, std return: 73.44121393509383
+[train] average return:4447.018409415394, std return: 865.9193266973563
+[train] average return:4999.325684082882, std return: 81.75211943849226
+[train] average return:3143.2426260357597, std return: 2252.6455114561963
+[train] average return:4912.379655297524, std return: 25.423690520267424
+[train] average return:4946.642777267174, std return: 30.920473163323404
+[train] average return:4924.035055237326, std return: 55.74373998352708
+-------------------------
+| avg_return | 4.9e+03  |
+| episodes   | 4100     |
+| iteration  | 81       |
+| std_return | 51.3     |
+| steps      | 4100000  |
+-------------------------
+[train] average return:4310.590844622717, std return: 1230.8460016046818
+[train] average return:4946.4988030064615, std return: 58.04295896915565
+[train] average return:4893.278377705897, std return: 54.020462874989356
+[train] average return:4912.317081541123, std return: 88.65325610904767
+[train] average return:4909.690938519158, std return: 89.30230779013175
+[train] average return:4939.476739590155, std return: 44.04133991059316
+[train] average return:4971.725022911076, std return: 77.74372735380035
+[train] average return:4942.090072128727, std return: 75.22098594170417
+[train] average return:4907.986293352855, std return: 50.57939829134841
+[train] average return:4923.495617283521, std return: 108.65120937495153
+-------------------------
+| avg_return | 4.95e+03 |
+| episodes   | 4150     |
+| iteration  | 82       |
+| std_return | 52.1     |
+| steps      | 4150000  |
+-------------------------
+[train] average return:4961.782975826176, std return: 67.11566997447777
+[train] average return:4919.995532811833, std return: 38.219564594183424
+[train] average return:4928.794033902993, std return: 74.6173792165215
+[train] average return:4963.986787610111, std return: 72.7546225214462
+[train] average return:4991.339164430517, std return: 66.08803898250707
+[train] average return:4943.714262447555, std return: 36.7442998991356
+[train] average return:5021.650070226295, std return: 84.34782307335595
+[train] average return:4908.60274549071, std return: 36.84069611093613
+[train] average return:4927.523496479373, std return: 50.927999250179504
+[train] average return:5014.278528485889, std return: 47.20023755290475
+-------------------------
+| avg_return | 4.98e+03 |
+| episodes   | 4200     |
+| iteration  | 83       |
+| std_return | 86.2     |
+| steps      | 4200000  |
+-------------------------
+[train] average return:4913.443403490421, std return: 58.521240874923336
+[train] average return:4953.60193427931, std return: 90.89307695689038
+[train] average return:3871.4284731664566, std return: 2087.957412054415
+[train] average return:4924.543217608785, std return: 50.71973791108236
+[train] average return:4958.827991244222, std return: 49.5698295299105
+[train] average return:4952.95401248521, std return: 54.99819198427141
+[train] average return:4952.958544410605, std return: 61.735912525211916
+[train] average return:5017.820527640475, std return: 86.604385404238
+[train] average return:4968.237066876621, std return: 78.3345561323966
+[train] average return:4972.788817941064, std return: 78.33811782505802
+-------------------------
+| avg_return | 4.99e+03 |
+| episodes   | 4250     |
+| iteration  | 84       |
+| std_return | 57.6     |
+| steps      | 4250000  |
+-------------------------
+[train] average return:4965.69130769028, std return: 73.698513261487
+[train] average return:5030.606782590745, std return: 69.30126994592266
+[train] average return:5015.193280766163, std return: 57.40106162442001
+[train] average return:4967.283646876878, std return: 32.86856657439553
+[train] average return:4986.021967646356, std return: 29.842307755766594
+[train] average return:4954.55941669842, std return: 35.8170927041526
+[train] average return:5007.029157463548, std return: 37.55803089181389
+[train] average return:4972.59114655707, std return: 78.00306878255623
+[train] average return:4976.816312359418, std return: 40.18042276789008
+[train] average return:5047.999622965492, std return: 68.82212054379858
+-------------------------
+| avg_return | 5.01e+03 |
+| episodes   | 4300     |
+| iteration  | 85       |
+| std_return | 56.5     |
+| steps      | 4300000  |
+-------------------------
+[train] average return:5050.34380682616, std return: 103.31999420207833
+[train] average return:5002.449821533888, std return: 51.99257472522141
+[train] average return:4993.728043492895, std return: 55.98370828914832
+[train] average return:4975.826379203201, std return: 81.84734916696432
+[train] average return:5020.400402240017, std return: 45.12471216967245
+[train] average return:4933.523462388238, std return: 53.630632824360084
+[train] average return:5015.798122743855, std return: 79.84343832341078
+[train] average return:5054.895480684633, std return: 64.49409262153873
+[train] average return:5015.157972133811, std return: 64.97157320863333
+[train] average return:4976.083720936042, std return: 33.70878222972714
+-------------------------
+| avg_return | 4.49e+03 |
+| episodes   | 4350     |
+| iteration  | 86       |
+| std_return | 1.6e+03  |
+| steps      | 4350000  |
+-------------------------
+[train] average return:5029.353796308872, std return: 63.443425980456844
+[train] average return:5010.409484561582, std return: 43.549309884662826
+[train] average return:4988.741371726179, std return: 94.4835366753206
+[train] average return:5056.666517263112, std return: 32.87859714486732
+[train] average return:5102.5618976888245, std return: 25.018549585931385
+[train] average return:5020.963413190388, std return: 107.01904780173265
+[train] average return:5024.956741768968, std return: 89.14927339887731
+[train] average return:5056.198609328099, std return: 67.62526097569578
+[train] average return:5081.802560697013, std return: 55.80921149346669
+[train] average return:5104.80792747419, std return: 66.4468260611768
+-------------------------
+| avg_return | 5.07e+03 |
+| episodes   | 4400     |
+| iteration  | 87       |
+| std_return | 56.1     |
+| steps      | 4400000  |
+-------------------------
+[train] average return:5052.399154273031, std return: 49.75963048449475
+[train] average return:5044.447571653244, std return: 36.074999096181365
+[train] average return:5072.691502022177, std return: 62.474543901395975
+[train] average return:5008.60071995061, std return: 61.93045617917071
+[train] average return:5063.4675565056405, std return: 69.15167490785579
+[train] average return:5037.621887770212, std return: 73.39818200238663
+[train] average return:5062.883454700558, std return: 52.21660999535361
+[train] average return:5062.155122823193, std return: 81.05868243671891
+[train] average return:5083.933664246106, std return: 60.398392294945985
+[train] average return:5060.766358245383, std return: 95.67781032662673
+-------------------------
+| avg_return | 5.04e+03 |
+| episodes   | 4450     |
+| iteration  | 88       |
+| std_return | 64       |
+| steps      | 4450000  |
+-------------------------
+[train] average return:5033.551262071176, std return: 38.38885742203982
+[train] average return:5044.93388177433, std return: 45.96606928818028
+[train] average return:5073.676560421938, std return: 31.827467920073037
+[train] average return:5102.142120499852, std return: 54.93749159633094
+[train] average return:5138.404741585868, std return: 59.45196938546935
+[train] average return:5071.534450548606, std return: 78.21588436038522
+[train] average return:5081.737789353632, std return: 35.25610395598543
+[train] average return:5141.064639391336, std return: 57.26952705861161
+[train] average return:5093.4556229418395, std return: 42.241593542099565
+[train] average return:5089.528990446319, std return: 68.91776531748859
+-------------------------
+| avg_return | 5.08e+03 |
+| episodes   | 4500     |
+| iteration  | 89       |
+| std_return | 100      |
+| steps      | 4500000  |
+-------------------------
+[train] average return:5137.177514850694, std return: 63.81416290570572
+[train] average return:5110.454233048672, std return: 43.73461549236582
+[train] average return:5058.595493955344, std return: 21.52689851329343
+[train] average return:5122.313451475731, std return: 34.764104846435245
+[train] average return:5161.2018186792975, std return: 46.05678523841457
+[train] average return:5104.356682597507, std return: 64.85903567520478
+[train] average return:5117.3987533889285, std return: 35.902744552915884
+[train] average return:5116.083874551185, std return: 90.8137736883636
+[train] average return:5099.744730172619, std return: 85.81435809441655
+[train] average return:5054.245080206588, std return: 62.74478610772245
+-------------------------
+| avg_return | 5.1e+03  |
+| episodes   | 4550     |
+| iteration  | 90       |
+| std_return | 84.5     |
+| steps      | 4550000  |
+-------------------------
+[train] average return:5190.5298393418225, std return: 28.34418559879625
+[train] average return:5093.344773589568, std return: 49.48278927037749
+[train] average return:5082.092300481369, std return: 82.66266958066247
+[train] average return:5142.6791960551955, std return: 65.2026510694576
+[train] average return:5143.48155289823, std return: 76.60526729611574
+[train] average return:5152.703663713803, std return: 54.33039289723116
+[train] average return:5133.764848001536, std return: 43.30442622435433
+[train] average return:5155.854328377257, std return: 52.35377646681689
+[train] average return:5106.945295305435, std return: 91.30913517321616
+[train] average return:4086.734462712273, std return: 2190.9260686295825
+-------------------------
+| avg_return | 5.1e+03  |
+| episodes   | 4600     |
+| iteration  | 91       |
+| std_return | 65.3     |
+| steps      | 4600000  |
+-------------------------
+[train] average return:5131.529475239872, std return: 86.42724123840361
+[train] average return:5128.723254379716, std return: 19.0583812953623
+[train] average return:5117.24491305285, std return: 84.40561762041179
+[train] average return:5152.76489084197, std return: 46.62357842309573
+[train] average return:5127.949175516516, std return: 56.46846031934501
+[train] average return:5112.177552770084, std return: 60.72214669603887
+[train] average return:5169.479456056875, std return: 76.81329794184668
+[train] average return:5151.622999131597, std return: 67.65031348579875
+[train] average return:5193.852626630476, std return: 33.89367794971152
+[train] average return:5203.992601812382, std return: 50.06935756910065
+-------------------------
+| avg_return | 5.18e+03 |
+| episodes   | 4650     |
+| iteration  | 92       |
+| std_return | 60.3     |
+| steps      | 4650000  |
+-------------------------
+[train] average return:5177.388826431553, std return: 45.596924590950245
+[train] average return:5142.360092069188, std return: 44.232940383006856
+[train] average return:5101.185567075213, std return: 9.702881201317425
+[train] average return:5177.783021187882, std return: 69.4812547674247
+[train] average return:5119.752742052277, std return: 76.93756472159147
+[train] average return:5192.90888962623, std return: 44.894832713244654
+[train] average return:5152.621419308328, std return: 65.46991150441677
+[train] average return:5160.231634481921, std return: 61.235067103927946
+[train] average return:5149.684670252803, std return: 64.39742452119775
+[train] average return:5131.500150512411, std return: 87.58252014864358
+-------------------------
+| avg_return | 5.16e+03 |
+| episodes   | 4700     |
+| iteration  | 93       |
+| std_return | 41.9     |
+| steps      | 4700000  |
+-------------------------
+[train] average return:5182.30298831578, std return: 56.3836883222296
+[train] average return:5195.85458821235, std return: 83.94271632495331
+[train] average return:5191.199370273937, std return: 36.88885617312204
+[train] average return:4088.2962244914575, std return: 2180.913356198446
+[train] average return:5178.244430643033, std return: 35.9376557260048
+[train] average return:5161.521526469627, std return: 33.490305817851336
+[train] average return:5140.058999531721, std return: 50.48665682158556
+[train] average return:5139.333868815893, std return: 74.90202894979613
+[train] average return:5162.176886547256, std return: 41.84781635852353
+[train] average return:5228.231828782102, std return: 35.13083177262197
+-------------------------
+| avg_return | 5.13e+03 |
+| episodes   | 4750     |
+| iteration  | 94       |
+| std_return | 88.9     |
+| steps      | 4750000  |
+-------------------------
+[train] average return:5153.725579895383, std return: 54.26517471595004
+[train] average return:5227.914799268177, std return: 68.96556551085561
+[train] average return:5151.362159462876, std return: 86.98012751463077
+[train] average return:5223.043799395102, std return: 49.175751814501844
+[train] average return:5169.614687971415, std return: 54.72885279287442
+[train] average return:5137.971804597219, std return: 71.20454548802651
+[train] average return:5171.848585150913, std return: 49.25100440556228
+[train] average return:5190.50152905627, std return: 40.206996796016
+[train] average return:5223.53060394083, std return: 95.10479216520712
+[train] average return:5180.970344667605, std return: 64.4603276479877
+-------------------------
+| avg_return | 5.18e+03 |
+| episodes   | 4800     |
+| iteration  | 95       |
+| std_return | 69.8     |
+| steps      | 4800000  |
+-------------------------
+[train] average return:5154.4230372469865, std return: 76.52603044045401
+[train] average return:5213.766839702193, std return: 38.46009711083449
+[train] average return:5169.329730484913, std return: 75.65794618345254
+[train] average return:5208.512183674748, std return: 117.74758037836881
+[train] average return:5179.281840846986, std return: 78.47935717848483
+[train] average return:5231.265985165981, std return: 20.854234522000045
+[train] average return:5235.269978683046, std return: 70.80634381236335
+[train] average return:4742.622009654934, std return: 921.6996863587426
+[train] average return:5175.184930283571, std return: 52.375186627678076
+[train] average return:5195.283888771355, std return: 121.27027889437132
+-------------------------
+| avg_return | 5.23e+03 |
+| episodes   | 4850     |
+| iteration  | 96       |
+| std_return | 55.6     |
+| steps      | 4850000  |
+-------------------------
+[train] average return:5253.266034440499, std return: 46.446478707953986
+[train] average return:5240.287129732497, std return: 42.98988910531299
+[train] average return:5186.1415970771395, std return: 52.77294559377898
+[train] average return:5172.634251450171, std return: 35.586465625796315
+[train] average return:5193.930794086856, std return: 28.49869917988113
+[train] average return:5211.639868730122, std return: 82.32099387276658
+[train] average return:5167.214916906373, std return: 84.46604014970505
+[train] average return:5197.516122266177, std return: 42.14068243585308
+[train] average return:5174.476061262311, std return: 27.256602336328385
+[train] average return:5179.840646218526, std return: 55.63539452648401
+-------------------------
+| avg_return | 5.23e+03 |
+| episodes   | 4900     |
+| iteration  | 97       |
+| std_return | 52       |
+| steps      | 4900000  |
+-------------------------
+[train] average return:5199.927413340422, std return: 63.9125367821357
+[train] average return:5212.565082371917, std return: 70.96701878965479
+[train] average return:5209.488113686019, std return: 58.40903809452924
+[train] average return:5216.828340655042, std return: 51.561932533428205
+[train] average return:5157.486393531872, std return: 69.48673453972066
+[train] average return:5212.78879195185, std return: 76.2123651119864
+[train] average return:5258.718864064698, std return: 22.979571236262796
+[train] average return:5235.6668471624735, std return: 61.73217380229104
+[train] average return:5228.678785375052, std return: 79.62349720091456
+[train] average return:5225.345495499285, std return: 70.00033858796152
+-------------------------
+| avg_return | 5.21e+03 |
+| episodes   | 4950     |
+| iteration  | 98       |
+| std_return | 56.9     |
+| steps      | 4950000  |
+-------------------------
+[train] average return:5211.62781618798, std return: 65.52504098155437
+[train] average return:5254.974084278449, std return: 48.53838750386358
+[train] average return:5223.702211809499, std return: 85.354702724193
+[train] average return:5205.883676109157, std return: 56.935722601142395
+[train] average return:5214.653894572604, std return: 66.05677002318289
+[train] average return:5221.8685090777735, std return: 35.261199574952606
+[train] average return:4113.367078446581, std return: 2217.3475083036706
+[train] average return:5198.505810776441, std return: 49.169721705151446
+[train] average return:5228.028333710308, std return: 48.5338675084093
+[train] average return:5248.519373356934, std return: 85.99556522555342
+-------------------------
+| avg_return | 5.23e+03 |
+| episodes   | 5000     |
+| iteration  | 99       |
+| std_return | 70.8     |
+| steps      | 5000000  |
+-------------------------
