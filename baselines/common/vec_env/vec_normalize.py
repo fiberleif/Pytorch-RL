@@ -1,6 +1,7 @@
 from . import VecEnvWrapper
 import numpy as np
 
+
 class VecNormalize(VecEnvWrapper):
     """
     A vectorized wrapper that normalizes the observations
