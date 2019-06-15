@@ -23,31 +23,33 @@ def parse_cmdline_kwargs(args):
     return {k: parse(v) for k, v in parse_unknown_args(args).items()}
 
 
-def build_env(args):
+def build_env(args, train=True):
     ncpu = multiprocessing.cpu_count()
     if sys.platform == 'darwin': ncpu //= 2
-    nenv = args.num_env or ncpu
     alg = args.alg
     seed = args.seed
-
     env_type, env_id = get_env_type(args)
 
-    if env_type in {'atari', 'retro'}:
+    if env_type in {'atari'}:
         if alg == 'deepq':
             env = make_env(env_id, env_type, seed=seed, wrapper_kwargs={'frame_stack': True})
-        elif alg == 'trpo_mpi':
-            env = make_env(env_id, env_type, seed=seed)
         else:
             frame_stack_size = 4
-            env = make_vec_env(env_id, env_type, nenv, seed, gamestate=args.gamestate, reward_scale=args.reward_scale)
+            if train:
+                env = make_vec_env(env_id, env_type, args.num_env or ncpu, seed, reward_scale=args.reward_scale)
+            else:
+                env = make_vec_env(env_id, env_type, 1, seed, reward_scale=args.reward_scale)
             env = VecFrameStack(env, frame_stack_size)
 
     else:
         flatten_dict_observations = alg not in {'her'}
-        env = make_vec_env(env_id, env_type, args.num_env or 1, seed, reward_scale=args.reward_scale, flatten_dict_observations=flatten_dict_observations)
+        if train:
+            env = make_vec_env(env_id, env_type, args.num_env or 1, seed, reward_scale=args.reward_scale, flatten_dict_observations=flatten_dict_observations)
+        else:
+            env = make_vec_env(env_id, env_type, 1, seed, reward_scale=args.reward_scale, flatten_dict_observations=flatten_dict_observations)
 
-        if env_type == 'mujoco':
-            env = VecNormalize(env, use_tf=True)
+        # if env_type == 'mujoco':
+        #     env = VecNormalize(env, use_tf=True)
 
     return env
 
@@ -58,17 +60,6 @@ for env in gym.envs.registry.all():
     # TODO: solve this with regexes
     env_type = env._entry_point.split(':')[0].split('.')[-1]
     _game_envs[env_type].add(env.id)
-
-_game_envs['retro'] = {
-    'BubbleBobble-Nes',
-    'SuperMarioBros-Nes',
-    'TwinBee3PokoPokoDaimaou-Nes',
-    'SpaceHarrier-Nes',
-    'SonicTheHedgehog-Genesis',
-    'Vectorman-Genesis',
-    'FinalFight-Snes',
-    'SpaceInvaders-Snes',
-}
 
 
 def get_env_type(args):
@@ -168,7 +159,6 @@ def main(args):
     # train with multiple RL algorithms
     model, env = train(args, extra_args)
     env.close()
-
     return model
 
 
