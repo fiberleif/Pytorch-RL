@@ -119,7 +119,7 @@ def get_learn_function_defaults(alg, env_type):
 
 
 def train(args, extra_args):
-    # get env type (e.g. Atari, Mujoco)
+    # Get env type (e.g. Atari, Mujoco).
     env_type, env_id = get_env_type(args)
     print('env_type: {}'.format(env_type))
 
@@ -131,6 +131,7 @@ def train(args, extra_args):
     alg_kwargs.update(extra_args)
 
     env = build_env(args)
+    eval_env = build_env(args, train=False)
 
     if args.network:
         alg_kwargs['network'] = args.network
@@ -142,23 +143,27 @@ def train(args, extra_args):
 
     model = learn(
         env=env,
+        eval_env=eval_env,
         seed=seed,
         total_timesteps=total_timesteps,
         **alg_kwargs
     )
 
-    return model, env
+    return model, env, eval_env
 
 
 def main(args):
-    # parse arguments
+    # Parse arguments.
     arg_parser = common_arg_parser()
     args, unknown_args = arg_parser.parse_known_args(args)
     extra_args = parse_cmdline_kwargs(unknown_args)
 
-    # train with multiple RL algorithms
-    model, env = train(args, extra_args)
+    # Train with DRL algorithms.
+    model, env, eval_env = train(args, extra_args)
+
+    # Close environments.
     env.close()
+    eval_env.close()
     return model
 
 
