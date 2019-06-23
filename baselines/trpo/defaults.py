@@ -26,6 +26,7 @@ def mujoco():
         # network hyper-parameters.
         network_hidden_sizes=[32, 32],
         network_activation='tanh',
+        state_dependent_var=True,
         normalize_observations=True,
 
         # algorithm hyper-parameters.

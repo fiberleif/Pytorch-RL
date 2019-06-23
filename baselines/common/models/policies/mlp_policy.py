@@ -11,7 +11,7 @@ class MLPPolicy(nn.Module):
         self._input_dim = input_dim
         self._action_dim = action_dim
         self._state_dependent_var = state_dependent_var
-        self._init_log_std=initial_log_std
+        self._init_log_std = initial_log_std
         self.rms = rms
         if activation == 'tanh':
             self._activation = torch.tanh
