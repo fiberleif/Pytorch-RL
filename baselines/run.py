@@ -123,7 +123,6 @@ def train(args, extra_args):
     env_type, env_id = get_env_type(args)
     print('env_type: {}'.format(env_type))
 
-    total_timesteps = int(args.num_timesteps)
     seed = args.seed
 
     learn = get_learn_function(args.alg)
@@ -145,7 +144,6 @@ def train(args, extra_args):
         env=env,
         eval_env=eval_env,
         seed=seed,
-        total_timesteps=total_timesteps,
         **alg_kwargs
     )
 

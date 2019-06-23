@@ -54,9 +54,12 @@ class MLPPolicy(nn.Module):
         action_dist = dist.ReinforcedNormal(action_mean, action_std)
         return action_dist
 
-    def select_action(self, obs):
+    def select_action(self, obs, stochastic=True):
         action_dist = self.forward(obs)
-        return action_dist.sample()
+        if stochastic:
+            return action_dist.sample()
+        else:
+            return action_dist.mode()
 
 
 # test
