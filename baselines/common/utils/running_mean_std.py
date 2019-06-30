@@ -9,13 +9,14 @@ class RunningMeanStd(object):
         self._sumsq = torch.ones(shape) * epsilon
         self._count = torch.ones(()) * epsilon
         self.shape = shape
+        self._clip_range = clip_range  # for observation normalization
+        self._update_mean_and_std()  # compute mean & std of observation
 
-        self.mean = self._sum / self._count
-        self.std = torch.sqrt(torch.max(self._sumsq / self._count - self.mean**2, 1e-2 * torch.ones_like(self._sumsq)))
-        self.clip_range = clip_range # for observation normalization
+    def normalize(self, x):
+        return torch.clamp((x - self._mean) / self._std, min(self._clip_range), max(self._clip_range))
 
     def update(self, x):
-        x = x.astype('float64')
+        x = x.astype('float32')
         newsum = torch.tensor(x.sum(axis=0).ravel().reshape(self.shape))
         newsumsq = torch.tensor(np.square(x).sum(axis=0).ravel().reshape(self.shape))
         newcount = torch.tensor(len(x))
@@ -23,3 +24,8 @@ class RunningMeanStd(object):
         self._sum += newsum
         self._sumsq += newsumsq
         self._count += newcount
+        self._update_mean_and_std()
+
+    def _update_mean_and_std(self):
+        self._mean = self._sum / self._count
+        self._std = torch.sqrt(torch.max(self._sumsq / self._count - self._mean ** 2, 1e-2 * torch.ones_like(self._sumsq)))

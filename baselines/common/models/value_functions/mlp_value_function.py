@@ -25,12 +25,15 @@ class MLPValueFunction(nn.Module):
     def forward(self, x):
         # Just for the x = obs case, normalize observation here.
         if self.rms:
-            x = torch.clamp((x - self.rms.mean) / self.rms.std, min(self.rms.clip_range), max(self.rms.clip_range))
+            x = self.rms.normalize(x)
 
         for hidden_layer in self.hidden_layers:
             x = self._activation(hidden_layer(x))
         value = self.value(x)
         return value
+
+    def ouput_value(self, x):
+        self.forward(x).data.numpy()
 
 
 

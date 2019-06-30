@@ -37,15 +37,14 @@ class MLPPolicy(nn.Module):
 
         # Just for the x = obs case, normalize observation here.
         if self.rms:
-            x = torch.clamp((x - self.rms.mean) / self.rms.std, min(self.rms.clip_range), max(self.rms.clip_range))
+            x = self.rms.normalize(x)
 
         for hidden_layer in self.hidden_layers:
             x = self._activation(hidden_layer(x))
-            print(x.dtype)
 
-        if self.state_dependent_var:
-            action_mean = self.action(x)[:, :self.action_dim]
-            action_log_std = self.action(x)[:, self.action_dim:]
+        if self._state_dependent_var:
+            action_mean = self.action(x)[:, :self._action_dim]
+            action_log_std = self.action(x)[:, self._action_dim:]
         else:
             action_mean = self.action_mean(x)
             action_log_std = self.action_log_std.expand_as(action_mean)
@@ -57,20 +56,19 @@ class MLPPolicy(nn.Module):
     def select_action(self, obs, stochastic=True):
         action_dist = self.forward(obs)
         if stochastic:
-            return action_dist.sample()
+            return action_dist.sample().data.numpy()
         else:
-            return action_dist.mode()
+            return action_dist.mode().data.numpy()
 
 
 # test
 if __name__ == "__main__":
     input_dim = 20
     action_dim = 10
-    states = np.ones((10, input_dim))
+    states = np.ones((10, input_dim)).astype(np.float32)
     states = torch.from_numpy(states)
-    # states = torch.tensor(states)
     pi = MLPPolicy(input_dim, action_dim)
-    actions = pi.select_action(states)
+    actions = pi.select_action(states).data.numpy()
     print(actions.shape)
 
 
