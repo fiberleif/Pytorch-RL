@@ -46,6 +46,34 @@ def add_adv_and_vtarg(seg, gamma, lam, value_estimator="MC"):
         seg["mb_value_target"] = seg["mb_advs"] + seg["mb_values"]
 
 
+def reshape_segment_values(seg):
+    assert len(seg["mb_obs"].shape) == 3
+    assert len(seg["mb_actions"].shape) == 3
+    obs_dim = seg["mb_obs"].shape[2]
+    action_dim = seg["mb_actions"].shape[2]
+    seg["mb_obs"] = seg["mb_obs"].reshape(-1, obs_dim)
+    seg["mb_action"] = seg["mb_action"].reshape(-1, action_dim)
+    seg["mb_advs"] = seg["mb_advs"].reshape(-1, 1)
+    seg["mb_value_target"] = seg["mb_value_target"].reshape(-1, 1)
+
+
+def update_value_net(seg, value_net, value_net_optimizer, vf_iters, vf_batchsize):
+    seg_size = seg["mb_obs"].shape[0]
+    for _ in range(vf_iters):
+        idx = np.arange(seg_size)
+        np.random.shuffle(idx)
+        value_net_optimizer.zero_grad()
+        batch_obs = torch.from_numpy(seg["mb_obs"][idx[:vf_batchsize]])
+        batch_value_target = torch.from_numpy(seg["mb_value_target"][idx[:vf_batchsize]])
+        value_loss = torch.mean((value_net(batch_obs) - batch_value_target) ** 2)
+        value_loss.backward()
+        value_net_optimizer.step()
+
+
+def update_policy_net(seg, policy_net):
+    pass
+
+
 def learn(
         env,
         eval_env,
@@ -67,6 +95,7 @@ def learn(
         cg_damping=1e-2,
         vf_stepsize=3e-4,
         vf_iters =3,
+        vf_batchsize=128,
         ):
 
     # Configure log directory.
@@ -95,15 +124,18 @@ def learn(
                        state_dependent_var=state_dependent_var, rms=obs_normalizer)
     value_net = MLPValueFunction(obs_dim, hidden_sizes=network_hidden_sizes, activation=network_activation, rms=obs_normalizer)
 
+    value_net_optimizer = torch.optim.Adam(value_net.parameters(), lr=vf_stepsize)
     sampler = Sampler(env, old_policy_net, value_net, timesteps_per_batch)
 
     for epoch in range(num_epochs):
         logger.log("********** Epoch  %i ************" % epoch)
         old_policy_net.load_state_dict(policy_net.state_dict())  # align the old policy with current policy
 
-        seg = sampler.sample()  # sample basic data, e.g. state, action, reward, done, value, last_value.
-        add_adv_and_vtarg(seg, gamma, lam)  # extract value target and advantage data from the basic data.
-
+        segment = sampler.sample()  # sample basic data, e.g. state, action, reward, done, value, last_value.
+        add_adv_and_vtarg(segment, gamma, lam)  # extract value target and advantage data from the basic data.
+        reshape_segment_values(segment)  # reshape some values in segment (dict class) for future training.
+        update_value_net(segment, value_net, value_net_optimizer, vf_iters, vf_batchsize)
+        update_policy_net(segment, policy_net)
 
         if epoch % evaluate_freq == 0:
             return_mean, return_std = evaluate_policy(eval_env, policy_net)
