@@ -32,8 +32,8 @@ class MLPValueFunction(nn.Module):
         value = self.value(x)
         return value
 
-    def ouput_value(self, x):
-        self.forward(x).data.numpy()
+    def output_value(self, x):
+        return self.forward(x).data.numpy()
 
 
 

@@ -10,7 +10,7 @@ class ReinforcedNormal(dist.Normal):
         return self.log_prob(actions).sum(-1, keepdim=True)
 
     def entropies(self):
-        return self.entropy().sum(-1)
+        return self.entropy().sum()
 
     def mode(self):
         return self.mean

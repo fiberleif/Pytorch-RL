@@ -9,7 +9,7 @@ except ImportError:
     MPI = None
 
 import gym
-from gym.wrappers import FlattenDictWrapper
+# from gym.wrappers import FlattenDictWrapper
 from baselines import logger
 from baselines.common import set_global_seeds
 from baselines.common.atari_wrappers import make_atari, wrap_deepmind
@@ -73,9 +73,9 @@ def make_env(env_id, env_type, mpi_rank=0, subrank=0, seed=None, reward_scale=1.
     elif env_type == 'mujoco':
         env = gym.make(env_id, **env_kwargs)
 
-    if flatten_dict_observations and isinstance(env.observation_space, gym.spaces.Dict):
-        keys = env.observation_space.spaces.keys()
-        env = gym.wrappers.FlattenDictWrapper(env, dict_keys=list(keys))
+    # if flatten_dict_observations and isinstance(env.observation_space, gym.spaces.Dict):
+    #     keys = env.observation_space.spaces.keys()
+    #     env = gym.wrappers.FlattenDictWrapper(env, dict_keys=list(keys))
 
     env.seed(seed + subrank if seed is not None else None)
 
@@ -99,7 +99,7 @@ def common_arg_parser():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--env', help='environment ID', type=str, default='Reacher-v2')
     parser.add_argument('--env_type', help='type of environment, used when the environment type cannot be automatically determined', type=str)
-    parser.add_argument('--seed', help='RNG seed', type=int, default=None)
+    parser.add_argument('--seed', help='RNG seed', type=int, default=0)
     parser.add_argument('--alg', help='Algorithm', type=str, default='ppo2')
     # parser.add_argument('--num_timesteps', type=float, default=1e6),
     parser.add_argument('--network', help='network type (mlp, cnn, lstm, cnn_lstm, conv_only)', default=None)

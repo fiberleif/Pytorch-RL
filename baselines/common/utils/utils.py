@@ -19,7 +19,7 @@ def set_flat_params(model, flat_params):
         prev_ind += flat_size
 
 
-def get_flat_grad_(model, grad_grad=False):
+def get_flat_grad(model, grad_grad=False):
     grads = []
     for param in model.parameters():
         if grad_grad:
