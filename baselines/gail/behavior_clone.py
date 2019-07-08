@@ -1,5 +1,6 @@
 from baselines.common.models.policies.mlp_policy import MLPPolicy
 from baselines.gail.mujoco_dset import Mujoco_Dset
+from baselines.common.utils.running_mean_std import RunningMeanStd
 import baselines.logger as logger
 from tqdm import tqdm
 import torch.optim as optim
@@ -27,6 +28,8 @@ def argsparser():
 
 
 def compute_policy_loss(policy, obs, acs):
+    """ [Build torch Graph] """
+    """ Compute the BC loss of the policy. """
     obs = torch.from_numpy(obs.astype(np.float32))
     acs = torch.from_numpy(acs.astype(np.float32))
     loss = -policy(obs).log_prob_mean(acs)
@@ -34,7 +37,7 @@ def compute_policy_loss(policy, obs, acs):
 
 
 def learn(env, policy, policy_optimizer, dataset, max_iters=1e4, optim_batch_size=128):
-
+    """ Learn the policy with expert state-action pairs, based on BC."""
     val_per_iter = int(max_iters/10)
     for iter_so_far in tqdm(range(int(max_iters))):
         policy_optimizer.zero_grad()
@@ -52,6 +55,7 @@ def learn(env, policy, policy_optimizer, dataset, max_iters=1e4, optim_batch_siz
 
 
 def evaluate(env, policy, number_trajs=10):
+    """ Evaluate the learned policy via perform multiple rollouts."""
     rets = []
     horizon = 1000
     for _ in range(number_trajs):
@@ -80,11 +84,14 @@ def main(args):
 
     obs_dim = env.observation_space.shape[0]
     acs_dim = env.action_space.shape[0]
-    policy = MLPPolicy(obs_dim, acs_dim, hidden_sizes=(100, 100))
+
+    rms = RunningMeanStd(shape=env.observation_space.shape)
+    policy = MLPPolicy(obs_dim, acs_dim, hidden_sizes=(100, 100), rms=rms)
     policy_optimizer = optim.Adam(policy.parameters(), lr=args.bc_lr)
     dataset = Mujoco_Dset(expert_path=args.expert_path, traj_limitation=args.traj_limitation, data_subsample_freq=args.subsample_freq)
-    learn(env, policy, policy_optimizer, dataset, max_iters=args.BC_max_iter)
-    evaluate(env, policy, number_trajs=10)
+    rms.update(dataset.obs)  # set observation normalization
+    learn(env, policy, policy_optimizer, dataset, max_iters=args.BC_max_iter)  # train policy by BC
+    evaluate(env, policy, number_trajs=10)  # evaluate policy
 
 
 if __name__ == "__main__":
