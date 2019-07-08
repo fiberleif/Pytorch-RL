@@ -56,9 +56,9 @@ class MLPPolicy(nn.Module):
     def select_action(self, obs, stochastic=True):
         action_dist = self.forward(obs)
         if stochastic:
-            return action_dist.sample().data.numpy()
+            return action_dist.sample().cpu().data.numpy()
         else:
-            return action_dist.mode().data.numpy()
+            return action_dist.mode().cpu().data.numpy()
 
 
 # test

@@ -9,6 +9,7 @@ import numpy as np
 import argparse
 import gym
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def argsparser():
     parser = argparse.ArgumentParser("Tensorflow Implementation of Behavior Cloning")
@@ -23,15 +24,15 @@ def argsparser():
     # Network Configuration (Using MLP Policy)
     parser.add_argument('--policy_hidden_size', type=int, default=100)
     parser.add_argument('--bc_lr', type=float, default=3e-4)
-    parser.add_argument('--BC_max_iter', help='Max iteration for training BC', type=float, default=1e5)
+    parser.add_argument('--max_iter', help='Max iteration for training BC', type=float, default=1e5)
     return parser.parse_args()
 
 
 def compute_policy_loss(policy, obs, acs):
     """ [Build torch Graph] """
     """ Compute the BC loss of the policy. """
-    obs = torch.from_numpy(obs.astype(np.float32))
-    acs = torch.from_numpy(acs.astype(np.float32))
+    obs = torch.from_numpy(obs.astype(np.float32)).to(device)
+    acs = torch.from_numpy(acs.astype(np.float32)).to(device)
     loss = -policy(obs).log_prob_mean(acs)
     return loss
 
@@ -51,7 +52,7 @@ def learn(env, policy, policy_optimizer, dataset, max_iters=1e4, optim_batch_siz
 
             ob_expert, ac_expert = dataset.get_next_batch(optim_batch_size, 'train')
             train_loss = compute_policy_loss(policy, ob_expert, ac_expert)
-            logger.log("Training loss: {}, Validation loss: {}".format(train_loss.data.numpy(), val_loss.data.numpy()))
+            logger.log("Training loss: {}, Validation loss: {}".format(train_loss.cpu().data.numpy(), val_loss.cpu().data.numpy()))
 
 
 def evaluate(env, policy, number_trajs=10):
@@ -61,11 +62,11 @@ def evaluate(env, policy, number_trajs=10):
     for _ in range(number_trajs):
         traj_ret = 0.0
         obs = env.reset()
-        obs = torch.from_numpy(obs.astype(np.float32))
-        for t in range(horizon):
+        obs = torch.from_numpy(obs.astype(np.float32)).to(device)
+        for t in tqdm(range(horizon)):
             action = policy.select_action(obs.view(-1, obs.shape[0]), stochastic=False)[0]
             obs, reward, done, _ = env.step(action)
-            obs = torch.from_numpy(obs.astype(np.float32))
+            obs = torch.from_numpy(obs.astype(np.float32)).to(device)
             traj_ret += reward
             if done:
                 rets.append(traj_ret)
@@ -86,11 +87,11 @@ def main(args):
     acs_dim = env.action_space.shape[0]
 
     rms = RunningMeanStd(shape=env.observation_space.shape)
-    policy = MLPPolicy(obs_dim, acs_dim, hidden_sizes=(100, 100), rms=rms)
+    policy = MLPPolicy(obs_dim, acs_dim, hidden_sizes=(100, 100), rms=rms).to(device)
     policy_optimizer = optim.Adam(policy.parameters(), lr=args.bc_lr)
     dataset = Mujoco_Dset(expert_path=args.expert_path, traj_limitation=args.traj_limitation, data_subsample_freq=args.subsample_freq)
     rms.update(dataset.obs)  # set observation normalization
-    learn(env, policy, policy_optimizer, dataset, max_iters=args.BC_max_iter)  # train policy by BC
+    learn(env, policy, policy_optimizer, dataset, max_iters=args.max_iter)  # train policy by BC
     evaluate(env, policy, number_trajs=10)  # evaluate policy
 
 
