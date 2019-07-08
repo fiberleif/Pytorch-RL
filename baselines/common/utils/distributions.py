@@ -6,8 +6,11 @@ class ReinforcedNormal(dist.Normal):
     def __init__(self, loc, scale, validate_args=None):
         super(ReinforcedNormal, self).__init__(loc, scale, validate_args=validate_args)
 
+    def log_prob_mean(self, actions):
+        return self.log_prob(actions).mean()
+
     def log_probs(self, actions):
-        return self.log_prob(actions).sum(-1, keepdim=True)
+        return self.log_prob(actions).sum()
 
     def entropies(self):
         return self.entropy().sum()
