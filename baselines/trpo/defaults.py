@@ -18,7 +18,7 @@ def mujoco():
     return dict(
         # run hyper-parameters.
         num_epochs=1000,
-        timesteps_per_batch=25000,
+        timesteps_per_batch=1000,
         gamma=0.99,
         lam=0.98,
         evaluate_freq=10,
@@ -27,7 +27,7 @@ def mujoco():
         network_hidden_sizes=[128, 128],
         network_activation='tanh',
         state_dependent_var=True,
-        normalize_observations=False,
+        normalize_observations=True,
 
         # algorithm hyper-parameters.
         max_kl=0.01,

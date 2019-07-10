@@ -7,8 +7,11 @@ from baselines.common.utils.cg import conjugate_gradients
 from baselines import logger
 import os
 import torch
+import torchsnooper
 import random
 import numpy as np
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def evaluate_policy(eval_env, policy, eval_n_episodes=10):
@@ -19,7 +22,7 @@ def evaluate_policy(eval_env, policy, eval_n_episodes=10):
         obs = obs.astype(np.float32)
         current_return = 0.0
         for t in range(traj_max_length):
-            action = policy.select_action(torch.from_numpy(obs), stochastic=False)
+            action = policy.select_action(torch.from_numpy(obs).to(device), stochastic=False)
             obs, reward, done, _ = eval_env.step(action)
             obs = obs.astype(np.float32)
             assert reward.size == 1
@@ -67,8 +70,8 @@ def update_value_net(seg, value_net, value_net_optimizer, vf_iters, vf_batchsize
         idx = np.arange(seg_size)
         np.random.shuffle(idx)
         value_net_optimizer.zero_grad()
-        batch_obs = torch.from_numpy(seg["mb_obs"][idx[:vf_batchsize]])
-        batch_value_target = torch.from_numpy(seg["mb_value_targets"][idx[:vf_batchsize]])
+        batch_obs = torch.from_numpy(seg["mb_obs"][idx[:vf_batchsize]]).to(device)
+        batch_value_target = torch.from_numpy(seg["mb_value_targets"][idx[:vf_batchsize]]).to(device)
         value_loss = torch.mean((value_net(batch_obs) - batch_value_target) ** 2)
         value_loss.backward()
         value_net_optimizer.step()
@@ -81,40 +84,63 @@ def fisher_vector_product(policy_net, get_kl_and_loss, cg_damping):
         kl_flat_grad = torch.cat([grad.view(-1) for grad in grads])
         kl_v = torch.sum(kl_flat_grad * v)
         grads = torch.autograd.grad(kl_v, policy_net.parameters())
-        kl_flat_grad_grad = torch.cat([grad.contiguous().view(-1) for grad in grads]).data
+        kl_flat_grad_grad = torch.cat([grad.contiguous().view(-1) for grad in grads])
         return kl_flat_grad_grad + v * cg_damping
     return compute_fvp
 
 
-def line_search(policy_net, old_policy_net, fullstep, expected_improve_rate, max_kl, get_kl_and_loss, max_backtracks=10,):
-    prev_params = get_flat_params(old_policy_net)
-    _, surro_before, _ = get_kl_and_loss()
-    surro_before = surro_before.data
-    for (_n_backtracks, stepfrac) in enumerate(.5**np.arange(max_backtracks)):
-        new_params = prev_params + stepfrac * fullstep
-        set_flat_params(policy_net, new_params)
-        kl, surro, _ = get_kl_and_loss()
-        improve = surro - surro_before
-        expected_improve = expected_improve_rate * stepfrac
-        logger.log("Expected: %.3f Actual: %.3f" % (expected_improve, improve))
+# def line_search(policy_net, old_policy_net, fullstep, expected_improve_rate, max_kl, get_kl_and_loss, max_backtracks=10,):
+#     prev_params = get_flat_params(old_policy_net)
+#     _, surro_before, _ = get_kl_and_loss()
+#     surro_before = surro_before.data
+#     for (_n_backtracks, stepfrac) in enumerate(.5**np.arange(max_backtracks)):
+#         new_params = prev_params + stepfrac * fullstep
+#         set_flat_params(policy_net, new_params)
+#         kl, surro, _ = get_kl_and_loss()
+#         improve = surro - surro_before
+#         expected_improve = expected_improve_rate * stepfrac
+#         logger.log("Expected: %.3f Actual: %.3f" % (expected_improve, improve))
+#
+#         if kl > max_kl * 1.5:
+#             logger.log("violated KL constraint. shrinking step.")
+#         elif improve < 0:
+#             logger.log("surrogate didn't improve. shrinking step.")
+#         else:
+#             logger.log("Stepsize OK!")
+#             break
+#     else:
+#         set_flat_params(policy_net, prev_params)
 
-        if kl > max_kl * 1.5:
-            logger.log("violated KL constraint. shrinking step.")
-        elif improve < 0:
-            logger.log("surrogate didn't improve. shrinking step.")
-        else:
-            logger.log("Stepsize OK!")
-            break
-    else:
-        set_flat_params(policy_net, prev_params)
+# @torchsnooper.snoop()
+def line_search(policy_net, old_policy_net, fullstep, expected_improve_rate, get_kl_and_loss, max_backtracks=10, accept_ratio=.1):
+    prev_params = get_flat_params(old_policy_net)
+    _, fval, _ = get_kl_and_loss()
+    # fval = fval.cpu().data
+    print("fval before", fval.item())
+    for (_n_backtracks, stepfrac) in enumerate(.5 ** np.arange(max_backtracks)):
+        # xnew = prev_params + torch.tensor(stepfrac).to(device) * fullstep
+        xnew = prev_params + fullstep * stepfrac
+        set_flat_params(policy_net, xnew)
+        _, newfval, _ = get_kl_and_loss()
+        # newfval = newfval.cpu().data
+        actual_improve = fval - newfval
+        expected_improve = expected_improve_rate * stepfrac
+        ratio = actual_improve / expected_improve
+        print("a/e/r", actual_improve.item(), expected_improve.item(), ratio.item())
+
+        if ratio.item() > accept_ratio and actual_improve.item() > 0:
+            print("fval after", newfval.item())
+            return True
+    set_flat_params(policy_net, prev_params)
+    return False
 
 
 def update_policy_net(seg, policy_net, old_policy_net, max_kl, cg_iters, cg_damping, ent_coef):
     # Normalize the advantages.
     mb_advs = (seg["mb_advs"] - seg["mb_advs"].mean()) / seg["mb_advs"].std()
-    batch_advs = torch.from_numpy(mb_advs)
-    batch_obs = torch.from_numpy(seg["mb_obs"])
-    batch_actions = torch.from_numpy(seg["mb_actions"])
+    batch_advs = torch.from_numpy(mb_advs).to(device)
+    batch_obs = torch.from_numpy(seg["mb_obs"]).to(device)
+    batch_actions = torch.from_numpy(seg["mb_actions"]).to(device)
 
     def get_kl_and_loss():
         action_dist = policy_net(batch_obs)
@@ -139,7 +165,7 @@ def update_policy_net(seg, policy_net, old_policy_net, max_kl, cg_iters, cg_damp
 
     kl, surro_loss, policy_loss = get_kl_and_loss()
     grads = torch.autograd.grad(policy_loss, policy_net.parameters())
-    flat_gradient = torch.cat([grad.view(-1) for grad in grads]).data
+    flat_gradient = torch.cat([grad.view(-1) for grad in grads])
 
     stepdir = conjugate_gradients(fisher_vector_product(policy_net, get_kl_and_loss, cg_damping), -flat_gradient, cg_iters)
     shs = 0.5 * (stepdir * fisher_vector_product(policy_net, get_kl_and_loss, cg_damping)(stepdir)).sum(0, keepdim=True)
@@ -150,7 +176,9 @@ def update_policy_net(seg, policy_net, old_policy_net, max_kl, cg_iters, cg_damp
     neggdotstepdir = (-flat_gradient * stepdir).sum(0, keepdim=True)
     print(("lagrange multiplier:", lm[0], "grad_norm:", flat_gradient.norm()))
 
-    line_search(policy_net, old_policy_net, fullstep, neggdotstepdir / lm[0], max_kl, get_kl_and_loss)
+    # line_search(policy_net, old_policy_net, fullstep, neggdotstepdir / lm[0], max_kl, get_kl_and_loss)
+    success = line_search(policy_net, old_policy_net, fullstep, neggdotstepdir / lm[0], get_kl_and_loss)
+    print(success)
 
 
 def learn(
@@ -182,8 +210,6 @@ def learn(
     logger.configure(dir=log_dir)
 
     # Set all seeds.
-    # env.seed(seed)
-    # eval_env.seed(seed)
     torch.manual_seed(seed)
     random.seed(seed)
     np.random.seed(seed)
@@ -198,10 +224,10 @@ def learn(
         obs_normalizer = None
 
     old_policy_net = MLPPolicy(obs_dim, act_dim, hidden_sizes=network_hidden_sizes, activation=network_activation,
-                       state_dependent_var=state_dependent_var, rms=obs_normalizer)
+                       state_dependent_var=state_dependent_var, rms=obs_normalizer).to(device)
     policy_net = MLPPolicy(obs_dim, act_dim, hidden_sizes=network_hidden_sizes, activation=network_activation,
-                       state_dependent_var=state_dependent_var, rms=obs_normalizer)
-    value_net = MLPValueFunction(obs_dim, hidden_sizes=network_hidden_sizes, activation=network_activation, rms=obs_normalizer)
+                       state_dependent_var=state_dependent_var, rms=obs_normalizer).to(device)
+    value_net = MLPValueFunction(obs_dim, hidden_sizes=network_hidden_sizes, activation=network_activation, rms=obs_normalizer).to(device)
 
     value_net_optimizer = torch.optim.Adam(value_net.parameters(), lr=vf_stepsize)
     sampler = Sampler(env, old_policy_net, value_net, timesteps_per_batch)

@@ -21,6 +21,9 @@ class MLPValueFunction(nn.Module):
             last_dim = hidden_size
 
         self.value = nn.Linear(last_dim, 1)
+        # For param initialization.
+        self.value.weight.data.mul_(0.1)
+        self.value.bias.data.mul_(0.0)
 
     def forward(self, x):
         # Just for the x = obs case, normalize observation here.
@@ -33,7 +36,7 @@ class MLPValueFunction(nn.Module):
         return value
 
     def output_value(self, x):
-        return self.forward(x).data.numpy()
+        return self.forward(x).cpu().data.numpy()
 
 
 

@@ -1,8 +1,10 @@
 import torch
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 def conjugate_gradients(Avp, b, cg_iters=10, residual_tol=1e-10):
-    x = torch.zeros(b.size())
+    x = torch.zeros(b.size()).to(device)
     r = b.clone()
     p = b.clone()
     rdotr = torch.dot(r, r)

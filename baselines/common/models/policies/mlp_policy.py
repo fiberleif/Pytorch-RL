@@ -28,8 +28,13 @@ class MLPPolicy(nn.Module):
 
         if state_dependent_var:
             self.action = nn.Linear(last_dim, 2 * self._action_dim)
+            self.action.weight.data.mul_(0.1)
+            self.action.bias.data.mul_(0.0)
         else:
             self.action_mean = nn.Linear(last_dim, self._action_dim)
+            # For param initialization.
+            self.action_mean.weight.data.mul_(0.1)
+            self.action_mean.bias.data.mul_(0.0)
             self.action_log_std = nn.Parameter(torch.ones((1, self._action_dim)) * self._initial_log_std)
 
     def forward(self, x):
